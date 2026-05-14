@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Storage | Private Funnel Reference Library</title>
+  <meta name="description" content="A private dashboard for storing, generating, filtering, previewing, and studying high-quality websites and funnels by niche." />
+  <meta property="og:title" content="Website Storage" />
+  <meta property="og:description" content="Collect, generate, organize, preview, and study premium websites and funnels by niche." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: oklch(14% 0.018 252);
+      --bg-2: oklch(18% 0.022 252);
+      --panel: oklch(20% 0.019 252 / 0.88);
+      --panel-2: oklch(23% 0.02 252 / 0.82);
+      --line: oklch(100% 0.005 252 / 0.095);
+      --line-strong: oklch(76% 0.09 243 / 0.32);
+      --text: oklch(94% 0.012 252);
+      --muted: oklch(72% 0.028 252);
+      --soft: oklch(58% 0.028 252);
+      --accent: oklch(68% 0.17 246);
+      --accent-2: oklch(78% 0.12 218);
+      --warning: oklch(76% 0.15 67);
+      --success: oklch(74% 0.13 162);
+      --danger: oklch(66% 0.19 24);
+      --shadow: 0 24px 70px oklch(7% 0.02 252 / 0.62);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 78% -12%, oklch(58% 0.18 246 / 0.22), transparent 31rem),
+        radial-gradient(circle at 12% 7%, oklch(74% 0.12 210 / 0.12), transparent 25rem),
+        linear-gradient(145deg, oklch(12% 0.018 252), var(--bg) 42%, oklch(10% 0.016 252));
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(oklch(100% 0.005 252 / 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(100% 0.005 252 / 0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 76%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .32;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    .card,
+    .tab {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    .card:focus-visible {
+      outline: 2px solid var(--accent-2);
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: min(1440px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+      padding: 12px 0 26px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 210px;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: linear-gradient(145deg, oklch(30% 0.06 246 / .88), oklch(17% 0.02 252 / .92));
+      box-shadow: inset 0 1px 0 oklch(100% 0.005 252 / .15), 0 14px 34px oklch(8% 0.03 252 / .45);
+    }
+
+    .brand-mark svg {
+      width: 23px;
+      height: 23px;
+      stroke: var(--accent-2);
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 1px;
+    }
+
+    .brand-copy strong {
+      font-size: 15px;
+      letter-spacing: .01em;
+    }
+
+    .brand-copy span {
+      color: var(--soft);
+      font-size: 12px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 15px;
+      color: var(--text);
+      background: oklch(100% 0.005 252 / 0.055);
+      cursor: pointer;
+      transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease), color 220ms var(--ease);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: oklch(100% 0.005 252 / 0.085);
+    }
+
+    .button svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.9;
+    }
+
+    .button.primary {
+      border-color: oklch(78% 0.12 218 / .36);
+      background: linear-gradient(180deg, oklch(62% 0.16 246 / .94), oklch(50% 0.14 246 / .94));
+      color: oklch(99% 0.005 246);
+      box-shadow: 0 16px 42px oklch(46% 0.15 246 / .22);
+    }
+
+    .button.danger:hover {
+      border-color: oklch(70% 0.18 24 / .45);
+      color: oklch(82% 0.14 24);
+    }
+
+    .button.tiny {
+      min-height: 34px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+
+    .button.icon-only {
+      width: 34px;
+      padding: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-main,
+    .research-panel,
+    .card,
+    .stat,
+    .modal-card,
+    .empty-state {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), oklch(16% 0.018 252 / .88));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      min-height: 338px;
+      border-radius: var(--radius-lg);
+      padding: 34px;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -96px;
+      top: -118px;
+      width: 360px;
+      height: 360px;
+      border-radius: 48%;
+      background:
+        linear-gradient(90deg, transparent 48%, oklch(82% 0.08 218 / .11) 49%, transparent 50%),
+        linear-gradient(0deg, transparent 48%, oklch(82% 0.08 218 / .09) 49%, transparent 50%);
+      background-size: 28px 28px;
+      transform: rotate(12deg);
+      opacity: .85;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 31px;
+      padding: 0 12px;
+      border: 1px solid oklch(78% 0.12 218 / .22);
+      border-radius: 999px;
+      color: oklch(82% 0.11 218);
+      background: oklch(58% 0.14 246 / .11);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 5px oklch(78% 0.12 218 / .12);
+    }
+
+    h1 {
+      position: relative;
+      max-width: 760px;
+      margin: 24px 0 15px;
+      font-size: clamp(44px, 6vw, 92px);
+      line-height: .9;
+      letter-spacing: 0;
+      text-wrap: balance;
+      z-index: 1;
+    }
+
+    .subtitle {
+      position: relative;
+      max-width: 740px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 1.55vw, 20px);
+      line-height: 1.55;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      z-index: 1;
+    }
+
+    .hero-note {
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .research-panel {
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .panel-head h2,
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .panel-head p,
+    .section-head p {
+      margin: 7px 0 0;
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .status-pill {
+      white-space: nowrap;
+      padding: 7px 10px;
+      border: 1px solid oklch(76% 0.15 67 / .24);
+      border-radius: 999px;
+      color: oklch(82% 0.13 67);
+      background: oklch(76% 0.12 67 / .08);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 13px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 0 13px;
+      color: var(--text);
+      background: oklch(100% 0.005 252 / .055);
+      outline: none;
+      transition: border-color 200ms var(--ease), background 200ms var(--ease);
+    }
+
+    input::placeholder {
+      color: oklch(62% 0.025 252);
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover {
+      border-color: oklch(100% 0.005 252 / .18);
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position: calc(100% - 18px) 18px, calc(100% - 12px) 18px;
+      background-size: 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    .notice {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid oklch(76% 0.15 67 / .18);
+      border-radius: 14px;
+      color: oklch(84% 0.07 67);
+      background: oklch(76% 0.1 67 / .07);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .notice svg {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 1px;
+    }
+
+    .research-flow {
+      display: grid;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: oklch(100% 0.005 252 / .035);
+    }
+
+    .flow-step strong {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      color: oklch(91% 0.04 218);
+      background: oklch(62% 0.13 246 / .18);
+      font-size: 12px;
+    }
+
+    .flow-step span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.42;
+    }
+
+    .generator-status {
+      display: none;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid oklch(78% 0.12 218 / .22);
+      border-radius: 14px;
+      color: oklch(85% 0.06 218);
+      background: oklch(62% 0.13 246 / .08);
+      font-size: 12px;
+    }
+
+    .generator-status.visible {
+      display: flex;
+    }
+
+    .skeleton-line {
+      position: relative;
+      overflow: hidden;
+      width: 72px;
+      height: 9px;
+      border-radius: 999px;
+      background: oklch(100% 0.005 252 / .08);
+    }
+
+    .skeleton-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, oklch(100% 0.005 252 / .22), transparent);
+      animation: shimmer 1.1s var(--ease) infinite;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0 18px;
+    }
+
+    .stat {
+      position: relative;
+      overflow: hidden;
+      min-height: 118px;
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      inset: auto 16px 14px 16px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, oklch(78% 0.12 218 / .36), transparent);
+    }
+
+    .stat span {
+      display: block;
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 14px;
+      font-size: clamp(31px, 3vw, 46px);
+      line-height: 1;
+    }
+
+    .stat small {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .content-zone {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      padding: 8px 2px 0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      padding: 4px 2px 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-strong) transparent;
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 13px;
+      color: var(--muted);
+      background: oklch(100% 0.005 252 / .04);
+      cursor: pointer;
+      transition: color 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), transform 200ms var(--ease);
+    }
+
+    .tab:hover,
+    .tab.active {
+      color: var(--text);
+      border-color: var(--line-strong);
+      background: oklch(62% 0.13 246 / .14);
+      transform: translateY(-1px);
+    }
+
+    .tab-count {
+      display: inline-grid;
+      place-items: center;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      color: oklch(91% 0.02 252);
+      background: oklch(100% 0.005 252 / .08);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) 190px 178px;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: transform 240ms var(--ease), border-color 240ms var(--ease), background 240ms var(--ease);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+      background: linear-gradient(180deg, oklch(25% 0.025 252 / .92), oklch(16% 0.018 252 / .9));
+    }
+
+    .preview {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: oklch(12% 0.018 252);
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.95) contrast(1.02);
+      transition: transform 400ms var(--ease), filter 300ms var(--ease);
+    }
+
+    .card:hover .preview img {
+      transform: scale(1.035);
+      filter: saturate(1.08) contrast(1.05);
+    }
+
+    .preview-top {
+      position: absolute;
+      inset: 13px 13px auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border: 1px solid oklch(100% 0.005 252 / .12);
+      border-radius: 999px;
+      color: oklch(92% 0.014 252);
+      background: oklch(11% 0.018 252 / .72);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .badge.version {
+      color: oklch(87% 0.1 218);
+      border-color: oklch(76% 0.12 218 / .28);
+    }
+
+    .card-body {
+      display: grid;
+      gap: 13px;
+      padding: 18px;
+    }
+
+    .title-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .title-line h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .niche {
+      flex: 0 0 auto;
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .angle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.48;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 8px;
+      color: var(--soft);
+      background: oklch(100% 0.005 252 / .035);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      padding-top: 3px;
+    }
+
+    .card-actions .button {
+      min-width: 0;
+    }
+
+    .open-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: oklch(82% 0.1 218);
+      font-weight: 800;
+    }
+
+    .open-link svg {
+      width: 15px;
+      height: 15px;
+      transition: transform 200ms var(--ease);
+    }
+
+    .card:hover .open-link svg {
+      transform: translateX(2px);
+    }
+
+    .empty-state {
+      display: none;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: oklch(7% 0.016 252 / .78);
+      backdrop-filter: blur(14px);
+      z-index: 40;
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(330px, .72fr);
+      width: min(1160px, 100%);
+      max-height: min(860px, calc(100dvh - 44px));
+      overflow: hidden;
+      border-radius: 26px;
+    }
+
+    .modal-media {
+      min-height: 520px;
+      border-right: 1px solid var(--line);
+      background: oklch(10% 0.016 252);
+    }
+
+    .modal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-content {
+      overflow: auto;
+      padding: 26px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: oklch(11% 0.016 252 / .78);
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .modal-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .modal-title {
+      margin: 16px 0 6px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin: 18px 0;
+    }
+
+    .field-title {
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .field p,
+    .field ul {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .field ul {
+      padding-left: 18px;
+    }
+
+    .field li + li {
+      margin-top: 6px;
+    }
+
+    .source {
+      display: flex;
+      align-items: center;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 0 12px;
+      color: oklch(83% 0.08 218);
+      background: oklch(100% 0.005 252 / .045);
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .modal-actions {
+      position: sticky;
+      bottom: -26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 24px -26px -26px;
+      padding: 16px 26px 26px;
+      background: linear-gradient(180deg, transparent, oklch(16% 0.018 252) 24%);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      min-width: min(360px, calc(100% - 36px));
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 12px 16px;
+      color: var(--text);
+      background: oklch(16% 0.018 252 / .95);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
+      z-index: 60;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @keyframes shimmer {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .library-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        width: min(100% - 28px, 720px);
+        padding-top: 14px;
+      }
+
+      .topbar,
+      .section-head {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .nav-actions {
+        justify-content: flex-start;
+      }
+
+      .hero-main {
+        min-height: auto;
+        padding: 25px;
+      }
+
+      .stats-grid,
+      .toolbar,
+      .library-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-card {
+        grid-template-columns: 1fr;
+        overflow: auto;
+      }
+
+      .modal-media {
+        min-height: auto;
+        aspect-ratio: 16 / 10;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .brand {
+        min-width: 0;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-actions,
+      .nav-actions {
+        width: 100%;
+      }
+
+      .hero-note {
+        width: 100%;
+      }
+
+      .modal-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .card-actions {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar" aria-label="Website Storage header">
+      <a class="brand" href="#" aria-label="Website Storage home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 7.5h16M6.5 4.5h11A2.5 2.5 0 0 1 20 7v10a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17V7a2.5 2.5 0 0 1 2.5-2.5Z" stroke="currentColor" stroke-linecap="round" />
+            <path d="M8 11h8M8 14h5" stroke="currentColor" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>Website Storage</strong>
+          <span>Private reference library</span>
+        </span>
+      </a>
+      <nav class="nav-actions" aria-label="Dashboard shortcuts">
+        <a class="button" href="#library">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16" stroke="currentColor" stroke-linecap="round"/></svg>
+          Browse Library
+        </a>
+        <a class="button primary" href="#research">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 4a7 7 0 1 0 4.9 12M16 16l4 4M14 7h6M17 4v6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Research Sites
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-main">
+          <span class="eyebrow"><span class="pulse" aria-hidden="true"></span> Funnel intelligence vault</span>
+          <h1 id="page-title">Website Storage</h1>
+          <p class="subtitle">A private inspiration library for funnel builders, designers, and GoHighLevel specialists to collect reference sites, generate original mirrored funnels, preview pages, and study conversion strategy by niche.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#library">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Open Saved Sites
+            </a>
+            <button class="button" type="button" id="seedButton">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-linecap="round"/></svg>
+              Queue Live Research
+            </button>
+            <span class="hero-note">Built for studying angles, sections, CTAs, and conversion patterns.</span>
+          </div>
+        </div>
+
+        <aside class="research-panel" id="research" aria-labelledby="research-title">
+          <div class="panel-head">
+            <div>
+              <h2 id="research-title">AutoResearch Generator</h2>
+              <p>Research intent, teardown structure, original website generation, and storage in one controlled flow.</p>
+            </div>
+            <span class="status-pill">Live required</span>
+          </div>
+          <form class="form-grid" id="researchForm">
+            <label>
+              Niche
+              <input id="nicheInput" name="niche" autocomplete="off" placeholder="Dental Clinic" />
+            </label>
+            <label>
+              Number of websites
+              <input id="countInput" name="count" type="number" min="1" max="12" value="4" />
+            </label>
+            <label>
+              Website type
+              <select id="typeInput" name="type">
+                <option>Landing page</option>
+                <option>Funnel</option>
+                <option>Full website</option>
+                <option>Booking page</option>
+                <option>Opt-in page</option>
+              </select>
+            </label>
+            <label>
+              Conversion goal
+              <select id="goalInput" name="goal">
+                <option>Book a consultation</option>
+                <option>Capture qualified leads</option>
+                <option>Sell a premium offer</option>
+                <option>Drive demo requests</option>
+                <option>Start an application</option>
+              </select>
+            </label>
+            <label>
+              Style preference
+              <select id="styleInput" name="style">
+                <option>Premium</option>
+                <option>Modern</option>
+                <option>Minimal</option>
+                <option>Animated</option>
+                <option>Luxury</option>
+                <option>Local service</option>
+                <option>High-converting</option>
+              </select>
+            </label>
+            <div class="notice" role="note">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8v5M12 17h.01M10.3 4.6 2.7 18a2 2 0 0 0 1.7 3h15.2a2 2 0 0 0 1.7-3L13.7 4.6a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Live browsing is mandatory. This dashboard will not create generated websites unless a Codex live AutoResearch adapter is connected and returns inspected source URLs, teardown notes, and working preview pages.
+            </div>
+            <div class="research-flow" aria-label="AutoResearch workflow">
+              <div class="flow-step"><strong>1</strong><span>Codex browses the live web and selects high-performing reference websites for the niche.</span></div>
+              <div class="flow-step"><strong>2</strong><span>Site teardown inspects real layout, section rhythm, CTA placement, style direction, interactions, and mobile behavior.</span></div>
+              <div class="flow-step"><strong>3</strong><span>The generator mirrors strategy only, replaces all brand/copy/assets, builds a real preview page, then saves it to storage.</span></div>
+            </div>
+            <div class="generator-status" id="generatorStatus">
+              <span class="skeleton-line" aria-hidden="true"></span>
+              <span id="generatorStatusText">Preparing AutoResearch pipeline...</span>
+            </div>
+            <button class="button primary" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Auto Research
+            </button>
+          </form>
+        </aside>
+      </section>
+
+      <section class="stats-grid" aria-label="Library stats">
+        <article class="stat">
+          <span>Total Sites</span>
+          <strong id="totalSites">0</strong>
+          <small>Saved references</small>
+        </article>
+        <article class="stat">
+          <span>Funnels</span>
+          <strong id="totalFunnels">0</strong>
+          <small>Lead journeys and offers</small>
+        </article>
+        <article class="stat">
+          <span>Niches</span>
+          <strong id="totalNiches">0</strong>
+          <small>Categories with examples</small>
+        </article>
+        <article class="stat">
+          <span>Archived</span>
+          <strong id="totalArchived">0</strong>
+          <small>Hidden from active review</small>
+        </article>
+      </section>
+
+      <section class="content-zone" id="library" aria-labelledby="library-title">
+        <div class="section-head">
+          <div>
+            <h2 id="library-title">Saved Website Library</h2>
+            <p>Filter by niche, scan positioning angles, then open a deeper teardown preview.</p>
+          </div>
+          <div class="toolbar" aria-label="Library controls">
+            <label>
+              Search
+              <input id="searchInput" type="search" placeholder="Search name, niche, tag, or angle" />
+            </label>
+            <label>
+              Type
+              <select id="typeFilter">
+                <option value="ALL">All types</option>
+                <option value="SITE">Site</option>
+                <option value="FUNNEL">Funnel</option>
+                <option value="LANDING PAGE">Landing page</option>
+                <option value="BOOKING PAGE">Booking page</option>
+                <option value="OPT-IN PAGE">Opt-in page</option>
+              </select>
+            </label>
+            <label>
+              View
+              <select id="viewFilter">
+                <option value="ACTIVE">Active</option>
+                <option value="FAVORITES">Favorites</option>
+                <option value="ARCHIVED">Archived</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabs" role="tablist" aria-label="Niche filters"></div>
+        <div class="library-grid" id="libraryGrid" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState">No sites match this view yet. Run mock research or change the filters.</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <article class="modal-card">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-media">
+        <img id="modalImage" src="" alt="" />
+      </div>
+      <div class="modal-content">
+        <div class="meta-line" id="modalBadges"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="field">
+          <span class="field-title">URL or source</span>
+          <a class="source" id="modalUrl" href="#" target="_blank" rel="noreferrer"></a>
+        </div>
+        <div class="field">
+          <span class="field-title">Positioning angle</span>
+          <p id="modalAngle"></p>
+        </div>
+        <div class="field">
+          <span class="field-title">What makes it good</span>
+          <ul id="modalGood"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">CTA strategy</span>
+          <p id="modalCta"></p>
+        </div>
+        <div class="field">
+          <span class="field-title">Section breakdown</span>
+          <ul id="modalSections"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">Design notes</span>
+          <ul id="modalDesign"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">Conversion notes</span>
+          <ul id="modalConversion"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">Source inspiration notes</span>
+          <p id="modalSource"></p>
+        </div>
+        <div class="modal-actions">
+          <a class="button primary" id="openLive" href="#" target="_blank" rel="noreferrer">Open Live Site</a>
+          <button class="button" id="copyNotes" type="button">Copy Notes</button>
+          <button class="button" id="favoriteButton" type="button">Add to Favorites</button>
+          <button class="button danger" id="archiveButton" type="button">Archive</button>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const STORAGE_KEY = "website-storage-dashboard-v2";
+    const LIVE_RESEARCH_QUEUE_KEY = "website-storage-live-autoresearch-queue-v1";
+    const categories = [
+      "All",
+      "Coaching",
+      "Law Firm",
+      "Dental Clinic",
+      "Med Spa",
+      "HVAC",
+      "Moving Company",
+      "Real Estate",
+      "SaaS",
+      "Agency",
+      "Solar Energy",
+      "Fitness",
+      "Custom"
+    ];
+
+    const palette = {
+      "Dental Clinic": ["#0f3154", "#5fd0d5", "#d8fbff"],
+      "Moving Company": ["#182138", "#f2b84b", "#f6f0dc"],
+      "HVAC": ["#10283c", "#4eb6ff", "#e3f4ff"],
+      "Real Estate": ["#1c2432", "#c9a15b", "#f5ead7"],
+      "Coaching": ["#241f35", "#b7a4ff", "#f0ebff"],
+      "Solar Energy": ["#20220e", "#e8c44f", "#fff2ba"],
+      "Law Firm": ["#131c29", "#7aa7ff", "#e7eefc"],
+      "SaaS": ["#111b35", "#61a5ff", "#edf6ff"],
+      "Agency": ["#181727", "#75d4c8", "#ecfffb"],
+      "Fitness": ["#1d1717", "#ff7c58", "#fff0ea"],
+      "Med Spa": ["#1c2430", "#a7d8c9", "#effcf8"],
+      "Custom": ["#1e2230", "#8fb5ff", "#eef4ff"]
+    };
+
+    const seedSites = [
+      {
+        id: "ws-001",
+        name: "Brightline Dental Studio",
+        niche: "Dental Clinic",
+        type: "SITE",
+        version: "V0",
+        url: "https://example.com/brightline-dental",
+        screenshot: makePreview("Dental Clinic", "Brightline", "Smile design booking site"),
+        positioningAngle: "A boutique dental clinic positioned around cosmetic confidence and same-week appointment capture.",
+        headline: "A calmer path to a better smile.",
+        cta: "Primary CTA uses booking language above the fold, then repeats after services, financing, and proof.",
+        sectionBreakdown: ["Hero with booking promise", "Insurance and trust strip", "Service pathways", "Before and after proof", "Dentist authority", "FAQ", "Booking form"],
+        designNotes: ["Deep navy base with clinical cyan highlights", "Large screenshot block keeps the offer tangible", "Cards use soft borders instead of loud glows"],
+        conversionNotes: ["Fast path to appointment", "Trust proof near every decision point", "Financing removes a common objection"],
+        tags: ["Premium", "Booking funnel", "Local business", "Modern"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-12T08:00:00.000Z"
+      },
+      {
+        id: "ws-002",
+        name: "MovePilot Quote Funnel",
+        niche: "Moving Company",
+        type: "FUNNEL",
+        version: "A",
+        url: "https://example.com/movepilot",
+        screenshot: makePreview("Moving Company", "MovePilot", "Instant quote funnel"),
+        positioningAngle: "A quote-first moving funnel that makes availability, price range, and packing help feel simple.",
+        headline: "Get a moving quote before your boxes are packed.",
+        cta: "Step-based quote CTA asks only for origin, destination, date, and home size before collecting contact details.",
+        sectionBreakdown: ["Quote hero", "Move size selector", "Local proof", "Crew and truck details", "Review strip", "Deposit CTA"],
+        designNotes: ["Industrial dark panels with warm amber action states", "Form is visually dominant without feeling heavy", "Progress indicators make the funnel feel quick"],
+        conversionNotes: ["Low-friction first step", "Availability pressure without fake scarcity", "Review proof placed beside pricing expectations"],
+        tags: ["Lead capture", "Conversion-focused", "Local business"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:05:00.000Z"
+      },
+      {
+        id: "ws-003",
+        name: "Northline HVAC Rescue",
+        niche: "HVAC",
+        type: "LANDING PAGE",
+        version: "B",
+        url: "https://example.com/northline-hvac",
+        screenshot: makePreview("HVAC", "Northline", "Emergency repair page"),
+        positioningAngle: "Emergency repair page focused on speed, service zones, and trust signals for stressed homeowners.",
+        headline: "Same-day HVAC repair without the phone tag.",
+        cta: "Primary CTA starts a service request, secondary CTA supports direct calling on mobile.",
+        sectionBreakdown: ["Emergency hero", "Service zone badges", "Repair categories", "Technician proof", "Maintenance upsell", "FAQ", "Request form"],
+        designNotes: ["Cold blue accent makes urgency feel controlled", "Compact service cards support fast scanning", "Mobile sticky action keeps the phone path visible"],
+        conversionNotes: ["Urgency appears in service promise, not fear copy", "Zip code filter improves lead quality", "FAQ handles pricing and response time objections"],
+        tags: ["High-converting", "Lead capture", "Local business"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:10:00.000Z"
+      },
+      {
+        id: "ws-004",
+        name: "EstateSignal Seller Page",
+        niche: "Real Estate",
+        type: "LANDING PAGE",
+        version: "V0",
+        url: "https://example.com/estatesignal",
+        screenshot: makePreview("Real Estate", "EstateSignal", "Home valuation offer"),
+        positioningAngle: "Seller lead page that frames valuation as a strategic pricing consult instead of a generic estimate.",
+        headline: "Know what your home can command before you list.",
+        cta: "CTA invites a valuation review and asks for property basics before the contact step.",
+        sectionBreakdown: ["Valuation hero", "Market signal cards", "Agent method", "Neighborhood proof", "Seller FAQ", "Consult form"],
+        designNotes: ["Quiet charcoal with muted gold creates trust without looking dated", "Market cards add dashboard-like authority", "Photography area is treated as editorial proof"],
+        conversionNotes: ["Asks for the address after value is clear", "Method section differentiates from instant-estimate tools", "Local proof supports seller confidence"],
+        tags: ["Premium", "Lead capture", "Modern"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-12T08:15:00.000Z"
+      },
+      {
+        id: "ws-005",
+        name: "CoachPath Intensive",
+        niche: "Coaching",
+        type: "FUNNEL",
+        version: "A",
+        url: "https://example.com/coachpath",
+        screenshot: makePreview("Coaching", "CoachPath", "Application funnel"),
+        positioningAngle: "Application funnel for a high-ticket coaching offer, built around qualification and methodology clarity.",
+        headline: "A focused operating system for founders who cannot keep scaling by force.",
+        cta: "CTA opens an application flow, not a generic discovery call, making the offer feel selective.",
+        sectionBreakdown: ["Authority hero", "Pain pattern", "Method pillars", "Fit criteria", "Proof alternatives", "Application form"],
+        designNotes: ["Low-saturation violet softens the dark UI", "Method diagram replaces vague benefits", "Long-form copy is broken into tight editorial blocks"],
+        conversionNotes: ["Qualification increases lead quality", "Fit criteria reduces poor calls", "Method clarity builds trust without fabricated testimonials"],
+        tags: ["Premium", "Conversion-focused", "Application funnel"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:20:00.000Z"
+      },
+      {
+        id: "ws-006",
+        name: "Solstice Solar Audit",
+        niche: "Solar Energy",
+        type: "LANDING PAGE",
+        version: "B",
+        url: "https://example.com/solstice",
+        screenshot: makePreview("Solar Energy", "Solstice", "Savings audit page"),
+        positioningAngle: "Solar savings page that leads with utility bill clarity instead of broad green-energy messaging.",
+        headline: "See whether solar makes financial sense for this roof.",
+        cta: "CTA asks for monthly bill range first, then address and contact fields.",
+        sectionBreakdown: ["Savings audit hero", "Bill range tool", "Roof suitability", "Incentive explainer", "Installer proof", "Audit CTA"],
+        designNotes: ["Warm yellow accent is used for decisions only", "Calculator visual provides substance", "Sections avoid crowded energy clichés"],
+        conversionNotes: ["First question is easy to answer", "Financial framing improves intent", "Incentive explanation handles skepticism"],
+        tags: ["Lead capture", "Modern", "Local business"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:25:00.000Z"
+      },
+      {
+        id: "ws-007",
+        name: "CaseFoundry Injury Law",
+        niche: "Law Firm",
+        type: "SITE",
+        version: "V0",
+        url: "https://example.com/casefoundry",
+        screenshot: makePreview("Law Firm", "CaseFoundry", "Consultation site"),
+        positioningAngle: "Personal injury site built around clarity, case fit, and attorney credibility rather than aggressive claims.",
+        headline: "Clear next steps after a serious injury.",
+        cta: "CTA offers a free case review with expectations about response time and required details.",
+        sectionBreakdown: ["Trust hero", "Case type grid", "Attorney proof", "Process explanation", "FAQ", "Consultation form"],
+        designNotes: ["Blue accent signals trust while dark panels keep it premium", "Attorney profile blocks stay sober and direct", "Legal copy is readable and not sensational"],
+        conversionNotes: ["Expectation setting reduces hesitation", "Case types help self-selection", "Process section reduces uncertainty"],
+        tags: ["Premium", "Lead capture", "Professional"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:30:00.000Z"
+      },
+      {
+        id: "ws-008",
+        name: "PipelineOS Demo Hub",
+        niche: "SaaS",
+        type: "SITE",
+        version: "A",
+        url: "https://example.com/pipelineos",
+        screenshot: makePreview("SaaS", "PipelineOS", "Product demo site"),
+        positioningAngle: "SaaS product page that shows pipeline visibility and handoff logic through concrete UI previews.",
+        headline: "One operating view for every lead handoff.",
+        cta: "Primary CTA routes to demo booking, secondary CTA opens a product walkthrough.",
+        sectionBreakdown: ["Product hero", "Workflow preview", "Use cases", "Integration strip", "Security notes", "Demo CTA"],
+        designNotes: ["Product screenshots carry the story", "Dense data cards are balanced with larger visual zones", "Blue accent is restrained to active states"],
+        conversionNotes: ["Use cases translate features into buyer needs", "Security notes handle enterprise concerns", "Walkthrough CTA supports colder visitors"],
+        tags: ["SaaS", "Modern", "Conversion-focused"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-12T08:35:00.000Z"
+      },
+      {
+        id: "ws-009",
+        name: "StudioLedger Agency",
+        niche: "Agency",
+        type: "SITE",
+        version: "B",
+        url: "https://example.com/studioledger",
+        screenshot: makePreview("Agency", "StudioLedger", "Service authority site"),
+        positioningAngle: "Agency site built around implementation depth, process proof, and service packaging for serious buyers.",
+        headline: "Funnels, automations, and dashboards built as one revenue system.",
+        cta: "CTA asks for a lead leak audit, making the first step concrete.",
+        sectionBreakdown: ["Positioning hero", "Problem map", "Offer modules", "Build process", "System examples", "Audit CTA"],
+        designNotes: ["Technical visual motif reinforces systems work", "Offer modules are grouped by business problem", "Case alternatives avoid fake metrics"],
+        conversionNotes: ["Audit CTA is lower friction than a proposal request", "Problem map makes pain specific", "Process proof builds delivery confidence"],
+        tags: ["Premium", "Conversion-focused", "Lead capture"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:40:00.000Z"
+      },
+      {
+        id: "ws-010",
+        name: "FormLab Fitness Trial",
+        niche: "Fitness",
+        type: "FUNNEL",
+        version: "A",
+        url: "https://example.com/formlab",
+        screenshot: makePreview("Fitness", "FormLab", "Trial booking funnel"),
+        positioningAngle: "Gym trial funnel that reduces intimidation and routes visitors into the right first session.",
+        headline: "Book the first workout that fits your starting point.",
+        cta: "CTA starts with goal selection before asking for schedule and contact details.",
+        sectionBreakdown: ["Goal-based hero", "Class fit selector", "Coach proof", "Member outcomes", "Schedule picker", "Trial form"],
+        designNotes: ["Warm action accent gives the dark layout energy", "Class selector replaces generic service cards", "Human proof is framed around confidence and consistency"],
+        conversionNotes: ["Goal-first flow personalizes the trial", "Schedule picker shortens the path", "Objections around fitness level are handled early"],
+        tags: ["Booking funnel", "Modern", "Local business"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:45:00.000Z"
+      },
+      {
+        id: "ws-011",
+        name: "Aurea Med Spa Offers",
+        niche: "Med Spa",
+        type: "LANDING PAGE",
+        version: "V0",
+        url: "https://example.com/aurea",
+        screenshot: makePreview("Med Spa", "Aurea", "Treatment consultation page"),
+        positioningAngle: "Med spa page that sells consultation fit and treatment education before pushing the booking form.",
+        headline: "Plan the treatment path before choosing the treatment.",
+        cta: "CTA offers a skin consult with a short intake, then calendar booking.",
+        sectionBreakdown: ["Consultation hero", "Treatment concerns", "Provider trust", "Treatment path", "Safety FAQ", "Booking form"],
+        designNotes: ["Soft green accent keeps the brand clinical but warm", "Treatment cards are calm and editorial", "Safety notes stay close to the CTA"],
+        conversionNotes: ["Education improves lead quality", "Provider proof reduces aesthetic-treatment anxiety", "Consult-first CTA fits premium positioning"],
+        tags: ["Luxury", "Premium", "Booking funnel"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T08:50:00.000Z"
+      },
+      {
+        id: "ws-012",
+        name: "Custom Funnel Teardown",
+        niche: "Custom",
+        type: "SITE",
+        version: "V0",
+        url: "https://example.com/custom-teardown",
+        screenshot: makePreview("Custom", "Custom", "Reference teardown template"),
+        positioningAngle: "A reusable teardown template for storing visual, CTA, and section notes from any reference website.",
+        headline: "Save the pattern before the idea disappears.",
+        cta: "CTA supports previewing and copying notes for reuse in builds.",
+        sectionBreakdown: ["Reference summary", "Screenshot", "CTA notes", "Section map", "Design notes", "Conversion notes"],
+        designNotes: ["Neutral blue-gray treatment lets imported references differ", "Fields map directly to build research", "Preview layout favors quick scanning"],
+        conversionNotes: ["Copy notes action makes research usable", "Tags make cross-niche patterns discoverable", "Archive keeps old references without deleting them"],
+        tags: ["Research", "Modern", "Workflow"],
+        isFavorite: false,
+        isArchived: true,
+        createdAt: "2026-05-12T08:55:00.000Z"
+      },
+      {
+        id: "gen-coaching-001",
+        name: "ClaritySprint Advisory",
+        niche: "Coaching",
+        type: "FUNNEL",
+        version: "GEN-A",
+        url: "generated-website.html?id=gen-coaching-001",
+        localPath: "generated-website.html?id=gen-coaching-001",
+        screenshot: makePreview("Coaching", "ClaritySprint", "Original coaching funnel"),
+        sourceInspiration: "Inspired by premium coaching references at a strategy level: application-first CTAs, methodology clarity, fit criteria, authority proof, and objection handling. No brand names, copy, logos, images, or proprietary assets were reused.",
+        positioningAngle: "A premium founder coaching funnel that turns scattered operators into calm weekly decision-makers through a 30-day clarity sprint.",
+        headline: "Turn founder overload into a calmer operating rhythm in 30 days.",
+        primaryCTA: "Apply for the Clarity Sprint",
+        cta: "Apply for the Clarity Sprint",
+        sectionBreakdown: ["Big Promise / Desired Outcome", "Empathy / Connection", "Opportunity Vehicle / Solution", "Before vs After / Gap & Bridge", "USP / Unique Selling Proposition", "Offer Positioning / No-Brainer Deal", "Social Proof / Instant Credibility", "Risk Reversal / Lower The Bar", "Authority / Trust The Source", "Urgency / Take Action Today", "FAQ / Concerns & Objections", "Final CTA"],
+        designNotes: ["Editorial dark coaching aesthetic with ink, mist, and restrained blue", "Asymmetric hero with a method map instead of a generic portrait hero", "Conversion framework is explicit but styled as premium advisory content"],
+        conversionNotes: ["Application CTA increases lead quality", "Before/after bridge makes the transformation concrete", "Risk reversal lowers pressure before the final CTA"],
+        tags: ["Generated", "Premium", "Application funnel", "Conversion framework"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-12T09:10:00.000Z"
+      },
+      {
+        id: "gen-law-001",
+        name: "HarborLine Case Review",
+        niche: "Law Firm",
+        type: "LANDING PAGE",
+        version: "GEN-A",
+        url: "generated-website.html?id=gen-law-001",
+        localPath: "generated-website.html?id=gen-law-001",
+        screenshot: makePreview("Law Firm", "HarborLine", "Original case review page"),
+        sourceInspiration: "Inspired by high-trust legal landing page patterns: sober hierarchy, case-fit guidance, process certainty, consultation framing, and proof placement. No source copy, attorney names, marks, or imagery were reused.",
+        positioningAngle: "A calm legal intake page for people who need clarity after a serious injury and want to understand whether their case is worth reviewing.",
+        headline: "Know your next legal step before the pressure builds.",
+        primaryCTA: "Request a Free Case Review",
+        cta: "Request a Free Case Review",
+        sectionBreakdown: ["Big Promise / Desired Outcome", "Empathy / Connection", "Opportunity Vehicle / Solution", "Before vs After / Gap & Bridge", "USP / Unique Selling Proposition", "Offer Positioning / No-Brainer Deal", "Social Proof / Instant Credibility", "Risk Reversal / Lower The Bar", "Authority / Trust The Source", "Urgency / Take Action Today", "FAQ / Concerns & Objections", "Final CTA"],
+        designNotes: ["Deep slate legal interface with measured blue accents", "Trust content appears beside intake steps", "Mobile CTA keeps consultation action visible without blocking content"],
+        conversionNotes: ["Case-fit questions reduce poor-fit leads", "No-pressure review functions as risk reversal", "Process clarity lowers visitor anxiety"],
+        tags: ["Generated", "Law firm", "Lead capture", "Trust-first"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T09:12:00.000Z"
+      },
+      {
+        id: "gen-medspa-001",
+        name: "LumaSkin Consult Page",
+        niche: "Med Spa",
+        type: "BOOKING PAGE",
+        version: "GEN-B",
+        url: "generated-website.html?id=gen-medspa-001",
+        localPath: "generated-website.html?id=gen-medspa-001",
+        screenshot: makePreview("Med Spa", "LumaSkin", "Original consult booking page"),
+        sourceInspiration: "Inspired by premium med spa patterns: consult-first positioning, treatment education, safety reassurance, provider authority, and booking CTAs. No source brand identity, copy, logos, treatment images, or assets were reused.",
+        positioningAngle: "A consult-first med spa booking page that sells a safe treatment plan before selling a specific treatment.",
+        headline: "Build a skin plan before choosing the treatment.",
+        primaryCTA: "Book a Skin Planning Consult",
+        cta: "Book a Skin Planning Consult",
+        sectionBreakdown: ["Big Promise / Desired Outcome", "Empathy / Connection", "Opportunity Vehicle / Solution", "Before vs After / Gap & Bridge", "USP / Unique Selling Proposition", "Offer Positioning / No-Brainer Deal", "Social Proof / Instant Credibility", "Risk Reversal / Lower The Bar", "Authority / Trust The Source", "Urgency / Take Action Today", "FAQ / Concerns & Objections", "Final CTA"],
+        designNotes: ["Soft clinical dark surface with sage and pearl highlights", "Consultation path is treated as a premium diagnostic flow", "Cards avoid beauty clichés and emphasize safety"],
+        conversionNotes: ["Consult-first CTA attracts higher-intent visitors", "Risk reversal makes the first appointment feel easy", "FAQ answers safety, downtime, and fit concerns"],
+        tags: ["Generated", "Booking page", "Premium", "Med spa"],
+        isFavorite: false,
+        isArchived: false,
+        createdAt: "2026-05-12T09:14:00.000Z"
+      }
+    ];
+
+    let sites = loadSites();
+    let currentNiche = "All";
+    let activeSiteId = null;
+
+    const tabsEl = document.getElementById("tabs");
+    const gridEl = document.getElementById("libraryGrid");
+    const emptyEl = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const typeFilter = document.getElementById("typeFilter");
+    const viewFilter = document.getElementById("viewFilter");
+    const modal = document.getElementById("previewModal");
+    const modalClose = document.getElementById("modalClose");
+    const generatorStatus = document.getElementById("generatorStatus");
+    const generatorStatusText = document.getElementById("generatorStatusText");
+    const toast = document.getElementById("toast");
+
+    function loadSites() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const parsed = stored ? JSON.parse(stored) : seedSites;
+        return parsed.map(normalizeSite).filter(site => !isLegacySampleSite(site));
+      } catch (error) {
+        return seedSites.map(normalizeSite).filter(site => !isLegacySampleSite(site));
+      }
+    }
+
+    function isLegacySampleSite(site) {
+      return ["gen-coaching-001", "gen-law-001", "gen-medspa-001"].includes(site.id) || String(site.sourceInspiration || "").includes("AutoResearch local strategy layer");
+    }
+
+    function normalizeSite(site) {
+      return {
+        ...site,
+        localPath: site.localPath || site.url || "",
+        sourceInspiration: site.sourceInspiration || "Reference card created before source-inspiration tracking was added. Add teardown notes after reviewing the live page.",
+        primaryCTA: site.primaryCTA || site.cta || "Open preview",
+        cta: site.cta || site.primaryCTA || "Open preview",
+        type: normalizeType(site.type)
+      };
+    }
+
+    function normalizeType(type) {
+      const value = String(type || "SITE").toUpperCase();
+      if (value.includes("BOOKING")) return "BOOKING PAGE";
+      if (value.includes("OPT")) return "OPT-IN PAGE";
+      if (value.includes("FUNNEL")) return "FUNNEL";
+      if (value.includes("LANDING")) return "LANDING PAGE";
+      return "SITE";
+    }
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sites));
+    }
+
+    function makePreview(niche, name, descriptor) {
+      const colors = palette[niche] || palette.Custom;
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+          <defs>
+            <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="${colors[0]}"/>
+              <stop offset="1" stop-color="#080d18"/>
+            </linearGradient>
+            <linearGradient id="accent" x1="0" x2="1">
+              <stop offset="0" stop-color="${colors[1]}" stop-opacity=".92"/>
+              <stop offset="1" stop-color="${colors[2]}" stop-opacity=".68"/>
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000714" flood-opacity=".45"/>
+            </filter>
+          </defs>
+          <rect width="960" height="600" fill="url(#bg)"/>
+          <path d="M0 122h960M0 244h960M0 366h960M0 488h960M122 0v600M244 0v600M366 0v600M488 0v600M610 0v600M732 0v600M854 0v600" stroke="#ffffff" stroke-opacity=".045"/>
+          <rect x="54" y="48" width="852" height="504" rx="34" fill="#07111f" fill-opacity=".78" stroke="#ffffff" stroke-opacity=".12" filter="url(#shadow)"/>
+          <rect x="92" y="86" width="238" height="28" rx="14" fill="url(#accent)" fill-opacity=".85"/>
+          <rect x="92" y="150" width="430" height="48" rx="14" fill="#ffffff" fill-opacity=".9"/>
+          <rect x="92" y="217" width="346" height="18" rx="9" fill="#ffffff" fill-opacity=".42"/>
+          <rect x="92" y="249" width="286" height="18" rx="9" fill="#ffffff" fill-opacity=".27"/>
+          <rect x="92" y="320" width="172" height="52" rx="26" fill="url(#accent)"/>
+          <rect x="552" y="126" width="286" height="298" rx="28" fill="#ffffff" fill-opacity=".09" stroke="#ffffff" stroke-opacity=".12"/>
+          <rect x="586" y="164" width="146" height="18" rx="9" fill="${colors[1]}" fill-opacity=".76"/>
+          <rect x="586" y="213" width="204" height="14" rx="7" fill="#ffffff" fill-opacity=".35"/>
+          <rect x="586" y="245" width="176" height="14" rx="7" fill="#ffffff" fill-opacity=".22"/>
+          <rect x="586" y="296" width="92" height="72" rx="18" fill="#ffffff" fill-opacity=".1"/>
+          <rect x="698" y="296" width="92" height="72" rx="18" fill="#ffffff" fill-opacity=".1"/>
+          <text x="92" y="471" fill="${colors[2]}" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">${escapeSvg(name)}</text>
+          <text x="92" y="508" fill="#dce9f7" fill-opacity=".72" font-family="Segoe UI, Arial, sans-serif" font-size="21">${escapeSvg(descriptor)}</text>
+        </svg>
+      `;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function escapeSvg(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&apos;"
+      }[char]));
+    }
+
+    function render() {
+      renderTabs();
+      renderStats();
+      renderCards();
+    }
+
+    function filteredSites() {
+      const query = searchInput.value.trim().toLowerCase();
+      const typeValue = typeFilter.value;
+      const viewValue = viewFilter.value;
+
+      return sites.filter(site => {
+        const matchesNiche = currentNiche === "All" || site.niche === currentNiche;
+        const matchesType = typeValue === "ALL" || site.type === typeValue;
+        const matchesView =
+          viewValue === "ARCHIVED" ? site.isArchived :
+          viewValue === "FAVORITES" ? site.isFavorite && !site.isArchived :
+          !site.isArchived;
+        const haystack = [
+          site.name,
+          site.niche,
+          site.type,
+          site.positioningAngle,
+          site.headline,
+          site.primaryCTA,
+          site.sourceInspiration,
+          ...site.tags
+        ].join(" ").toLowerCase();
+        return matchesNiche && matchesType && matchesView && (!query || haystack.includes(query));
+      });
+    }
+
+    function renderTabs() {
+      tabsEl.innerHTML = categories.map(category => {
+        const count = category === "All"
+          ? sites.filter(site => !site.isArchived).length
+          : sites.filter(site => site.niche === category && !site.isArchived).length;
+        const selected = currentNiche === category;
+        return `
+          <button class="tab ${selected ? "active" : ""}" role="tab" aria-selected="${selected}" type="button" data-niche="${category}">
+            ${category}
+            <span class="tab-count">${count}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderStats() {
+      const active = sites.filter(site => !site.isArchived);
+      const funnels = active.filter(site => site.type === "FUNNEL").length;
+      const niches = new Set(active.map(site => site.niche)).size;
+      const archived = sites.filter(site => site.isArchived).length;
+      document.getElementById("totalSites").textContent = active.length;
+      document.getElementById("totalFunnels").textContent = funnels;
+      document.getElementById("totalNiches").textContent = niches;
+      document.getElementById("totalArchived").textContent = archived;
+    }
+
+    function renderCards() {
+      const results = filteredSites();
+      emptyEl.classList.toggle("visible", results.length === 0);
+      gridEl.innerHTML = results.map(site => `
+        <article class="card" tabindex="0" role="button" aria-label="Open preview for ${site.name}" data-id="${site.id}">
+          <div class="preview">
+            <img src="${site.screenshot}" alt="Preview screenshot for ${site.name}" loading="lazy" />
+            <div class="preview-top">
+              <span class="badge">${site.type}</span>
+              <span class="badge version">${site.version || "V0"}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="title-line">
+              <h3>${site.name}</h3>
+              <span class="niche">${site.niche}</span>
+            </div>
+            <p class="angle">${site.positioningAngle}</p>
+            <div class="tag-row">
+              ${site.tags.slice(0, 4).map(tag => `<span class="tag">${tag}</span>`).join("")}
+            </div>
+            <div class="card-footer">
+              <span>${site.isFavorite ? "Favorite" : site.localPath ? "Generated page" : "Reference"}</span>
+              <span class="open-link">Open preview <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="card-actions" aria-label="Actions for ${site.name}">
+              <button class="button tiny card-command" type="button" data-action="preview" data-id="${site.id}">Preview</button>
+              <a class="button tiny card-command" href="${site.localPath || site.url}" target="_blank" rel="noreferrer" data-action="open" data-id="${site.id}">Open</a>
+              <button class="button tiny card-command" type="button" data-action="edit" data-id="${site.id}">Edit</button>
+              <button class="button tiny card-command" type="button" data-action="archive" data-id="${site.id}">${site.isArchived ? "Restore" : "Archive"}</button>
+              <button class="button tiny card-command" type="button" data-action="favorite" data-id="${site.id}">${site.isFavorite ? "Saved" : "Save"}</button>
+              <button class="button tiny card-command" type="button" data-action="notes" data-id="${site.id}">Notes</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openModal(siteId) {
+      const site = sites.find(item => item.id === siteId);
+      if (!site) return;
+      activeSiteId = site.id;
+      document.getElementById("modalImage").src = site.screenshot;
+      document.getElementById("modalImage").alt = `Large preview screenshot for ${site.name}`;
+      document.getElementById("modalBadges").innerHTML = `
+        <span class="badge">${site.type}</span>
+        <span class="badge version">${site.version || "V0"}</span>
+        <span class="badge">${site.niche}</span>
+      `;
+      document.getElementById("modalTitle").textContent = site.name;
+      const openTarget = site.localPath || site.url;
+      document.getElementById("modalUrl").textContent = openTarget;
+      document.getElementById("modalUrl").href = openTarget;
+      document.getElementById("openLive").href = openTarget;
+      document.getElementById("modalAngle").textContent = site.positioningAngle;
+      document.getElementById("modalCta").textContent = site.primaryCTA || site.cta;
+      document.getElementById("modalSource").textContent = site.sourceInspiration;
+      fillList("modalGood", [site.headline, `Primary action: ${site.primaryCTA || site.cta}`, ...site.tags.map(tag => `${tag} pattern`)]);
+      fillList("modalSections", site.sectionBreakdown);
+      fillList("modalDesign", site.designNotes);
+      fillList("modalConversion", site.conversionNotes);
+      document.getElementById("favoriteButton").textContent = site.isFavorite ? "Remove Favorite" : "Add to Favorites";
+      document.getElementById("archiveButton").textContent = site.isArchived ? "Restore" : "Archive";
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      activeSiteId = null;
+    }
+
+    function fillList(id, items) {
+      document.getElementById(id).innerHTML = items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("visible");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("visible"), 2400);
+    }
+
+    function saveLiveResearchJob(job) {
+      let queue = [];
+      try {
+        queue = JSON.parse(localStorage.getItem(LIVE_RESEARCH_QUEUE_KEY) || "[]");
+      } catch (error) {
+        queue = [];
+      }
+      queue.unshift(job);
+      localStorage.setItem(LIVE_RESEARCH_QUEUE_KEY, JSON.stringify(queue.slice(0, 20)));
+    }
+
+    function applyLiveResearchResults(results) {
+      const generated = Array.isArray(results) ? results : (results && Array.isArray(results.records) ? results.records : []);
+      const valid = generated
+        .map(normalizeSite)
+        .filter(site => site.url && site.localPath && site.sourceInspiration && site.sectionBreakdown && site.designNotes && site.conversionNotes);
+      if (!valid.length) {
+        throw new Error("Live AutoResearch adapter returned no valid generated websites.");
+      }
+      sites = [...valid, ...sites];
+      currentNiche = categories.includes(valid[0].niche) ? valid[0].niche : "All";
+      persist();
+      render();
+      return valid.length;
+    }
+
+    function copyActiveNotes() {
+      const site = sites.find(item => item.id === activeSiteId);
+      if (!site) return;
+      const notes = [
+        `Website: ${site.name}`,
+        `Niche: ${site.niche}`,
+        `Type: ${site.type}`,
+        `URL: ${site.url}`,
+        `Local Path: ${site.localPath || ""}`,
+        `Source Inspiration: ${site.sourceInspiration || ""}`,
+        `Positioning: ${site.positioningAngle}`,
+        `Headline: ${site.headline}`,
+        `CTA: ${site.primaryCTA || site.cta}`,
+        `Sections: ${site.sectionBreakdown.join(" | ")}`,
+        `Design Notes: ${site.designNotes.join(" | ")}`,
+        `Conversion Notes: ${site.conversionNotes.join(" | ")}`,
+        `Tags: ${site.tags.join(", ")}`
+      ].join("\n");
+
+      navigator.clipboard.writeText(notes)
+        .then(() => showToast("Research notes copied."))
+        .catch(() => showToast("Copy failed. Select and copy the notes manually."));
+    }
+
+    function toggleFavorite() {
+      const site = sites.find(item => item.id === activeSiteId);
+      if (!site) return;
+      site.isFavorite = !site.isFavorite;
+      persist();
+      render();
+      openModal(site.id);
+      showToast(site.isFavorite ? "Added to favorites." : "Removed from favorites.");
+    }
+
+    function toggleArchive() {
+      const site = sites.find(item => item.id === activeSiteId);
+      if (!site) return;
+      site.isArchived = !site.isArchived;
+      persist();
+      closeModal();
+      render();
+      showToast(site.isArchived ? "Archived reference." : "Restored reference.");
+    }
+
+    const conversionFramework = [
+      "Big Promise / Desired Outcome",
+      "Empathy / Connection",
+      "Opportunity Vehicle / Solution",
+      "Before vs After / Gap & Bridge",
+      "USP / Unique Selling Proposition",
+      "Offer Positioning / No-Brainer Deal",
+      "Social Proof / Instant Credibility",
+      "Risk Reversal / Lower The Bar",
+      "Authority / Trust The Source",
+      "Urgency / Take Action Today",
+      "FAQ / Concerns & Objections",
+      "Final CTA"
+    ];
+
+    tabsEl.addEventListener("click", event => {
+      const button = event.target.closest(".tab");
+      if (!button) return;
+      currentNiche = button.dataset.niche;
+      render();
+    });
+
+    gridEl.addEventListener("click", event => {
+      const command = event.target.closest(".card-command");
+      if (command) {
+        handleCardCommand(command.dataset.action, command.dataset.id);
+        return;
+      }
+      const card = event.target.closest(".card");
+      if (card) openModal(card.dataset.id);
+    });
+
+    function handleCardCommand(action, siteId) {
+      const site = sites.find(item => item.id === siteId);
+      if (!site) return;
+      if (action === "preview" || action === "notes") {
+        openModal(siteId);
+        return;
+      }
+      if (action === "favorite") {
+        site.isFavorite = !site.isFavorite;
+        persist();
+        render();
+        showToast(site.isFavorite ? "Added to favorites." : "Removed from favorites.");
+        return;
+      }
+      if (action === "archive") {
+        site.isArchived = !site.isArchived;
+        persist();
+        render();
+        showToast(site.isArchived ? "Archived website." : "Restored website.");
+        return;
+      }
+      if (action === "edit") {
+        copyEditBrief(site);
+      }
+    }
+
+    function copyEditBrief(site) {
+      const brief = [
+        `Edit generated website: ${site.name}`,
+        `File: ${site.localPath || site.url}`,
+        `Niche: ${site.niche}`,
+        `Type: ${site.type}`,
+        `Keep the 11-part conversion framework.`,
+        `Current positioning: ${site.positioningAngle}`,
+        `Primary CTA: ${site.primaryCTA || site.cta}`
+      ].join("\n");
+      navigator.clipboard.writeText(brief)
+        .then(() => showToast("Edit brief copied. Ask Codex to revise this generated page."))
+        .catch(() => showToast("Edit brief ready, but clipboard access was blocked."));
+    }
+
+    gridEl.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".card");
+      if (!card) return;
+      event.preventDefault();
+      openModal(card.dataset.id);
+    });
+
+    document.getElementById("researchForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const niche = document.getElementById("nicheInput").value.trim() || "Custom";
+      const count = Math.min(12, Math.max(1, Number(document.getElementById("countInput").value) || 4));
+      const type = document.getElementById("typeInput").value;
+      const style = document.getElementById("styleInput").value;
+      const goal = document.getElementById("goalInput").value;
+      const job = {
+        id: `live-job-${Date.now()}`,
+        niche,
+        count,
+        type,
+        style,
+        goal,
+        requiredSkillOrder: ["autoresearch", "site-teardown", "ui-ux-pro-max", "gpt-tasteskill", "taste-skill", "frontend-design", "impeccable"],
+        mirroringRules: {
+          mirror: ["layout structure", "section rhythm", "spacing logic", "visual hierarchy", "CTA placement", "interaction patterns", "overall design direction"],
+          neverCopy: ["brand name", "logo", "exact copy", "images", "protected assets", "testimonials", "proprietary claims"]
+        },
+        framework: conversionFramework,
+        status: "PENDING_CODEX_LIVE_BROWSE",
+        createdAt: new Date().toISOString()
+      };
+      generatorStatus.classList.add("visible");
+      generatorStatusText.textContent = "Waiting for Codex live web browsing adapter...";
+
+      if (window.codexLiveAutoResearch && typeof window.codexLiveAutoResearch.run === "function") {
+        window.codexLiveAutoResearch.run(job)
+          .then(applyLiveResearchResults)
+          .then(count => {
+            generatorStatus.classList.remove("visible");
+            showToast(`${count} live-researched working websites saved to Website Storage.`);
+          })
+          .catch(error => {
+            generatorStatusText.textContent = error.message || "Live AutoResearch failed. No website was generated.";
+            showToast("Live AutoResearch failed. No fake result was created.");
+          });
+        return;
+      }
+
+      if (location.protocol === "http:" || location.protocol === "https:") {
+        fetch("/api/autoresearch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(job)
+        })
+          .then(response => response.json().then(payload => {
+            if (!response.ok) throw new Error(payload.error || "Live AutoResearch failed.");
+            return payload;
+          }))
+          .then(applyLiveResearchResults)
+          .then(count => {
+            generatorStatus.classList.remove("visible");
+            showToast(`${count} live-researched working websites saved to Website Storage.`);
+          })
+          .catch(error => {
+            generatorStatusText.textContent = error.message || "Live AutoResearch failed. No website was generated.";
+            showToast("Live AutoResearch failed. No fake result was created.");
+          });
+        return;
+      }
+
+      saveLiveResearchJob(job);
+      generatorStatusText.textContent = "This page is opened as file://. Start the local server and use http://localhost:4317 for live browsing.";
+      showToast("Static file mode cannot browse or write generated websites.");
+    });
+
+    document.getElementById("seedButton").addEventListener("click", () => {
+      const job = {
+        id: `live-job-${Date.now()}`,
+        niche: "Agency",
+        count: 3,
+        type: "Funnel",
+        style: "Premium",
+        goal: "Capture qualified leads",
+        requiredSkillOrder: ["autoresearch", "site-teardown", "ui-ux-pro-max", "gpt-tasteskill", "taste-skill", "frontend-design", "impeccable"],
+        mirroringRules: {
+          mirror: ["layout structure", "section rhythm", "spacing logic", "visual hierarchy", "CTA placement", "interaction patterns", "overall design direction"],
+          neverCopy: ["brand name", "logo", "exact copy", "images", "protected assets", "testimonials", "proprietary claims"]
+        },
+        framework: conversionFramework,
+        status: "PENDING_CODEX_LIVE_BROWSE",
+        createdAt: new Date().toISOString()
+      };
+      saveLiveResearchJob(job);
+      generatorStatus.classList.add("visible");
+      generatorStatusText.textContent = "Sample live research request queued. No generated website created without browsing.";
+      showToast("Live research request queued. No fake website was generated.");
+    });
+
+    [searchInput, typeFilter, viewFilter].forEach(control => {
+      control.addEventListener("input", render);
+      control.addEventListener("change", render);
+    });
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+    document.getElementById("copyNotes").addEventListener("click", copyActiveNotes);
+    document.getElementById("favoriteButton").addEventListener("click", toggleFavorite);
+    document.getElementById("archiveButton").addEventListener("click", toggleArchive);
+
+    render();
+  </script>
+</body>
+</html>

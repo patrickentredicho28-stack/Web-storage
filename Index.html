@@ -1,0 +1,2121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Storage | Private Funnel Reference Library</title>
+  <meta name="description" content="A private dashboard for storing, generating, filtering, previewing, and studying high-quality websites and funnels by niche." />
+  <meta property="og:title" content="Website Storage" />
+  <meta property="og:description" content="Collect, generate, organize, preview, and study premium websites and funnels by niche." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: oklch(14% 0.018 252);
+      --bg-2: oklch(18% 0.022 252);
+      --panel: oklch(20% 0.019 252 / 0.88);
+      --panel-2: oklch(23% 0.02 252 / 0.82);
+      --line: oklch(100% 0.005 252 / 0.095);
+      --line-strong: oklch(76% 0.09 243 / 0.32);
+      --text: oklch(94% 0.012 252);
+      --muted: oklch(72% 0.028 252);
+      --soft: oklch(58% 0.028 252);
+      --accent: oklch(68% 0.17 246);
+      --accent-2: oklch(78% 0.12 218);
+      --warning: oklch(76% 0.15 67);
+      --success: oklch(74% 0.13 162);
+      --danger: oklch(66% 0.19 24);
+      --shadow: 0 24px 70px oklch(7% 0.02 252 / 0.62);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 78% -12%, oklch(58% 0.18 246 / 0.22), transparent 31rem),
+        radial-gradient(circle at 12% 7%, oklch(74% 0.12 210 / 0.12), transparent 25rem),
+        linear-gradient(145deg, oklch(12% 0.018 252), var(--bg) 42%, oklch(10% 0.016 252));
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(oklch(100% 0.005 252 / 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(100% 0.005 252 / 0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 76%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .32;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    .card,
+    .tab {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    .card:focus-visible {
+      outline: 2px solid var(--accent-2);
+      outline-offset: 3px;
+    }
+
+    .shell {
+      width: min(1440px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+      padding: 12px 0 26px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 210px;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: linear-gradient(145deg, oklch(30% 0.06 246 / .88), oklch(17% 0.02 252 / .92));
+      box-shadow: inset 0 1px 0 oklch(100% 0.005 252 / .15), 0 14px 34px oklch(8% 0.03 252 / .45);
+    }
+
+    .brand-mark svg {
+      width: 23px;
+      height: 23px;
+      stroke: var(--accent-2);
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 1px;
+    }
+
+    .brand-copy strong {
+      font-size: 15px;
+      letter-spacing: .01em;
+    }
+
+    .brand-copy span {
+      color: var(--soft);
+      font-size: 12px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 15px;
+      color: var(--text);
+      background: oklch(100% 0.005 252 / 0.055);
+      cursor: pointer;
+      transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease), color 220ms var(--ease);
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: oklch(100% 0.005 252 / 0.085);
+    }
+
+    .button svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.9;
+    }
+
+    .button.primary {
+      border-color: oklch(78% 0.12 218 / .36);
+      background: linear-gradient(180deg, oklch(62% 0.16 246 / .94), oklch(50% 0.14 246 / .94));
+      color: oklch(99% 0.005 246);
+      box-shadow: 0 16px 42px oklch(46% 0.15 246 / .22);
+    }
+
+    .button.danger:hover {
+      border-color: oklch(70% 0.18 24 / .45);
+      color: oklch(82% 0.14 24);
+    }
+
+    .button.tiny {
+      min-height: 34px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+
+    .button.icon-only {
+      width: 34px;
+      padding: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .hero-main,
+    .card,
+    .stat,
+    .modal-card,
+    .empty-state {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), oklch(16% 0.018 252 / .88));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      min-height: 338px;
+      border-radius: var(--radius-lg);
+      padding: 34px;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -96px;
+      top: -118px;
+      width: 360px;
+      height: 360px;
+      border-radius: 48%;
+      background:
+        linear-gradient(90deg, transparent 48%, oklch(82% 0.08 218 / .11) 49%, transparent 50%),
+        linear-gradient(0deg, transparent 48%, oklch(82% 0.08 218 / .09) 49%, transparent 50%);
+      background-size: 28px 28px;
+      transform: rotate(12deg);
+      opacity: .85;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 31px;
+      padding: 0 12px;
+      border: 1px solid oklch(78% 0.12 218 / .22);
+      border-radius: 999px;
+      color: oklch(82% 0.11 218);
+      background: oklch(58% 0.14 246 / .11);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 5px oklch(78% 0.12 218 / .12);
+    }
+
+    h1 {
+      position: relative;
+      max-width: 760px;
+      margin: 24px 0 15px;
+      font-size: clamp(44px, 6vw, 92px);
+      line-height: .9;
+      letter-spacing: 0;
+      text-wrap: balance;
+      z-index: 1;
+    }
+
+    .subtitle {
+      position: relative;
+      max-width: 740px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 1.55vw, 20px);
+      line-height: 1.55;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      z-index: 1;
+    }
+
+    .hero-note {
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .panel-head h2,
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .panel-head p,
+    .section-head p {
+      margin: 7px 0 0;
+      color: var(--soft);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .status-pill {
+      white-space: nowrap;
+      padding: 7px 10px;
+      border: 1px solid oklch(76% 0.15 67 / .24);
+      border-radius: 999px;
+      color: oklch(82% 0.13 67);
+      background: oklch(76% 0.12 67 / .08);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 13px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 0 13px;
+      color: var(--text);
+      background: oklch(100% 0.005 252 / .055);
+      outline: none;
+      transition: border-color 200ms var(--ease), background 200ms var(--ease);
+    }
+
+    input::placeholder {
+      color: oklch(62% 0.025 252);
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover {
+      border-color: oklch(100% 0.005 252 / .18);
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position: calc(100% - 18px) 18px, calc(100% - 12px) 18px;
+      background-size: 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    select option {
+      color: oklch(78% 0.15 230);
+      background: oklch(12% 0.02 252);
+    }
+
+    select option:checked {
+      color: oklch(96% 0.02 230);
+      background: oklch(32% 0.11 230);
+    }
+
+    .notice {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid oklch(76% 0.15 67 / .18);
+      border-radius: 14px;
+      color: oklch(84% 0.07 67);
+      background: oklch(76% 0.1 67 / .07);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .notice svg {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      margin-top: 1px;
+    }
+
+    .research-flow {
+      display: grid;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: oklch(100% 0.005 252 / .035);
+    }
+
+    .flow-step strong {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      color: oklch(91% 0.04 218);
+      background: oklch(62% 0.13 246 / .18);
+      font-size: 12px;
+    }
+
+    .flow-step span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.42;
+    }
+
+    .generator-status {
+      display: none;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid oklch(78% 0.12 218 / .22);
+      border-radius: 14px;
+      color: oklch(85% 0.06 218);
+      background: oklch(62% 0.13 246 / .08);
+      font-size: 12px;
+    }
+
+    .generator-status.visible {
+      display: flex;
+    }
+
+    .skeleton-line {
+      position: relative;
+      overflow: hidden;
+      width: 72px;
+      height: 9px;
+      border-radius: 999px;
+      background: oklch(100% 0.005 252 / .08);
+    }
+
+    .skeleton-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, oklch(100% 0.005 252 / .22), transparent);
+      animation: shimmer 1.1s var(--ease) infinite;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0 18px;
+    }
+
+    .stat {
+      position: relative;
+      overflow: hidden;
+      min-height: 118px;
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      inset: auto 16px 14px 16px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, oklch(78% 0.12 218 / .36), transparent);
+    }
+
+    .stat span {
+      display: block;
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .stat strong {
+      display: block;
+      margin-top: 14px;
+      font-size: clamp(31px, 3vw, 46px);
+      line-height: 1;
+    }
+
+    .stat small {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .content-zone {
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      padding: 8px 2px 0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      padding: 4px 2px 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-strong) transparent;
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0 13px;
+      color: var(--muted);
+      background: oklch(100% 0.005 252 / .04);
+      cursor: pointer;
+      transition: color 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), transform 200ms var(--ease);
+    }
+
+    .tab:hover,
+    .tab.active {
+      color: var(--text);
+      border-color: var(--line-strong);
+      background: oklch(62% 0.13 246 / .14);
+      transform: translateY(-1px);
+    }
+
+    .tab-count {
+      display: inline-grid;
+      place-items: center;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      color: oklch(91% 0.02 252);
+      background: oklch(100% 0.005 252 / .08);
+      font-size: 11px;
+      font-weight: 800;
+      max-width: 92px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) 190px 178px;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .library-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      transition: transform 240ms var(--ease), border-color 240ms var(--ease), background 240ms var(--ease);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-strong);
+      background: linear-gradient(180deg, oklch(25% 0.025 252 / .92), oklch(16% 0.018 252 / .9));
+    }
+
+    .preview {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: oklch(12% 0.018 252);
+    }
+
+    .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.95) contrast(1.02);
+      transition: transform 400ms var(--ease), filter 300ms var(--ease);
+    }
+
+    .card:hover .preview img {
+      transform: scale(1.035);
+      filter: saturate(1.08) contrast(1.05);
+    }
+
+    .preview-top {
+      position: absolute;
+      inset: 10px 10px auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 23px;
+      padding: 0 8px;
+      border: 1px solid oklch(100% 0.005 252 / .12);
+      border-radius: 999px;
+      color: oklch(92% 0.014 252);
+      background: oklch(11% 0.018 252 / .72);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .badge.version {
+      color: oklch(87% 0.1 218);
+      border-color: oklch(76% 0.12 218 / .28);
+    }
+
+    .card-body {
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 10px;
+      padding: 14px;
+      height: 100%;
+      min-height: 236px;
+    }
+
+    .title-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .title-line h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.18;
+      letter-spacing: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .niche {
+      flex: 0 0 auto;
+      color: var(--accent-2);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .angle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 7px;
+      color: var(--soft);
+      background: oklch(100% 0.005 252 / .035);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--soft);
+      font-size: 13px;
+      align-self: end;
+      padding-top: 6px;
+    }
+
+    .live-card-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      min-height: 40px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .live-card-cta svg {
+      width: 15px;
+      height: 15px;
+      transition: transform 200ms var(--ease);
+    }
+
+    .card:hover .live-card-cta svg {
+      transform: translateX(2px);
+    }
+
+    .empty-state {
+      display: none;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 22px;
+      background: oklch(7% 0.016 252 / .78);
+      backdrop-filter: blur(14px);
+      z-index: 40;
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(330px, .72fr);
+      width: min(1160px, 100%);
+      max-height: min(860px, calc(100dvh - 44px));
+      overflow: hidden;
+      border-radius: 26px;
+    }
+
+    .modal-media {
+      min-height: 520px;
+      border-right: 1px solid var(--line);
+      background: oklch(10% 0.016 252);
+    }
+
+    .modal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-content {
+      overflow: auto;
+      padding: 26px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: oklch(11% 0.016 252 / .78);
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .modal-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .modal-title {
+      margin: 16px 0 6px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin: 18px 0;
+    }
+
+    .field-title {
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .field p,
+    .field ul {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .field ul {
+      padding-left: 18px;
+    }
+
+    .field li + li {
+      margin-top: 6px;
+    }
+
+    .source {
+      display: flex;
+      align-items: center;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 0 12px;
+      color: oklch(83% 0.08 218);
+      background: oklch(100% 0.005 252 / .045);
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .modal-actions {
+      position: sticky;
+      bottom: -26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 24px -26px -26px;
+      padding: 16px 26px 26px;
+      background: linear-gradient(180deg, transparent, oklch(16% 0.018 252) 24%);
+    }
+
+
+    .live-modal {
+      padding: 18px;
+    }
+
+    .live-modal-card {
+      width: min(1340px, 100%);
+      height: min(880px, calc(100dvh - 36px));
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #07100f;
+      border: 1px solid rgba(226, 208, 164, .28);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, .42);
+    }
+
+    .live-modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 16px 14px 22px;
+      border-bottom: 1px solid rgba(226, 208, 164, .2);
+      background: linear-gradient(135deg, rgba(13, 28, 25, .98), rgba(19, 42, 36, .96));
+      color: var(--text);
+    }
+
+    .live-modal-bar span {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--accent-2);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .live-modal-bar strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.1;
+    }
+
+    .live-modal-close {
+      position: static;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, .08);
+      color: var(--text);
+    }
+
+    .live-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      min-width: min(360px, calc(100% - 36px));
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 12px 16px;
+      color: var(--text);
+      background: oklch(16% 0.018 252 / .95);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: opacity 220ms var(--ease), transform 220ms var(--ease);
+      z-index: 60;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @keyframes shimmer {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .library-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        width: min(100% - 28px, 720px);
+        padding-top: 14px;
+      }
+
+      .topbar,
+      .section-head {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .nav-actions {
+        justify-content: flex-start;
+      }
+
+      .hero-main {
+        min-height: auto;
+        padding: 25px;
+      }
+
+      .stats-grid,
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .library-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .modal-card {
+        grid-template-columns: 1fr;
+        overflow: auto;
+      }
+
+      .modal-media {
+        min-height: auto;
+        aspect-ratio: 16 / 10;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .library-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-actions,
+      .nav-actions {
+        width: 100%;
+      }
+
+      .hero-note {
+        width: 100%;
+      }
+
+      .modal-actions {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar" aria-label="Website Storage header">
+      <a class="brand" href="#" aria-label="Website Storage home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 7.5h16M6.5 4.5h11A2.5 2.5 0 0 1 20 7v10a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17V7a2.5 2.5 0 0 1 2.5-2.5Z" stroke="currentColor" stroke-linecap="round" />
+            <path d="M8 11h8M8 14h5" stroke="currentColor" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>Website Storage</strong>
+          <span>Private reference library</span>
+        </span>
+      </a>
+      <nav class="nav-actions" aria-label="Dashboard shortcuts">
+        <a class="button" href="#library">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5h16M4 12h16M4 17.5h16" stroke="currentColor" stroke-linecap="round"/></svg>
+          Browse Library
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-main">
+          <span class="eyebrow"><span class="pulse" aria-hidden="true"></span> Funnel intelligence vault</span>
+          <h1 id="page-title">Website Storage</h1>
+          <p class="subtitle">A private inspiration library for funnel builders, designers, and GoHighLevel specialists to collect saved sites, preview working pages, and study conversion strategy by niche.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#library">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Open Saved Sites
+            </a>
+            <span class="hero-note">Built for studying angles, sections, CTAs, and conversion patterns.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Library stats">
+        <article class="stat">
+          <span>Total Sites</span>
+          <strong id="totalSites">0</strong>
+          <small>Saved references</small>
+        </article>
+        <article class="stat">
+          <span>Funnels</span>
+          <strong id="totalFunnels">0</strong>
+          <small>Lead journeys and offers</small>
+        </article>
+        <article class="stat">
+          <span>Niches</span>
+          <strong id="totalNiches">0</strong>
+          <small>Categories with examples</small>
+        </article>
+        <article class="stat">
+          <span>Archived</span>
+          <strong id="totalArchived">0</strong>
+          <small>Hidden from active review</small>
+        </article>
+      </section>
+
+      <section class="content-zone" id="library" aria-labelledby="library-title">
+        <div class="section-head">
+          <div>
+            <h2 id="library-title">Saved Website Library</h2>
+            <p>Filter by niche, scan positioning angles, then open a deeper teardown preview.</p>
+          </div>
+          <div class="toolbar" aria-label="Library controls">
+            <label>
+              Search
+              <input id="searchInput" type="search" placeholder="Search name, niche, tag, or angle" />
+            </label>
+            <label>
+              Type
+              <select id="typeFilter">
+                <option value="ALL">All types</option>
+                <option value="SITE">Site</option>
+                <option value="FUNNEL">Funnel</option>
+                <option value="LANDING PAGE">Landing page</option>
+                <option value="BOOKING PAGE">Booking page</option>
+                <option value="OPT-IN PAGE">Opt-in page</option>
+              </select>
+            </label>
+            <label>
+              View
+              <select id="viewFilter">
+                <option value="ACTIVE">Active</option>
+                <option value="FAVORITES">Favorites</option>
+                <option value="ARCHIVED">Archived</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabs" role="tablist" aria-label="Niche filters"></div>
+        <div class="library-grid" id="libraryGrid" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState">No sites match this view yet. Change the filters or add saved websites later.</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <article class="modal-card">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close preview">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-linecap="round"/></svg>
+      </button>
+      <div class="modal-media">
+        <img id="modalImage" src="" alt="" />
+      </div>
+      <div class="modal-content">
+        <div class="meta-line" id="modalBadges"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="field">
+          <span class="field-title">URL or source</span>
+          <a class="source" id="modalUrl" href="#" target="_blank" rel="noreferrer"></a>
+        </div>
+        <div class="field">
+          <span class="field-title">Positioning angle</span>
+          <p id="modalAngle"></p>
+        </div>
+        <div class="field">
+          <span class="field-title">What makes it good</span>
+          <ul id="modalGood"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">CTA strategy</span>
+          <p id="modalCta"></p>
+        </div>
+        <div class="field">
+          <span class="field-title">Section breakdown</span>
+          <ul id="modalSections"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">Design notes</span>
+          <ul id="modalDesign"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">Conversion notes</span>
+          <ul id="modalConversion"></ul>
+        </div>
+        <div class="field">
+          <span class="field-title">Source inspiration notes</span>
+          <p id="modalSource"></p>
+        </div>
+        <div class="modal-actions">
+          <button class="button primary" id="openLive" type="button">Open Live Site</button>
+          <button class="button" id="copyNotes" type="button">Copy Notes</button>
+          <button class="button" id="favoriteButton" type="button">Add to Favorites</button>
+          <button class="button danger" id="archiveButton" type="button">Archive</button>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="modal live-modal" id="liveModal" role="dialog" aria-modal="true" aria-labelledby="liveModalTitle">
+    <article class="live-modal-card">
+      <div class="live-modal-bar">
+        <div>
+          <span>Live Preview</span>
+          <strong id="liveModalTitle">Website</strong>
+        </div>
+        <button class="modal-close live-modal-close" id="liveModalClose" type="button" aria-label="Close live preview">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <iframe id="liveFrame" class="live-frame" title="Live website preview" src=""></iframe>
+    </article>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const STORAGE_KEY = "website-storage-dashboard-v2";
+    const categories = [
+      "All",
+      "Coaching",
+      "Law Firm",
+      "Dental Clinic",
+      "Med Spa",
+      "HVAC",
+      "Moving Company",
+      "Real Estate",
+      "SaaS",
+      "Agency",
+      "Solar Energy",
+      "Fitness",
+      "Custom"
+    ];
+
+    const palette = {
+      "Dental Clinic": ["#0f3154", "#5fd0d5", "#d8fbff"],
+      "Moving Company": ["#182138", "#f2b84b", "#f6f0dc"],
+      "HVAC": ["#10283c", "#4eb6ff", "#e3f4ff"],
+      "Real Estate": ["#1c2432", "#c9a15b", "#f5ead7"],
+      "Coaching": ["#241f35", "#b7a4ff", "#f0ebff"],
+      "Solar Energy": ["#20220e", "#e8c44f", "#fff2ba"],
+      "Law Firm": ["#131c29", "#7aa7ff", "#e7eefc"],
+      "SaaS": ["#111b35", "#61a5ff", "#edf6ff"],
+      "Agency": ["#181727", "#75d4c8", "#ecfffb"],
+      "Fitness": ["#1d1717", "#ff7c58", "#fff0ea"],
+      "Med Spa": ["#1c2430", "#a7d8c9", "#effcf8"],
+      "Custom": ["#1e2230", "#8fb5ff", "#eef4ff"]
+    };
+
+    const finalSiteRecords = [
+      {
+        id: "veyra-estate-law-mirror",
+        name: "Veyra Estate Law",
+        niche: "Law Firm",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/veyra-estate-law.html",
+        localPath: "generated-sites/veyra-estate-law.html",
+        screenshot: "generated-sites/preview-veyra-estate-law.png",
+        sourceInspiration: "Black minimalist estate-law landing page mirror, rewritten and hardened for GHL custom code.",
+        positioningAngle: "Premium estate-planning law firm for families who want wills, trusts, powers of attorney, directives, and estate administration handled with clarity.",
+        headline: "Make your wishes impossible to misunderstand.",
+        primaryCTA: "Book a Discovery Call",
+        cta: "Book a Discovery Call",
+        sectionBreakdown: ["Outcome hero", "Problem and empathy", "Services", "Process", "Offer", "Proof", "FAQ", "Final CTA"],
+        designNotes: ["Dark legal-luxury palette", "Poppins typography", "3D legal document motif", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Clear discovery-call CTA", "Risk reversal and authority sections", "No invented legal claims"],
+        tags: ["Generated", "Law firm", "Estate planning", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-12T12:00:00.000Z"
+      },
+      {
+        id: "mckinnison-davis-law",
+        name: "McKinnison Davis Law",
+        niche: "Law Firm",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/mckinnison-davis-law.html",
+        localPath: "generated-sites/mckinnison-davis-law.html",
+        screenshot: "generated-sites/preview-mckinnison-davis-law.png",
+        sourceInspiration: "Dark green legal homepage reference with Lady Justice hero, trust strip, service grid, cases, quote CTA, contact form, and footer.",
+        positioningAngle: "Professional legal practice offering consultations, trials assistance, law services, and success-case credibility.",
+        headline: "Legal advice you can count on",
+        primaryCTA: "Free Consultation",
+        cta: "Free Consultation",
+        sectionBreakdown: ["Hero", "Trusted by", "Service cards", "Client proof", "Metrics", "Professional services", "Success cases", "Quote CTA", "Contact form", "Footer"],
+        designNotes: ["Deep green and gold palette", "Large statue/scales visual", "Editorial law firm composition", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Free consultation CTA repeated", "Trust and case proof before contact", "Form captures lead details"],
+        tags: ["Generated", "Law firm", "Consultation", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T02:00:00.000Z"
+      },
+      {
+        id: "dentelle-studio-dental",
+        name: "Dentelle Studio Dental",
+        niche: "Dental Clinic",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/dentelle-studio.html",
+        localPath: "generated-sites/dentelle-studio.html",
+        screenshot: "generated-sites/preview-dentelle-studio.png",
+        sourceInspiration: "GoHighLevel-style dental clinic funnel reference with appointment-first hero, service cards, proof, team, FAQ, and booking form.",
+        positioningAngle: "Gentle dental clinic for preventive, cosmetic, restorative, and emergency guidance with clear treatment plans.",
+        headline: "A calmer dental visit for a healthier smile.",
+        primaryCTA: "Schedule My Appointment",
+        cta: "Schedule My Appointment",
+        sectionBreakdown: ["Hero", "Trust strip", "Services", "Why patients feel safer", "Process", "Team", "Reviews", "FAQ", "CTA", "Booking form", "Footer"],
+        designNotes: ["Soft mint clinical palette", "Appointment cards", "Rounded clinic visuals", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Appointment CTA", "Comfort-first copy", "Lead form with visit type"],
+        tags: ["Generated", "Dental", "Clinic", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T03:00:00.000Z"
+      },
+      {
+        id: "dentalbe-clinic",
+        name: "DentalBe Clinic",
+        niche: "Dental Clinic",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/dentalbe-clinic.html",
+        localPath: "generated-sites/dentalbe-clinic.html",
+        screenshot: "generated-sites/preview-dentalbe.png",
+        sourceInspiration: "Different DentalBe-style homepage reference with editorial bento layout, topbar, pricing cards, gallery, testimonial, and appointment form.",
+        positioningAngle: "Modern dental clinic built around clear plans, bento service exploration, and online appointment requests.",
+        headline: "Confident smiles start with a clearer dental plan.",
+        primaryCTA: "Plan My Visit",
+        cta: "Plan My Visit",
+        sectionBreakdown: ["Topbar", "Hero image grid", "Trust logos", "Bento services", "Experience", "Visit steps", "Plans", "Gallery", "Review", "Appointment", "Footer"],
+        designNotes: ["Navy and aqua palette", "Bento service architecture", "Pricing cards", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Clear online booking path", "Plan/pricing clarity", "Patient proof near appointment form"],
+        tags: ["Generated", "Dental", "Bento", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T04:00:00.000Z"
+      },
+      {
+        id: "solara-dental",
+        name: "Solara Dental",
+        niche: "Dental Clinic",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/solara-dental.html",
+        localPath: "generated-sites/solara-dental.html",
+        screenshot: "generated-sites/preview-solara-dental.png",
+        sourceInspiration: "Unique warm editorial dental design with arch imagery, boutique palette, treatment board, visit ritual, doctor lineup, testimonial, FAQ, and booking form.",
+        positioningAngle: "Boutique dental studio for warm, honest, beautifully planned care with a comfort-first visit experience.",
+        headline: "Smile care that feels warm, honest, and beautifully planned.",
+        primaryCTA: "Book a Comfort Visit",
+        cta: "Book a Comfort Visit",
+        sectionBreakdown: ["Hero", "Trust strip", "Treatment board", "Difference story", "Visit ritual", "Doctor lineup", "Review", "FAQ", "Booking", "Footer"],
+        designNotes: ["Warm cream, forest, clay palette", "Editorial serif hero", "Arch photo composition", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Comfort consult CTA", "Patient anxiety handled in copy", "Booking form captures visit type"],
+        tags: ["Generated", "Dental", "Boutique", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T05:00:00.000Z"
+      },
+
+      {
+        id: "arden-law",
+        name: "Arden Law",
+        niche: "Law Firm",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/arden-law.html",
+        localPath: "generated-sites/arden-law.html",
+        screenshot: "generated-sites/preview-arden-law.png",
+        sourceInspiration: "D.Law-inspired split editorial employment-law mirror with blue legal rebrand, stock Lady Justice overlay, animated practice carousel, and GHL-safe scoped wrapper.",
+        positioningAngle: "Employment-rights firm for workers who need fast clarity on termination, retaliation, harassment, wages, and uncertain workplace issues.",
+        headline: "We protect your voice when work becomes unfair.",
+        primaryCTA: "Request a Consultation",
+        cta: "Request a Consultation",
+        sectionBreakdown: ["Split hero", "Animated practice carousel", "Consultation launcher", "Three-step review", "Proof grid", "Case examples", "Image-led contact form", "Footer"],
+        designNotes: ["Editorial serif identity", "Navy legal palette", "Animated up/down practice controls", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Consultation CTA repeated", "Issue-led carousel clarifies services", "Short form reduces friction"],
+        tags: ["Generated", "Law firm", "Employment law", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T06:00:00.000Z"
+      },
+      {
+        id: "keystone-moving",
+        name: "Keystone Move Co.",
+        niche: "Moving Company",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/keystone-moving.html",
+        localPath: "generated-sites/keystone-moving.html",
+        screenshot: "generated-sites/preview-keystone-moving.png",
+        sourceInspiration: "Inspired by Rocket Relocate and Transit premium moving landing-page templates: cinematic hero, quote-first form, proof strip, service grid, process, pricing, and final estimate CTA.",
+        positioningAngle: "Premium moving company for home, apartment, office, packing, and long-distance moves where clients want planning, protection, and clear scope before move day.",
+        headline: "Move day should feel planned, not improvised.",
+        primaryCTA: "Get a Moving Quote",
+        cta: "Get a Moving Quote",
+        sectionBreakdown: ["Hero with quote form", "Service grid", "Proof strip", "Move process", "Pricing tiers", "Final quote form", "Footer"],
+        designNotes: ["Editorial moving-company layout", "Warm paper and deep navy palette", "Lime CTA accent", "Stock moving photography", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Quote form above the fold", "Trust metrics before service detail", "Pricing tiers reduce uncertainty"],
+        tags: ["Generated", "Moving company", "Quote funnel", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T07:00:00.000Z"
+      },
+      {
+        id: "brightlane-moving",
+        name: "BrightLane Moving",
+        niche: "Moving Company",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/brightlane-moving.html",
+        localPath: "generated-sites/brightlane-moving.html",
+        screenshot: "generated-sites/preview-brightlane-moving.png",
+        sourceInspiration: "Mirrored from BOWEN's Roadway Moving case-study direction with a bright gradient shell, bubble-wrap texture, route motion card, human mover photography, and quote-first conversion flow.",
+        positioningAngle: "Hospitality-led moving company for home, apartment, office, packing, and delicate-item moves where clients want a calm plan before move day.",
+        headline: "Moving help that feels human from hello.",
+        primaryCTA: "Plan My Move",
+        cta: "Plan My Move",
+        sectionBreakdown: ["Gradient hero", "Animated route card", "Quick quote strip", "Service scenes", "Care proof", "Recent move story", "Final quote form", "Footer references"],
+        designNotes: ["Fresh reference distinct from Keystone", "Violet rose sun and mint palette", "Bubble-wrap motion texture", "Stock moving photography", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Quote form lives in the hero", "Care proof builds trust before services", "Final form repeats the same low-friction action"],
+        tags: ["Generated", "Moving company", "Quote funnel", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T08:00:00.000Z"
+      },
+      {
+        id: "pipelineforge-saas-funnel",
+        name: "PageLift SaaS Funnel",
+        niche: "SaaS",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/pipelineforge-saas-funnel.html",
+        localPath: "generated-sites/pipelineforge-saas-funnel.html",
+        screenshot: "generated-sites/preview-pipelineforge-saas-funnel.png",
+        sourceInspiration: "Landingly-style high-converting landing page agency funnel mirrored with centered hero, trusted logo strip, included-services block, why landing pages section, featured case study, FAQ, and final booking CTA.",
+        positioningAngle: "SaaS agency funnel for paid traffic, landing page conversion, demo/trial conversion, and campaign-specific lead capture.",
+        headline: "Get your SaaS landing page launched in days.",
+        primaryCTA: "Book a Call",
+        cta: "Book a Call",
+        sectionBreakdown: ["Conversion hero","Client trust row","Service cards","Proof metrics","Process","Audit form","Reference footer"],
+        designNotes: ["Clean B2B conversion agency layout","Navy and electric blue palette","Stock team photography","Hover glow only on CTAs","GHL scoped wrapper"],
+        conversionNotes: ["Single primary funnel action", "Proof appears near major claims", "Forms explain what the visitor receives next"],
+        tags: ["Generated", "SaaS agency", "Funnel", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T09:00:00.000Z"
+      },
+      {
+        id: "trialpulse-saas-funnel",
+        name: "Hook3 Studio SaaS Funnel",
+        niche: "SaaS",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/trialpulse-saas-funnel.html",
+        localPath: "generated-sites/trialpulse-saas-funnel.html",
+        screenshot: "generated-sites/preview-trialpulse-saas-funnel.png",
+        sourceInspiration: "Akhtar Studio-style SaaS landing page design funnel mirrored with huge 3-second hero, continuous showcase tickers, large hero image, about section, numbered services, selected work, process, pricing, final brief form, and FAQ-style close.",
+        positioningAngle: "SaaS agency funnel for paid traffic, landing page conversion, demo/trial conversion, and campaign-specific lead capture.",
+        headline: "Your landing page has 3 seconds.",
+        primaryCTA: "Get Free Consultation",
+        cta: "Get Free Consultation",
+        sectionBreakdown: ["Dark cinematic hero","Moving capability strip","Campaign work section","Channel lanes","Testimonial proof","Brief form","Reference footer"],
+        designNotes: ["Dark neon SaaS growth aesthetic","Stock campaign/team photography","No CTA flashing","Scroll reveals","GHL scoped wrapper"],
+        conversionNotes: ["Single primary funnel action", "Proof appears near major claims", "Forms explain what the visitor receives next"],
+        tags: ["Generated", "SaaS agency", "Funnel", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T09:10:00.000Z"
+      },
+      {
+        id: "postclicklab-saas-funnel",
+        name: "PostClick Lab SaaS Funnel",
+        niche: "SaaS",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/postclicklab-saas-funnel.html",
+        localPath: "generated-sites/postclicklab-saas-funnel.html",
+        screenshot: "generated-sites/preview-postclicklab-saas-funnel.png",
+        sourceInspiration: "Bounty Hunter-inspired B2B SaaS post-click funnel with bold blocky structure, conversion stats, UX/copy/marketing blocks, checklist proof, and lead form.",
+        positioningAngle: "SaaS agency funnel for paid traffic, landing page conversion, demo/trial conversion, and campaign-specific lead capture.",
+        headline: "Stop wasting ad clicks after the click.",
+        primaryCTA: "Plan My Funnel",
+        cta: "Plan My Funnel",
+        sectionBreakdown: ["Blocky hero","Motion service strip","Method blocks","Build stack","Checklist proof","Lead form","Reference footer"],
+        designNotes: ["Brutalist green and acid palette","Stock SaaS team photos","Box-shadow card effects","Hover glow only on CTAs","GHL scoped wrapper"],
+        conversionNotes: ["Single primary funnel action", "Proof appears near major claims", "Forms explain what the visitor receives next"],
+        tags: ["Generated", "SaaS agency", "Funnel", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T09:20:00.000Z"
+      },
+            {
+        id: "aura-bloom-medspa",
+        name: "Aura & Bloom Med Spa",
+        niche: "Med Spa",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/aura-bloom-medspa-ghl-custom-code.html",
+        localPath: "generated-sites/aura-bloom-medspa-ghl-custom-code.html",
+        screenshot: "generated-sites/preview-aura-bloom-medspa.png",
+        referenceUrl: "https://milkandhoneyspa.com/",
+        sourceInspiration: "Milk + Honey-style wellness med spa homepage mirror expanded into a full high-converting funnel with outcome hero, treatment menu, proof, plan-first bridge, licensed-provider confidence, clear consult offer, FAQ, and final booking path.",
+        positioningAngle: "Consult-first med spa funnel for natural-looking skin plans, injectables, lasers, facials, and personalized treatment sequencing.",
+        headline: "Care that makes your skin feel quietly expensive.",
+        primaryCTA: "Reserve a skin consult",
+        cta: "Reserve a skin consult",
+        sectionBreakdown: ["Outcome hero","Treatment recognition","Service menu","Consult mechanism","Patient proof","Plan-first bridge","Provider confidence","Skin strategy consult","FAQ","Final booking path"],
+        designNotes: ["Warm editorial spa palette","Instrument Serif display type","Arched hero image","Service grid with refined hover depth","GHL-safe scoped wrapper"],
+        conversionNotes: ["Clear consultation CTA", "Trust and safety language", "Service-specific discovery path", "No fabricated medical claims"],
+        tags: ["Generated", "Med Spa", "GHL", "Funnel", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T20:45:00.000Z"
+      },
+      {
+        id: "formaskin-medspa",
+        name: "FormaSkin Med Spa",
+        niche: "Med Spa",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/formaskin-medspa-ghl-custom-code.html",
+        localPath: "generated-sites/formaskin-medspa-ghl-custom-code.html",
+        screenshot: "generated-sites/preview-formaskin-medspa.png",
+        referenceUrl: "https://everbody.com/",
+        sourceInspiration: "Ever/Body-style cosmetic dermatology funnel mirror expanded into a full plan-first conversion path with offer hero, treatment showcase, provider judgment, confusion/pain recognition, treatment route, proof, FAQ, and consult form.",
+        positioningAngle: "Expert-led cosmetic dermatology funnel for first-visit offers, treatment discovery, and confident provider-led booking.",
+        headline: "The gold standard for natural-looking skin plans.",
+        primaryCTA: "Claim first-visit consult",
+        cta: "Claim first-visit consult",
+        sectionBreakdown: ["Offer hero","Treatment showcase","Provider judgment","Pain recognition","Plan-first bridge","Treatment route","Proof metrics","FAQ","Consult form"],
+        designNotes: ["Blush clinical editorial palette","Split photo and offer hero","Treatment concern ticker","High contrast proof band","GHL-safe scoped wrapper"],
+        conversionNotes: ["Clear consultation CTA", "Trust and safety language", "Service-specific discovery path", "No fabricated medical claims"],
+        tags: ["Generated", "Med Spa", "GHL", "Funnel", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T20:45:00.000Z"
+      },
+      {
+        id: "solace-aesthetics-medspa",
+        name: "Solace Aesthetics Med Spa",
+        niche: "Med Spa",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/solace-aesthetics-medspa-ghl-custom-code.html",
+        localPath: "generated-sites/solace-aesthetics-medspa-ghl-custom-code.html",
+        screenshot: "generated-sites/preview-solace-aesthetics-medspa.png",
+        referenceUrl: "https://revive.md/",
+        sourceInspiration: "Revive-style med spa homepage mirror with announcement strip, treatment-heavy nav, Love Your Skin hero, offer-led CTA, treatment finder, location cards, reviews, top treatments, promotions, image-led consult block, and form.",
+        positioningAngle: "Modern med spa funnel for first-time clients who want a fast route from curiosity to a personalized aesthetic consultation.",
+        headline: "Radiate with confidence.",
+        primaryCTA: "Book a Free Consultation",
+        cta: "Book a Free Consultation",
+        sectionBreakdown: ["Announcement strip","Love Your Skin hero","Treatment finder","Featured treatment","Locations","Reviews","Top treatments","Promotions","Image-led consult form"],
+        designNotes: ["Sunny teal and citrus palette","Large rounded hero container","Lifestyle image plus quote card","Premium card hover effects","GHL-safe scoped wrapper"],
+        conversionNotes: ["Clear consultation CTA", "Trust and safety language", "Service-specific discovery path", "No fabricated medical claims"],
+        tags: ["Generated", "Med Spa", "GHL", "Funnel", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T20:45:00.000Z"
+      },
+      {
+        id: "fever-room-fitness",
+        name: "Fever Room Fitness",
+        niche: "Fitness",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/fever-room-fitness-ghl-custom-code.html",
+        localPath: "generated-sites/fever-room-fitness-ghl-custom-code.html",
+        screenshot: "generated-sites/preview-fever-room-fitness.png",
+        referenceUrl: "https://gymbox.com/",
+        sourceInspiration: "Gymbox-style challenger fitness site mirror with loud hero, promo strip, class category grid, club upgrades, interactive class deck, trial planner, studio selector, and free-trial conversion path.",
+        positioningAngle: "Interactive fitness training club for people bored by generic gyms, built around class exploration, first-week planning, and a low-friction free trial.",
+        headline: "Anything but routine.",
+        primaryCTA: "Claim a free trial",
+        cta: "Claim a free trial",
+        sectionBreakdown: ["Promo strip", "Bold hero", "Training ticker", "Proof stats", "Interactive class deck", "Recovery upgrades", "Trial planner", "Studio selector", "Free trial form"],
+        designNotes: ["Gymbox-inspired black and acid palette", "Oversized condensed headline system", "Interactive class and studio selectors", "Local stock imagery", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Free trial CTA", "Program-specific exploration", "First-week planner", "No empty label-only sections", "No clipped text or image overflow"],
+        tags: ["Generated", "Fitness", "Interactive", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T21:55:00.000Z"
+      },
+      {
+        id: "altitude-club-fitness",
+        name: "Altitude Club Fitness",
+        niche: "Fitness",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/altitude-club-fitness-ghl-custom-code.html",
+        localPath: "generated-sites/altitude-club-fitness-ghl-custom-code.html",
+        screenshot: "generated-sites/preview-altitude-club-fitness.png",
+        referenceUrl: "https://www.equinox.com/",
+        sourceInspiration: "Equinox-style luxury fitness club mirror with premium hero, membership benefits, interactive benefit tabs, classes, club finder, app-style booking module, and membership fit form.",
+        positioningAngle: "Premium lifestyle fitness club for members who want signature classes, precision coaching, regenerative amenities, and a club experience beyond the workout.",
+        headline: "Not fitness. A higher standard.",
+        primaryCTA: "Apply for membership",
+        cta: "Apply for membership",
+        sectionBreakdown: ["Premium hero", "Membership promise", "Interactive benefits", "Classes and amenities", "Club finder", "App module", "Membership form"],
+        designNotes: ["Equinox-inspired luxury palette", "Editorial serif headlines", "Interactive tabs and club selector", "Local stock imagery", "GHL-safe scoped wrapper"],
+        conversionNotes: ["Membership fit CTA", "Benefit-led exploration", "Club/location discovery", "No empty label-only sections", "No clipped text or image overflow"],
+        tags: ["Generated", "Fitness", "Luxury", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T22:10:00.000Z"
+      },
+      {
+        id: "counterform-fitness",
+        name: "Counterform Fitness",
+        niche: "Fitness",
+        type: "SITE",
+        version: "LIVE",
+        url: "generated-sites/counterform-fitness-ghl-custom-code.html",
+        localPath: "generated-sites/counterform-fitness-ghl-custom-code.html",
+        screenshot: "generated-sites/preview-counterform-fitness.png",
+        referenceUrl: "https://esserslosangeles.com/",
+        sourceInspiration: "Essers-style boutique personal training site with centered editorial section headlines, image-led confidence, philosophy blocks, premium typography, subtle SVG orbit motion, and focused application path.",
+        positioningAngle: "Private fitness coaching for people who want structure, accountability, and a training plan that fits real life without losing standards.",
+        headline: "Decide to change. Train like it matters.",
+        primaryCTA: "Apply to train",
+        cta: "Apply to train",
+        sectionBreakdown: ["Sticky nav", "Centered hero", "Value ticker", "Centered studio section", "Training standards", "Method rows", "Member proof", "Application form", "Footer"],
+        designNotes: ["Warm editorial palette", "Centered headline and subheadline structure", "Fraunces display typography", "Image-led storytelling", "Animated SVG orbit", "Subtle 3D hero depth", "Scroll reveals"],
+        conversionNotes: ["Hero asks for a committed first step", "Studio section reduces uncertainty", "Standards section communicates coaching expectations", "Method rows explain the first visit", "Final form captures readiness and preferred training window"],
+        tags: ["Generated", "Fitness", "Interactive", "GHL", "Final"],
+        isFavorite: true,
+        isArchived: false,
+        createdAt: "2026-05-13T23:05:00.000Z"
+      },
+    ];
+
+    const seedSites = finalSiteRecords;
+    const STORAGE_RESET_VERSION = "final-sites-library-v22";
+
+    let sites = loadSites();
+    let currentNiche = "All";
+    let activeSiteId = null;
+
+    const tabsEl = document.getElementById("tabs");
+    const gridEl = document.getElementById("libraryGrid");
+    const emptyEl = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const typeFilter = document.getElementById("typeFilter");
+    const viewFilter = document.getElementById("viewFilter");
+    const modal = document.getElementById("previewModal");
+    const modalClose = document.getElementById("modalClose");
+    const liveModal = document.getElementById("liveModal");
+    const liveModalClose = document.getElementById("liveModalClose");
+    const liveFrame = document.getElementById("liveFrame");
+    const liveModalTitle = document.getElementById("liveModalTitle");
+    const toast = document.getElementById("toast");
+
+
+
+    function mergeSeedSites(storedSites) {
+      const seedById = new Map(seedSites.map(site => [site.id, site]));
+      const mergedById = new Map();
+      [...storedSites, ...seedSites].forEach(site => {
+        const seed = seedById.get(site.id);
+        const merged = seed ? { ...site, ...seed } : { ...site };
+        if (merged.niche === "SaaS Agency") merged.niche = "SaaS";
+        mergedById.set(merged.id, merged);
+      });
+      return [...mergedById.values()];
+    }
+
+    function loadSites() {
+      try {
+        if (localStorage.getItem("website-storage-reset-version") !== STORAGE_RESET_VERSION) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(seedSites));
+          localStorage.setItem("website-storage-reset-version", STORAGE_RESET_VERSION);
+        }
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const parsed = stored ? JSON.parse(stored) : seedSites;
+        const merged = mergeSeedSites(Array.isArray(parsed) ? parsed : seedSites);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+        return merged.map(normalizeSite).filter(site => !isLegacySampleSite(site));
+      } catch (error) {
+        return mergeSeedSites(seedSites).map(normalizeSite).filter(site => !isLegacySampleSite(site));
+      }
+    }
+
+    function isLegacySampleSite(site) {
+      return ["gen-coaching-001", "gen-law-001", "gen-medspa-001"].includes(site.id) || String(site.sourceInspiration || "").includes("legacy local strategy layer");
+    }
+
+    function normalizeSite(site) {
+      return {
+        ...site,
+        localPath: site.localPath || site.url || "",
+        sourceInspiration: site.sourceInspiration || "Reference card created before source-inspiration tracking was added. Add teardown notes after reviewing the live page.",
+        primaryCTA: site.primaryCTA || site.cta || "Open preview",
+        cta: site.cta || site.primaryCTA || "Open preview",
+        type: normalizeType(site.type)
+      };
+    }
+
+    function normalizeType(type) {
+      const value = String(type || "SITE").toUpperCase();
+      if (value.includes("BOOKING")) return "BOOKING PAGE";
+      if (value.includes("OPT")) return "OPT-IN PAGE";
+      if (value.includes("FUNNEL")) return "FUNNEL";
+      if (value.includes("LANDING")) return "LANDING PAGE";
+      return "SITE";
+    }
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sites));
+    }
+
+    function makePreview(niche, name, descriptor) {
+      const colors = palette[niche] || palette.Custom;
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+          <defs>
+            <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="${colors[0]}"/>
+              <stop offset="1" stop-color="#080d18"/>
+            </linearGradient>
+            <linearGradient id="accent" x1="0" x2="1">
+              <stop offset="0" stop-color="${colors[1]}" stop-opacity=".92"/>
+              <stop offset="1" stop-color="${colors[2]}" stop-opacity=".68"/>
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000714" flood-opacity=".45"/>
+            </filter>
+          </defs>
+          <rect width="960" height="600" fill="url(#bg)"/>
+          <path d="M0 122h960M0 244h960M0 366h960M0 488h960M122 0v600M244 0v600M366 0v600M488 0v600M610 0v600M732 0v600M854 0v600" stroke="#ffffff" stroke-opacity=".045"/>
+          <rect x="54" y="48" width="852" height="504" rx="34" fill="#07111f" fill-opacity=".78" stroke="#ffffff" stroke-opacity=".12" filter="url(#shadow)"/>
+          <rect x="92" y="86" width="238" height="28" rx="14" fill="url(#accent)" fill-opacity=".85"/>
+          <rect x="92" y="150" width="430" height="48" rx="14" fill="#ffffff" fill-opacity=".9"/>
+          <rect x="92" y="217" width="346" height="18" rx="9" fill="#ffffff" fill-opacity=".42"/>
+          <rect x="92" y="249" width="286" height="18" rx="9" fill="#ffffff" fill-opacity=".27"/>
+          <rect x="92" y="320" width="172" height="52" rx="26" fill="url(#accent)"/>
+          <rect x="552" y="126" width="286" height="298" rx="28" fill="#ffffff" fill-opacity=".09" stroke="#ffffff" stroke-opacity=".12"/>
+          <rect x="586" y="164" width="146" height="18" rx="9" fill="${colors[1]}" fill-opacity=".76"/>
+          <rect x="586" y="213" width="204" height="14" rx="7" fill="#ffffff" fill-opacity=".35"/>
+          <rect x="586" y="245" width="176" height="14" rx="7" fill="#ffffff" fill-opacity=".22"/>
+          <rect x="586" y="296" width="92" height="72" rx="18" fill="#ffffff" fill-opacity=".1"/>
+          <rect x="698" y="296" width="92" height="72" rx="18" fill="#ffffff" fill-opacity=".1"/>
+          <text x="92" y="471" fill="${colors[2]}" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">${escapeSvg(name)}</text>
+          <text x="92" y="508" fill="#dce9f7" fill-opacity=".72" font-family="Segoe UI, Arial, sans-serif" font-size="21">${escapeSvg(descriptor)}</text>
+        </svg>
+      `;
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+    }
+
+    function escapeSvg(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&apos;"
+      }[char]));
+    }
+
+    function render() {
+      renderTabs();
+      renderStats();
+      renderCards();
+    }
+
+    function filteredSites() {
+      const query = searchInput.value.trim().toLowerCase();
+      const typeValue = typeFilter.value;
+      const viewValue = viewFilter.value;
+
+      return sites.filter(site => {
+        const matchesNiche = currentNiche === "All" || site.niche === currentNiche;
+        const matchesType = typeValue === "ALL" || site.type === typeValue;
+        const matchesView =
+          viewValue === "ARCHIVED" ? site.isArchived :
+          viewValue === "FAVORITES" ? site.isFavorite && !site.isArchived :
+          !site.isArchived;
+        const haystack = [
+          site.name,
+          site.niche,
+          site.type,
+          site.positioningAngle,
+          site.headline,
+          site.primaryCTA,
+          site.sourceInspiration,
+          ...site.tags
+        ].join(" ").toLowerCase();
+        return matchesNiche && matchesType && matchesView && (!query || haystack.includes(query));
+      });
+    }
+
+    function renderTabs() {
+      tabsEl.innerHTML = categories.map(category => {
+        const count = category === "All"
+          ? sites.filter(site => !site.isArchived).length
+          : sites.filter(site => site.niche === category && !site.isArchived).length;
+        const selected = currentNiche === category;
+        return `
+          <button class="tab ${selected ? "active" : ""}" role="tab" aria-selected="${selected}" type="button" data-niche="${category}">
+            ${category}
+            <span class="tab-count">${count}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderStats() {
+      const active = sites.filter(site => !site.isArchived);
+      const funnels = active.filter(site => site.type === "FUNNEL").length;
+      const niches = new Set(active.map(site => site.niche)).size;
+      const archived = sites.filter(site => site.isArchived).length;
+      document.getElementById("totalSites").textContent = active.length;
+      document.getElementById("totalFunnels").textContent = funnels;
+      document.getElementById("totalNiches").textContent = niches;
+      document.getElementById("totalArchived").textContent = archived;
+    }
+
+    function renderCards() {
+      const results = filteredSites();
+      emptyEl.classList.toggle("visible", results.length === 0);
+      gridEl.innerHTML = results.map(site => `
+        <article class="card" tabindex="0" role="button" aria-label="Open live preview for ${site.name}" data-id="${site.id}">
+          <div class="preview">
+            <img src="${site.screenshot}" alt="Preview screenshot for ${site.name}" loading="lazy" />
+            <div class="preview-top">
+              <span class="badge">${site.type}</span>
+              <span class="badge version">${site.version || "V0"}</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="title-line">
+              <h3>${site.name}</h3>
+              <span class="niche">${site.niche}</span>
+            </div>
+            <p class="angle">${site.positioningAngle}</p>
+            <div class="tag-row">
+              ${site.tags.slice(0, 4).map(tag => `<span class="tag">${tag}</span>`).join("")}
+            </div>
+            <div class="card-footer">
+              <button class="button primary live-card-cta" type="button" data-id="${site.id}">
+                Open live preview
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openModal(siteId) {
+      const site = sites.find(item => item.id === siteId);
+      if (!site) return;
+      activeSiteId = site.id;
+      document.getElementById("modalImage").src = site.screenshot;
+      document.getElementById("modalImage").alt = `Large preview screenshot for ${site.name}`;
+      document.getElementById("modalBadges").innerHTML = `
+        <span class="badge">${site.type}</span>
+        <span class="badge version">${site.version || "V0"}</span>
+        <span class="badge">${site.niche}</span>
+      `;
+      document.getElementById("modalTitle").textContent = site.name;
+      const openTarget = site.localPath || site.url;
+      document.getElementById("modalUrl").textContent = openTarget;
+      document.getElementById("modalUrl").href = openTarget;
+      document.getElementById("openLive").href = openTarget;
+      document.getElementById("modalAngle").textContent = site.positioningAngle;
+      document.getElementById("modalCta").textContent = site.primaryCTA || site.cta;
+      document.getElementById("modalSource").textContent = site.sourceInspiration;
+      fillList("modalGood", [site.headline, `Primary action: ${site.primaryCTA || site.cta}`, ...site.tags.map(tag => `${tag} pattern`)]);
+      fillList("modalSections", site.sectionBreakdown);
+      fillList("modalDesign", site.designNotes);
+      fillList("modalConversion", site.conversionNotes);
+      document.getElementById("favoriteButton").textContent = site.isFavorite ? "Remove Favorite" : "Add to Favorites";
+      document.getElementById("archiveButton").textContent = site.isArchived ? "Restore" : "Archive";
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      modalClose.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      activeSiteId = null;
+    }
+
+    function fillList(id, items) {
+      document.getElementById(id).innerHTML = items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("visible");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("visible"), 2400);
+    }
+
+
+
+    function openLiveModal(siteId) {
+      const site = sites.find(item => item.id === siteId);
+      if (!site) return;
+      const target = site.localPath || site.url;
+      if (!target) return;
+      activeSiteId = site.id;
+      liveModalTitle.textContent = site.name;
+      liveFrame.src = target;
+      liveModal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      liveModalClose.focus();
+    }
+
+    function closeLiveModal() {
+      liveModal.classList.remove("open");
+      liveFrame.src = "";
+      if (!modal.classList.contains("open")) {
+        document.body.style.overflow = "";
+      }
+    }
+    function copyActiveNotes() {
+      const site = sites.find(item => item.id === activeSiteId);
+      if (!site) return;
+      const notes = [
+        `Website: ${site.name}`,
+        `Niche: ${site.niche}`,
+        `Type: ${site.type}`,
+        `URL: ${site.url}`,
+        `Local Path: ${site.localPath || ""}`,
+        `Source Inspiration: ${site.sourceInspiration || ""}`,
+        `Positioning: ${site.positioningAngle}`,
+        `Headline: ${site.headline}`,
+        `CTA: ${site.primaryCTA || site.cta}`,
+        `Sections: ${site.sectionBreakdown.join(" | ")}`,
+        `Design Notes: ${site.designNotes.join(" | ")}`,
+        `Conversion Notes: ${site.conversionNotes.join(" | ")}`,
+        `Tags: ${site.tags.join(", ")}`
+      ].join("\n");
+
+      navigator.clipboard.writeText(notes)
+        .then(() => showToast("Research notes copied."))
+        .catch(() => showToast("Copy failed. Select and copy the notes manually."));
+    }
+
+    function toggleFavorite() {
+      const site = sites.find(item => item.id === activeSiteId);
+      if (!site) return;
+      site.isFavorite = !site.isFavorite;
+      persist();
+      render();
+      openModal(site.id);
+      showToast(site.isFavorite ? "Added to favorites." : "Removed from favorites.");
+    }
+
+    function toggleArchive() {
+      const site = sites.find(item => item.id === activeSiteId);
+      if (!site) return;
+      site.isArchived = !site.isArchived;
+      persist();
+      closeModal();
+      render();
+      showToast(site.isArchived ? "Archived reference." : "Restored reference.");
+    }
+
+    const conversionFramework = [
+      "Big Promise / Desired Outcome",
+      "Empathy / Connection",
+      "Opportunity Vehicle / Solution",
+      "Before vs After / Gap & Bridge",
+      "USP / Unique Selling Proposition",
+      "Offer Positioning / No-Brainer Deal",
+      "Social Proof / Instant Credibility",
+      "Risk Reversal / Lower The Bar",
+      "Authority / Trust The Source",
+      "Urgency / Take Action Today",
+      "FAQ / Concerns & Objections",
+      "Final CTA"
+    ];
+
+    tabsEl.addEventListener("click", event => {
+      const button = event.target.closest(".tab");
+      if (!button) return;
+      currentNiche = button.dataset.niche;
+      render();
+    });
+
+    gridEl.addEventListener("click", event => {
+      const liveCta = event.target.closest(".live-card-cta");
+      if (liveCta) {
+        openLiveModal(liveCta.dataset.id);
+        return;
+      }
+      const card = event.target.closest(".card");
+      if (card) openLiveModal(card.dataset.id);
+    });
+
+    function copyEditBrief(site) {
+      const brief = [
+        `Edit generated website: ${site.name}`,
+        `File: ${site.localPath || site.url}`,
+        `Niche: ${site.niche}`,
+        `Type: ${site.type}`,
+        `Keep the 11-part conversion framework.`,
+        `Current positioning: ${site.positioningAngle}`,
+        `Primary CTA: ${site.primaryCTA || site.cta}`
+      ].join("\n");
+      navigator.clipboard.writeText(brief)
+        .then(() => showToast("Edit brief copied. Ask Codex to revise this generated page."))
+        .catch(() => showToast("Edit brief ready, but clipboard access was blocked."));
+    }
+
+    gridEl.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".card");
+      if (!card) return;
+      event.preventDefault();
+      openLiveModal(card.dataset.id);
+    });
+
+    [searchInput, typeFilter, viewFilter].forEach(control => {
+      control.addEventListener("input", render);
+      control.addEventListener("change", render);
+    });
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && liveModal.classList.contains("open")) closeLiveModal();
+      else if (event.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+    document.getElementById("openLive").addEventListener("click", event => {
+      event.preventDefault();
+      if (activeSiteId) openLiveModal(activeSiteId);
+    });
+    document.getElementById("modalUrl").addEventListener("click", event => {
+      event.preventDefault();
+      if (activeSiteId) openLiveModal(activeSiteId);
+    });
+    liveModalClose.addEventListener("click", closeLiveModal);
+    liveModal.addEventListener("click", event => {
+      if (event.target === liveModal) closeLiveModal();
+    });
+    document.getElementById("copyNotes").addEventListener("click", copyActiveNotes);
+    document.getElementById("favoriteButton").addEventListener("click", toggleFavorite);
+    document.getElementById("archiveButton").addEventListener("click", toggleArchive);
+
+    render();
+  </script>
+</body>
+</html>
+
+
+
+
+
