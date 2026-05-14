@@ -1,0 +1,805 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap");
+
+.brightlane {
+  --ink: #131624;
+  --night: #171a38;
+  --violet: #5f4bff;
+  --rose: #ff6fa8;
+  --sun: #ffcf4a;
+  --mint: #6df0c2;
+  --paper: #fff8ea;
+  --white: #fffdf8;
+  --muted: #687084;
+  --line: rgba(19, 22, 36, .13);
+  --soft: #f4ecdc;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+  line-height: 1.55;
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+.brightlane,
+.brightlane *,
+.brightlane *::before,
+.brightlane *::after { box-sizing: border-box; }
+
+.brightlane a { color: inherit; text-decoration: none; }
+.brightlane img { display: block; max-width: 100%; height: auto; }
+.brightlane :focus-visible { outline: 3px solid rgba(255, 207, 74, .76); outline-offset: 4px; }
+.brightlane .wrap { width: min(1260px, calc(100% - 48px)); margin-inline: auto; }
+.brightlane :is(h1,h2,h3,p) { margin: 0; }
+
+.brightlane .nav {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto minmax(240px, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+
+.brightlane .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -.055em;
+}
+
+.brightlane .brand span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--rose));
+  color: var(--white);
+}
+
+.brightlane .nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  color: #42495a;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.brightlane .nav-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brightlane .pill {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 900;
+  background: var(--night);
+  color: var(--white);
+  box-shadow: 0 16px 40px rgba(23, 26, 56, .18);
+}
+
+.brightlane .pill.light { background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+
+.brightlane .hero {
+  position: relative;
+  min-height: 900px;
+  padding: 28px 0 96px;
+}
+
+.brightlane .hero-shell {
+  position: relative;
+  min-height: 820px;
+  overflow: hidden;
+  border-radius: 38px;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 207, 74, .46), transparent 28%),
+    radial-gradient(circle at 68% 30%, rgba(109, 240, 194, .28), transparent 28%),
+    linear-gradient(135deg, #5f4bff, #ff6fa8 62%, #ffcf4a);
+  box-shadow: 0 34px 90px rgba(95, 75, 255, .23);
+}
+
+.brightlane .hero-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.32) 0 8px, transparent 9px),
+    linear-gradient(105deg, transparent 0 38%, rgba(255,255,255,.22) 48%, transparent 60%);
+  background-size: 34px 34px, 230% 100%;
+  opacity: .34;
+  animation: bubbleDrift 12s linear infinite, sheenMove 7s var(--ease) infinite;
+}
+
+.brightlane .hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, .98fr) minmax(420px, .72fr);
+  gap: 34px;
+  min-height: 710px;
+  padding: 58px;
+}
+
+.brightlane .hero-copy {
+  display: grid;
+  align-content: center;
+}
+
+.brightlane .eyebrow {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255,253,248,.88);
+  color: #313548;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.brightlane .eyebrow::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 6px rgba(109, 240, 194, .2);
+}
+
+.brightlane h1 {
+  max-width: 720px;
+  margin-top: 28px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(68px, 8vw, 126px);
+  line-height: .88;
+  font-weight: 400;
+  letter-spacing: -.045em;
+  color: var(--white);
+  text-shadow: 0 20px 48px rgba(23,26,56,.22);
+  padding-block: .08em .16em;
+}
+
+.brightlane .hero-copy p {
+  max-width: 620px;
+  color: rgba(255,253,248,.88);
+  font-size: clamp(18px, 1.6vw, 22px);
+}
+
+.brightlane .hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.brightlane .btn {
+  min-height: 58px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  background: var(--night);
+  color: var(--white);
+  font-weight: 900;
+  box-shadow: 0 18px 46px rgba(23,26,56,.26);
+  cursor: pointer;
+  transition: transform 220ms var(--ease), box-shadow 220ms var(--ease);
+}
+
+.brightlane .btn:hover { transform: translateY(-3px); box-shadow: 0 24px 60px rgba(23,26,56,.32), 0 0 0 6px rgba(255,255,255,.16); }
+.brightlane .btn.sun:hover { box-shadow: 0 24px 60px rgba(23,26,56,.28), 0 0 0 7px rgba(255,207,74,.24); }
+.brightlane .btn.sun { background: var(--sun); color: var(--ink); }
+.brightlane .btn.ghost { background: rgba(255,255,255,.16); box-shadow: inset 0 0 0 1px rgba(255,255,255,.36); }
+
+.brightlane .move-card {
+  align-self: center;
+  position: relative;
+  min-height: 540px;
+  border-radius: 34px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(23,26,56,.08), rgba(23,26,56,.74)),
+    url("https://images.unsplash.com/photo-1600518464441-9306b5f79e64?auto=format&fit=crop&w=1100&q=84") center/cover;
+  box-shadow: 0 30px 80px rgba(23,26,56,.28);
+}
+
+.brightlane .floating-route {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255,253,248,.94);
+  color: var(--ink);
+  box-shadow: 0 20px 60px rgba(0,0,0,.24);
+}
+
+.brightlane .route-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.brightlane .route-top strong {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 34px;
+  line-height: .95;
+  font-weight: 400;
+}
+
+.brightlane .route-chip {
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: var(--mint);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.brightlane .route-line {
+  position: relative;
+  height: 84px;
+  margin-top: 18px;
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg, rgba(95,75,255,.18), rgba(255,111,168,.18)),
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(19,22,36,.09) 22px 23px);
+}
+
+.brightlane .route-line::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--rose), var(--sun));
+  transform: translateY(-50%);
+  border-radius: 999px;
+}
+
+.brightlane .truck-dot {
+  position: absolute;
+  top: 50%;
+  left: 22%;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--night);
+  color: var(--white);
+  transform: translate(-50%, -50%);
+  animation: truckMove 5.8s var(--ease) infinite;
+}
+
+.brightlane .quick-form {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  z-index: 4;
+  transform: translateX(-50%);
+  width: min(1050px, calc(100% - 80px));
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 26px;
+  background: var(--white);
+  box-shadow: 0 24px 70px rgba(23,26,56,.18);
+}
+
+.brightlane .quick-form input,
+.brightlane .quick-form select {
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 0 16px;
+  background: #fffaf1;
+  color: var(--ink);
+  font: inherit;
+}
+
+.brightlane .section { padding: 104px 0; background: var(--paper) !important; }
+.brightlane .section.light { background: var(--soft) !important; }
+.brightlane .section.dark { background: var(--night) !important; color: var(--white); }
+
+.brightlane .section-head {
+  display: grid;
+  grid-template-columns: minmax(300px, .85fr) minmax(0, .9fr);
+  gap: 70px;
+  align-items: end;
+}
+
+.brightlane h2 {
+  max-width: 760px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(48px, 5.8vw, 90px);
+  line-height: .94;
+  font-weight: 400;
+  letter-spacing: -.045em;
+  padding-block: .08em .16em;
+}
+
+.brightlane .section-head p { color: var(--muted); font-size: 18px; }
+.brightlane .dark .section-head p { color: rgba(255,255,255,.7); }
+
+.brightlane .service-row {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.brightlane .service {
+  min-height: 300px;
+  padding: 26px;
+  display: grid;
+  align-content: space-between;
+  border-radius: 30px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+
+.brightlane .service:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(19,22,36,.12); }
+.brightlane .service:nth-child(2) { background: #effff7; }
+.brightlane .service:nth-child(3) { background: #fff0f6; }
+.brightlane .service:nth-child(4) { background: #fff6d8; }
+
+.brightlane .service-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: var(--night);
+  color: var(--white);
+}
+
+.brightlane .service h3 {
+  margin-top: 40px;
+  font-size: 24px;
+  line-height: 1.06;
+}
+
+.brightlane .service p { margin-top: 13px; color: var(--muted); }
+
+.brightlane .story-grid {
+  margin-top: 62px;
+  display: grid;
+  grid-template-columns: minmax(320px, .8fr) minmax(0, 1fr);
+  gap: 24px;
+}
+
+.brightlane .photo-panel {
+  min-height: 540px;
+  border-radius: 34px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(23,26,56,.05), rgba(23,26,56,.82)),
+    url("https://images.unsplash.com/photo-1600518464441-9306b5f79e64?auto=format&fit=crop&w=1000&q=84") center/cover;
+}
+
+.brightlane .story-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.brightlane .story-card {
+  min-height: 262px;
+  padding: 26px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.brightlane .story-card strong {
+  display: block;
+  color: var(--sun);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.brightlane .story-card h3 { margin-top: 28px; color: var(--white); font-size: 22px; }
+.brightlane .story-card p { margin-top: 12px; color: rgba(255,255,255,.7); }
+
+.brightlane .moves {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 18px;
+}
+
+.brightlane .move-big,
+.brightlane .move-list {
+  border-radius: 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.brightlane .move-big {
+  min-height: 520px;
+  padding: 30px;
+  display: grid;
+  align-content: end;
+  color: var(--white);
+  background:
+    linear-gradient(180deg, rgba(19,22,36,.05), rgba(19,22,36,.82)),
+    url("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1000&q=84") center/cover;
+}
+
+.brightlane .move-big h3 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 58px;
+  line-height: .96;
+  font-weight: 400;
+  padding-block: .05em .12em;
+}
+
+.brightlane .move-big p { margin-top: 16px; color: rgba(255,255,255,.78); max-width: 460px; }
+
+.brightlane .move-list {
+  padding: 24px;
+  display: grid;
+  gap: 12px;
+}
+
+.brightlane .move-item {
+  padding: 18px;
+  border-radius: 20px;
+  background: #f7f0df;
+}
+
+.brightlane .move-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.brightlane .move-item strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 22px;
+}
+
+.brightlane .final {
+  border-radius: 40px;
+  padding: 54px;
+  color: var(--white);
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255,207,74,.34), transparent 28%),
+    linear-gradient(135deg, var(--violet), var(--rose));
+  overflow: hidden;
+  position: relative;
+}
+
+.brightlane .final::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.25) 0 8px, transparent 9px);
+  background-size: 34px 34px;
+  opacity: .28;
+}
+
+.brightlane .final-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(280px, .8fr) minmax(0, 1fr);
+  gap: 42px;
+  align-items: center;
+}
+
+.brightlane .final p {
+  max-width: 540px;
+  margin-top: 18px;
+  color: rgba(255,255,255,.82);
+}
+
+.brightlane .final-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 18px;
+  border-radius: 28px;
+  background: rgba(255,253,248,.94);
+}
+
+.brightlane .final-form input,
+.brightlane .final-form select,
+.brightlane .final-form textarea {
+  min-height: 56px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fffaf1;
+  padding: 0 16px;
+  color: var(--ink);
+  font: inherit;
+}
+
+.brightlane .final-form textarea {
+  grid-column: 1 / -1;
+  min-height: 110px;
+  padding-top: 14px;
+  resize: vertical;
+}
+
+.brightlane .final-form button { grid-column: 1 / -1; }
+
+.brightlane .footer {
+  padding: 54px 0;
+  background: var(--ink) !important;
+  color: rgba(255,255,255,.64);
+}
+
+.brightlane .footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(3, 1fr);
+  gap: 30px;
+}
+
+.brightlane .footer h3 { color: var(--white); margin: 0 0 12px; font-size: 14px; }
+.brightlane .footer p,
+.brightlane .footer a { display: block; margin-top: 9px; color: rgba(255,255,255,.62); font-size: 13px; }
+
+.brightlane [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 760ms var(--ease), transform 760ms var(--ease);
+}
+
+.brightlane [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+@keyframes bubbleDrift {
+  from { background-position: 0 0, 130% 0; }
+  to { background-position: 68px 68px, 130% 0; }
+}
+
+@keyframes sheenMove {
+  0%, 100% { background-position: 0 0, 130% 0; }
+  50% { background-position: 0 0, -30% 0; }
+}
+
+@keyframes truckMove {
+  0%, 100% { left: 22%; }
+  50% { left: 78%; }
+}
+
+@media (max-width: 1020px) {
+  .brightlane .nav { grid-template-columns: 1fr auto; }
+  .brightlane .nav-links { display: none; }
+  .brightlane .nav-actions .pill.light { display: none; }
+  .brightlane .hero-grid,
+  .brightlane .section-head,
+  .brightlane .story-grid,
+  .brightlane .moves,
+  .brightlane .final-grid { grid-template-columns: 1fr; }
+  .brightlane .hero-shell { min-height: auto; }
+  .brightlane .hero-grid { min-height: auto; padding: 38px; }
+  .brightlane .move-card { min-height: 620px; }
+  .brightlane .quick-form {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: min(100% - 48px, 820px);
+    margin: -28px auto 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .brightlane .service-row,
+  .brightlane .story-cards { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .brightlane .wrap { width: min(100% - 28px, 1260px); }
+  .brightlane .brand { font-size: 20px; }
+  .brightlane .brand span { width: 38px; height: 38px; }
+  .brightlane .pill { min-height: 44px; padding-inline: 14px; font-size: 13px; }
+  .brightlane .hero { padding-top: 12px; }
+  .brightlane .hero-grid { padding: 24px; }
+  .brightlane h1 { font-size: clamp(54px, 18vw, 72px); }
+  .brightlane .move-card { min-height: 580px; }
+  .brightlane .quick-form,
+  .brightlane .service-row,
+  .brightlane .story-cards,
+  .brightlane .final-form,
+  .brightlane .footer-grid { grid-template-columns: 1fr; }
+  .brightlane .quick-form { width: min(100% - 28px, 820px); }
+  .brightlane .section { padding: 72px 0; }
+  .brightlane .photo-panel,
+  .brightlane .move-big { min-height: 360px; }
+  .brightlane .final { padding: 28px; border-radius: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brightlane *,
+  .brightlane *::before,
+  .brightlane *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .brightlane [data-reveal] { opacity: 1; transform: none; }
+}
+</style>
+
+<div class="brightlane">
+  <nav class="wrap nav" aria-label="Primary navigation">
+    <a class="brand" href="#top"><span>B</span> BrightLane Moving</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#care">Care</a>
+      <a href="#moves">Recent Moves</a>
+      <a href="#quote">Quote</a>
+    </div>
+    <div class="nav-actions">
+      <a class="pill light" href="tel:+10000000000">(000) 000-0000</a>
+      <a class="pill" href="#quote">Start Moving</a>
+    </div>
+  </nav>
+
+  <section class="wrap hero" id="top">
+    <div class="hero-shell">
+      <div class="hero-grid">
+        <div class="hero-copy" data-reveal>
+          <span class="eyebrow">A warmer way to move</span>
+          <h1>Moving help that feels human from hello.</h1>
+          <p>BrightLane plans the crew, truck, packing, building access, and arrival sequence so move day feels cared for instead of chaotic.</p>
+          <div class="hero-actions">
+            <a class="btn sun" href="#quote">Plan My Move</a>
+            <a class="btn ghost" href="#services">Explore Services</a>
+          </div>
+        </div>
+
+        <div class="move-card" data-reveal>
+          <div class="floating-route">
+            <div class="route-top"><strong>Your move, mapped before it starts.</strong><span class="route-chip">Live plan</span></div>
+            <div class="route-line"><span class="truck-dot">→</span></div>
+          </div>
+        </div>
+      </div>
+      <form class="quick-form" data-reveal>
+        <input type="text" placeholder="Pickup address" aria-label="Pickup address">
+        <input type="text" placeholder="Destination" aria-label="Destination">
+        <select aria-label="Move type"><option>Home move</option><option>Apartment move</option><option>Office move</option><option>Packing only</option></select>
+        <button class="btn" type="submit">Get Quote</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section light" id="services">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Every move gets a different kind of care.</h2>
+        <p>Customers do not need a generic truck. They need the right crew, packing support, building coordination, and timing for the move they actually have.</p>
+      </div>
+      <div class="service-row">
+        <article class="service" data-reveal><div><span class="service-icon">01</span><h3>Local home moves</h3><p>For houses, condos, and apartments where timing and protection matter.</p></div><a href="#quote">Plan this move</a></article>
+        <article class="service" data-reveal><div><span class="service-icon">02</span><h3>Packing and unpacking</h3><p>Fragile rooms, kitchens, wardrobes, art, mirrors, and essentials packed with labels.</p></div><a href="#quote">Get packing help</a></article>
+        <article class="service" data-reveal><div><span class="service-icon">03</span><h3>Office transitions</h3><p>Desk maps, department zones, IT timing, and after-hours move sequencing.</p></div><a href="#quote">Move the team</a></article>
+        <article class="service" data-reveal><div><span class="service-icon">04</span><h3>Long-distance plans</h3><p>Route coordination, delivery windows, inventory checks, and move-lead updates.</p></div><a href="#quote">Map the route</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="care">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>The difference is care you can see.</h2>
+        <p>Inspired by hospitality-led moving brands, this page makes the people, process, and proof feel visible before the visitor asks for a price.</p>
+      </div>
+      <div class="story-grid">
+        <div class="photo-panel" data-reveal></div>
+        <div class="story-cards">
+          <article class="story-card" data-reveal><strong>4.9</strong><h3>Review-led trust</h3><p>Proof appears early, close to the quote flow, because moving customers compare risk before price.</p></article>
+          <article class="story-card" data-reveal><strong>24h</strong><h3>Fast quote target</h3><p>A simple intake helps the coordinator respond with the right follow-up instead of vague pricing.</p></article>
+          <article class="story-card" data-reveal><strong>1</strong><h3>Dedicated move lead</h3><p>One person keeps timing, access, route, and placement clear for the client and the crew.</p></article>
+          <article class="story-card" data-reveal><strong>0</strong><h3>Last-minute guessing</h3><p>The plan names the fragile items, stairs, elevator windows, and parking constraints early.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="moves">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Designed around the jobs people remember.</h2>
+        <p>The page turns services into scenes: stairs, family homes, offices, fragile pieces, and arrival windows.</p>
+      </div>
+      <div class="moves">
+        <article class="move-big" data-reveal><h3>Family home reset in one day.</h3><p>Pack, protect, transport, and place the rooms so the first night feels livable, not lost.</p></article>
+        <div class="move-list" data-reveal>
+          <div class="move-item"><span>Move type</span><strong>Apartment, 3rd-floor walkup</strong></div>
+          <div class="move-item"><span>Constraint</span><strong>Two-hour elevator window</strong></div>
+          <div class="move-item"><span>Special care</span><strong>Glass table, framed art, nursery setup</strong></div>
+          <div class="move-item"><span>Outcome</span><strong>Boxes labeled by room before unload</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quote">
+    <div class="wrap final" data-reveal>
+      <div class="final-grid">
+        <div>
+          <span class="eyebrow">Start with the plan</span>
+          <h2>Tell us what is moving. We will price the path.</h2>
+          <p>Share the basics and a move coordinator will help you understand crew size, timing, access constraints, and what needs protection.</p>
+        </div>
+        <form class="final-form">
+          <input type="text" placeholder="Full name" aria-label="Full name">
+          <input type="tel" placeholder="Phone number" aria-label="Phone number">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <select aria-label="Move size"><option>Studio or one-bedroom</option><option>Two or three-bedroom home</option><option>Large home</option><option>Office or commercial move</option></select>
+          <textarea placeholder="What needs special care?" aria-label="What needs special care?"></textarea>
+          <button class="btn sun" type="submit">Request My Moving Plan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div><h3>BrightLane Moving</h3><p>Joyful, hospitality-led moving-company concept inspired by Roadway Moving’s vibrant brand case study.</p></div>
+      <div><h3>Services</h3><a href="#services">Home moves</a><a href="#services">Packing</a><a href="#services">Office moves</a></div>
+      <div><h3>Plan</h3><a href="#care">Care model</a><a href="#moves">Recent moves</a><a href="#quote">Quote</a></div>
+      <div><h3>Reference</h3><a href="https://www.bowenmedia.com/work/moving-company-web-design-project-roadway-moving">Roadway/BOWEN case</a><a href="https://www.behance.net/gallery/240818773/Metropolis-Moving-Company-Website-Design-">Metropolis reference</a></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector(".brightlane");
+  if (!page) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .14, rootMargin: "0px 0px -8% 0px" });
+    page.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+      item.style.transitionDelay = Math.min(index * 55, 260) + "ms";
+      observer.observe(item);
+    });
+  } else {
+    page.querySelectorAll("[data-reveal]").forEach(function (item) { item.classList.add("visible"); });
+  }
+})();
+</script>

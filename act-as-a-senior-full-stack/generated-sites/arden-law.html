@@ -1,0 +1,1194 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Libre+Baskerville:wght@400;700&display=swap");
+
+.redlaw-page {
+  --coral: #153e90;
+  --coral-2: #0c2e73;
+  --coral-dark: #071d49;
+  --paper: #f8f7f1;
+  --white: #fffdfa;
+  --ink: #07111f;
+  --muted: #4c5564;
+  --line: rgba(7, 17, 31, 0.13);
+  --soft: #eef2f7;
+  --shadow: 0 24px 70px rgba(21, 62, 144, 0.22);
+  --track-y: 0px;
+  --orb-y: 0px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: "Inter", Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+  isolation: isolate;
+  text-rendering: geometricPrecision;
+}
+
+.redlaw-page,
+.redlaw-page *,
+.redlaw-page *::before,
+.redlaw-page *::after { box-sizing: border-box; }
+
+.redlaw-page a { color: inherit; text-decoration: none; }
+.redlaw-page img { display: block; width: 100%; max-width: 100%; height: auto; }
+.redlaw-page :focus-visible { outline: 3px solid rgba(21, 62, 144, .5); outline-offset: 4px; }
+.redlaw-page .wrap { width: min(1280px, calc(100% - 48px)); margin-inline: auto; }
+
+.redlaw-page .nav {
+  min-height: 108px;
+  display: grid;
+  grid-template-columns: 340px 300px minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.redlaw-page .brand {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: clamp(34px, 3.35vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  line-height: 1.16;
+}
+
+.redlaw-page .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  color: #444850;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.redlaw-page .nav-actions {
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.redlaw-page .btn {
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  border-radius: 16px;
+  padding: 0 24px;
+  background: var(--coral);
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 16px 36px rgba(21, 62, 144, .22);
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), background 240ms var(--ease);
+  cursor: pointer;
+}
+
+.redlaw-page .btn:hover { transform: translateY(-2px); background: var(--coral-2); box-shadow: 0 22px 52px rgba(21, 62, 144, .28); }
+.redlaw-page .btn.light { background: var(--white); color: #424650; box-shadow: inset 0 0 0 1px rgba(9,9,9,.08); }
+.redlaw-page .btn.phone { background: transparent; border: 1px solid rgba(255,255,255,.72); color: var(--white); box-shadow: none; }
+.redlaw-page .btn .dot { width: 26px; min-width: 26px; height: 26px; display: grid; place-items: center; overflow: hidden; border-radius: 50%; background: currentColor; color: var(--coral); }
+.redlaw-page .btn .dot svg { width: 14px; height: 14px; color: var(--white); }
+
+.redlaw-page .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(520px, .95fr);
+  gap: 42px;
+  min-height: 790px;
+}
+
+.redlaw-page .hero-copy {
+  display: grid;
+  align-content: center;
+  padding: 76px 0 110px;
+}
+
+.redlaw-page h1,
+.redlaw-page h2,
+.redlaw-page h3,
+.redlaw-page p { margin: 0; }
+
+.redlaw-page h1 {
+  max-width: 660px;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: clamp(54px, 5.4vw, 82px);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.redlaw-page .hero-copy p {
+  max-width: 670px;
+  margin-top: 34px;
+  color: #141414;
+  font-size: clamp(18px, 1.8vw, 23px);
+  line-height: 1.55;
+}
+
+.redlaw-page .hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+.redlaw-page .practice-panel {
+  position: relative;
+  overflow: hidden;
+  margin-top: -88px;
+  margin-bottom: 24px;
+  min-height: 868px;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(10, 42, 104, .48), rgba(7, 29, 73, .86)),
+    url("https://images.unsplash.com/photo-1589994965851-a8f479c573a9?auto=format&fit=crop&w=1200&q=84") center/cover,
+    radial-gradient(circle at 62% 18%, rgba(255,255,255,.22), transparent 26%),
+    linear-gradient(180deg, #1d55b4, var(--coral-2) 58%, var(--coral-dark)) !important;
+  color: var(--white);
+  padding: 24px 42px 42px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 26px 72px rgba(7, 29, 73, .18);
+}
+
+.redlaw-page .practice-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, transparent 0 34%, rgba(255,255,255,.12) 45%, transparent 56%),
+    radial-gradient(circle at 45% 38%, rgba(255,255,255,.16), transparent 28%);
+  background-size: 220% 100%, 100% 100%;
+  mix-blend-mode: screen;
+  opacity: .5;
+  pointer-events: none;
+  animation: redlawPanelLight 8s cubic-bezier(.16, 1, .3, 1) infinite;
+}
+
+.redlaw-page .panel-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  align-items: center;
+}
+
+.redlaw-page .practice-rail {
+  position: relative;
+  z-index: 2;
+  margin-top: 104px;
+  height: 660px;
+  overflow: hidden;
+}
+
+.redlaw-page .ghost-label {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  color: rgba(255,255,255,.1);
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 52px;
+  transition: opacity 320ms var(--ease), transform 420ms var(--ease);
+}
+
+.redlaw-page .practice-track {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  width: min(480px, calc(100% - 136px));
+  height: 560px;
+  transform: translateX(-50%);
+}
+
+.redlaw-page .practice-fade {
+  display: none;
+}
+
+.redlaw-page .practice-card {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  min-height: 292px;
+  padding: 42px 50px;
+  border-radius: 28px;
+  background: rgba(7, 29, 73, .78);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 22px 52px rgba(3, 13, 35, .22);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 150px, 0) scale(.92);
+  transition: transform 680ms cubic-bezier(.16, 1, .3, 1), background 520ms var(--ease), opacity 520ms var(--ease), box-shadow 520ms var(--ease), filter 520ms var(--ease);
+}
+
+.redlaw-page .practice-card.dim {
+  background: rgba(7, 29, 73, .72);
+  box-shadow: none;
+  opacity: 0;
+}
+
+.redlaw-page .practice-card.is-active {
+  background: rgba(7, 29, 73, .92);
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 128px, 0) scale(1);
+  box-shadow: 0 28px 70px rgba(3, 13, 35, .28);
+  z-index: 2;
+  animation: redlawCardIdle 5.4s ease-in-out infinite;
+}
+
+.redlaw-page .practice-card.is-active h2,
+.redlaw-page .practice-card.is-active p {
+  animation: redlawTextIn 560ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.redlaw-page .practice-card.is-active p {
+  animation-delay: 80ms;
+}
+
+.redlaw-page .practice-card.is-prev,
+.redlaw-page .practice-card.is-next {
+  opacity: .36;
+  filter: saturate(.8);
+  z-index: 1;
+}
+
+.redlaw-page .practice-card.is-prev {
+  transform: translate3d(0, 0, 0) scale(.9);
+}
+
+.redlaw-page .practice-card.is-next {
+  transform: translate3d(0, 320px, 0) scale(.9);
+}
+
+.redlaw-page .practice-card h2 {
+  color: #fffdfa;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: clamp(31px, 2.55vw, 39px);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none;
+  text-wrap: balance;
+}
+
+.redlaw-page .practice-card p {
+  max-width: 540px;
+  margin-top: 22px;
+  color: rgba(255,253,250,.9);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.redlaw-page .plus {
+  position: absolute;
+  right: calc(50% - 224px);
+  width: 58px;
+  height: 58px;
+  border: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--coral);
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+  transition: transform 260ms var(--ease), background 240ms var(--ease), color 240ms var(--ease), box-shadow 240ms var(--ease);
+  box-shadow: 0 20px 44px rgba(3, 13, 35, .2);
+  animation: redlawPulse 2.8s ease-in-out infinite;
+  z-index: 4;
+}
+
+.redlaw-page .plus.next {
+  top: 396px;
+}
+
+.redlaw-page .plus.prev {
+  top: 320px;
+}
+
+.redlaw-page .plus:hover {
+  background: #dfe9ff;
+  transform: translateY(3px);
+}
+
+.redlaw-page .plus.prev:hover {
+  transform: translateY(-3px);
+}
+
+.redlaw-page .plus span {
+  width: 15px;
+  height: 15px;
+  display: block;
+  border-right: 4px solid currentColor;
+  border-bottom: 4px solid currentColor;
+  transform: translateY(-3px) rotate(45deg);
+}
+
+.redlaw-page .plus.prev span {
+  transform: translateY(3px) rotate(225deg);
+}
+
+.redlaw-page .chat-toggle {
+  position: fixed;
+  right: 26px;
+  bottom: 28px;
+  z-index: 35;
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--coral);
+  color: var(--white);
+  cursor: pointer;
+  box-shadow: 0 18px 46px rgba(7, 29, 73, .24);
+  transition: transform 240ms var(--ease), background 240ms var(--ease), box-shadow 240ms var(--ease);
+}
+
+.redlaw-page .chat-toggle:hover {
+  transform: translateY(-3px);
+  background: var(--coral-2);
+  box-shadow: 0 24px 56px rgba(7, 29, 73, .3);
+}
+
+.redlaw-page .chat-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.redlaw-page .chat-card {
+  position: fixed;
+  right: 26px;
+  bottom: 104px;
+  z-index: 35;
+  width: min(330px, calc(100vw - 40px));
+  overflow: hidden;
+  border: 2px solid var(--white);
+  border-radius: 28px;
+  background: var(--white);
+  box-shadow: 0 22px 54px rgba(7, 29, 73, .24);
+  transform: translate3d(0, 16px, 0) scale(.96);
+  transform-origin: right bottom;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 260ms var(--ease), opacity 260ms var(--ease);
+}
+
+.redlaw-page.chat-open .chat-card {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.redlaw-page .chat-head {
+  position: relative;
+  padding: 18px 54px 18px 22px;
+  background: var(--coral);
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.redlaw-page .chat-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.redlaw-page .chat-body {
+  padding: 14px 18px 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.redlaw-page .chat-body a {
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--coral);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.redlaw-page .chat-body a.primary {
+  background: var(--coral);
+  color: var(--white);
+}
+
+.redlaw-page .section { padding: 100px 0; background: var(--paper) !important; }
+.redlaw-page .section.alt { background: var(--soft) !important; }
+.redlaw-page .section.red { background: var(--coral) !important; color: var(--white); }
+
+.redlaw-page .section-head {
+  display: grid;
+  grid-template-columns: minmax(280px, .85fr) minmax(0, .8fr);
+  gap: 70px;
+  align-items: end;
+}
+
+.redlaw-page h2 {
+  max-width: 720px;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: clamp(42px, 5vw, 76px);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+}
+
+.redlaw-page .section-head p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.redlaw-page .red .section-head p { color: rgba(255,255,255,.86); }
+
+.redlaw-page .steps {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.redlaw-page .step {
+  min-height: 275px;
+  padding: 32px;
+  border-radius: 28px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 54px rgba(0,0,0,.04);
+}
+
+.redlaw-page .step strong {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: var(--white);
+  font-size: 16px;
+}
+
+.redlaw-page .step h3 {
+  margin-top: 54px;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.redlaw-page .step p {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.redlaw-page .proof-grid {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 24px;
+}
+
+.redlaw-page .proof-card {
+  padding: 38px;
+  border-radius: 32px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.redlaw-page .proof-card.dark {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.redlaw-page .proof-card h3 {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 38px;
+  line-height: 1.12;
+}
+
+.redlaw-page .proof-card p {
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+.redlaw-page .proof-card.dark p {
+  color: rgba(255,255,255,.72);
+}
+
+.redlaw-page .metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.redlaw-page .metric {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.08);
+}
+
+.redlaw-page .metric strong {
+  display: block;
+  color: var(--coral);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.redlaw-page .metric span {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255,255,255,.7);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.redlaw-page .case-grid {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.redlaw-page .case {
+  min-height: 340px;
+  padding: 26px;
+  display: grid;
+  align-content: end;
+  border-radius: 30px;
+  color: var(--white);
+  background:
+    linear-gradient(180deg, rgba(9,9,9,.08), rgba(9,9,9,.86)),
+    url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=84") center/cover;
+  overflow: hidden;
+}
+
+.redlaw-page .case:nth-child(2) {
+  background-image: linear-gradient(180deg, rgba(9,9,9,.08), rgba(9,9,9,.86)), url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=84");
+}
+
+.redlaw-page .case:nth-child(3) {
+  background-image: linear-gradient(180deg, rgba(9,9,9,.08), rgba(9,9,9,.86)), url("https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=84");
+}
+
+.redlaw-page .case h3 {
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 30px;
+  line-height: 1.12;
+}
+
+.redlaw-page .case p {
+  margin-top: 14px;
+  color: rgba(255,255,255,.78);
+  font-size: 14px;
+}
+
+.redlaw-page .form-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, .72fr) minmax(0, 1fr);
+  gap: 42px;
+  align-items: start;
+  overflow: hidden;
+  border-radius: 36px;
+  padding: 42px;
+  background:
+    linear-gradient(90deg, rgba(7, 29, 73, .96), rgba(7, 29, 73, .72)),
+    url("https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1400&q=84") center/cover;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 30px 72px rgba(4, 13, 32, .22);
+}
+
+.redlaw-page .form-copy {
+  padding: 38px;
+  border-radius: 32px;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.redlaw-page .form-copy p {
+  margin-top: 18px;
+  color: rgba(255,255,255,.82);
+}
+
+.redlaw-page .form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.redlaw-page .form input,
+.redlaw-page .form select,
+.redlaw-page .form textarea {
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 16px;
+  background: var(--white);
+  padding: 0 16px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+}
+
+.redlaw-page .form textarea {
+  grid-column: 1 / -1;
+  min-height: 150px;
+  padding-top: 16px;
+  resize: vertical;
+}
+
+.redlaw-page .footer {
+  padding: 62px 0;
+  background: var(--ink) !important;
+  color: rgba(255,255,255,.7);
+}
+
+.redlaw-page .footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 34px;
+}
+
+.redlaw-page .footer h3 {
+  color: var(--white);
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.redlaw-page .footer a,
+.redlaw-page .footer p {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,.62);
+  font-size: 13px;
+}
+
+.redlaw-page [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 720ms var(--ease), transform 720ms var(--ease);
+}
+
+.redlaw-page [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes redlawPulse {
+  0%, 100% { box-shadow: 0 20px 44px rgba(3, 13, 35, .2); }
+  50% { box-shadow: 0 26px 58px rgba(3, 13, 35, .32); }
+}
+
+@keyframes redlawPanelLight {
+  0%, 100% {
+    background-position: 130% 0, 50% 50%;
+    opacity: .38;
+  }
+  50% {
+    background-position: -30% 0, 50% 50%;
+    opacity: .58;
+  }
+}
+
+@keyframes redlawCardIdle {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.08); }
+}
+
+@keyframes redlawTextIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 980px) {
+  .redlaw-page .nav-links,
+  .redlaw-page .nav-actions .phone {
+    display: none;
+  }
+
+  .redlaw-page .nav {
+    grid-template-columns: minmax(160px, 1fr) auto;
+  }
+
+  .redlaw-page .nav-actions {
+    grid-column: 2;
+  }
+
+  .redlaw-page .hero,
+  .redlaw-page .section-head,
+  .redlaw-page .proof-grid,
+  .redlaw-page .form-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .redlaw-page .practice-panel {
+    margin-top: 0;
+    min-height: 600px;
+  }
+
+  .redlaw-page .practice-track {
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(280px, 76vw);
+    grid-auto-rows: auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    transform: none;
+  }
+
+  .redlaw-page .practice-card {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    scroll-snap-align: start;
+  }
+
+  .redlaw-page .practice-card.is-prev,
+  .redlaw-page .practice-card.is-next,
+  .redlaw-page .practice-card.is-active {
+    transform: none;
+    filter: none;
+  }
+
+  .redlaw-page .steps,
+  .redlaw-page .case-grid,
+  .redlaw-page .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .redlaw-page .wrap {
+    width: min(100% - 28px, 1280px);
+  }
+
+  .redlaw-page .nav {
+    min-height: 74px;
+  }
+
+  .redlaw-page .brand {
+    font-size: 38px;
+  }
+
+  .redlaw-page .nav-actions .light {
+    min-height: 46px;
+    padding-inline: 0;
+    font-size: 0;
+    border-radius: 50%;
+    width: 50px;
+  }
+
+  .redlaw-page .hero {
+    min-height: auto;
+    gap: 36px;
+  }
+
+  .redlaw-page .hero-copy {
+    text-align: center;
+    padding: 34px 0 48px;
+  }
+
+  .redlaw-page h1 {
+    font-size: clamp(38px, 11vw, 48px);
+  }
+
+  .redlaw-page .hero-actions {
+    justify-content: center;
+  }
+
+  .redlaw-page .practice-panel {
+    margin-inline: -14px;
+    border-radius: 8px;
+    padding: 28px 0 44px;
+  }
+
+  .redlaw-page .panel-top,
+  .redlaw-page .ghost-label,
+  .redlaw-page .plus {
+    display: none;
+  }
+
+  .redlaw-page .practice-rail {
+    height: auto;
+    margin-top: 36px;
+    overflow: visible;
+  }
+
+  .redlaw-page .practice-track {
+    position: relative;
+    inset: auto;
+    height: auto;
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    gap: 16px;
+    padding: 0 18px;
+  }
+
+  .redlaw-page .practice-card {
+    width: 100%;
+    min-height: 0;
+    padding: 36px 26px;
+    border-radius: 24px;
+  }
+
+  .redlaw-page .practice-card.dim {
+    background: rgba(7, 29, 73, .52);
+    opacity: 1;
+  }
+
+  .redlaw-page .practice-fade {
+    display: none;
+  }
+
+  .redlaw-page h2 {
+    font-size: clamp(34px, 10vw, 46px);
+  }
+
+  .redlaw-page .practice-card h2 {
+    font-size: clamp(30px, 7.4vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .redlaw-page .chat-toggle {
+    right: 16px;
+    bottom: 18px;
+  }
+
+  .redlaw-page .chat-card {
+    right: 14px;
+    bottom: 94px;
+    width: min(342px, calc(100vw - 28px));
+  }
+
+  .redlaw-page .section {
+    padding: 68px 0;
+  }
+
+  .redlaw-page .metrics,
+  .redlaw-page .form {
+    grid-template-columns: 1fr;
+  }
+
+  .redlaw-page .form-panel {
+    padding: 22px;
+  }
+}
+
+.redlaw-page,
+.redlaw-page * {
+  min-width: 0 !important;
+}
+
+.redlaw-page :is(h1, h2, h3, p, a, span, strong, small, li, label, input, textarea, select) {
+  max-height: none !important;
+  height: auto;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+.redlaw-page :is(h1, h2, h3) {
+  line-height: 1.18 !important;
+  padding-block: .05em .12em;
+  text-wrap: balance;
+}
+
+.redlaw-page p {
+  line-height: 1.62 !important;
+}
+
+.redlaw-page .btn {
+  line-height: 1.2 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .redlaw-page *,
+  .redlaw-page *::before,
+  .redlaw-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .redlaw-page [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+
+<div class="redlaw-page">
+  <nav class="wrap nav" aria-label="Primary navigation">
+    <a class="brand" href="#top">Arden Law</a>
+    <div class="nav-links">
+      <a href="#what">What We Do</a>
+      <a href="#about">About Us</a>
+      <a href="#cases">Cases</a>
+      <a href="#contact">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn light" href="#contact"><span class="dot"><svg viewBox="0 0 24 24" fill="none"><path d="M7 8h10M7 12h7M5 19l3-3h9a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Request a Consultation</a>
+      <a class="btn phone" href="tel:+10000000000">(000) 000-0000</a>
+    </div>
+  </nav>
+
+  <section class="wrap hero" id="top">
+    <div class="hero-copy" data-reveal>
+      <h1>We protect your voice when work becomes unfair.</h1>
+      <p>If your employer crossed a line, you deserve clear answers before deadlines, fear, or paperwork make the decision harder.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact"><span class="dot"><svg viewBox="0 0 24 24" fill="none"><path d="M7 8h10M7 12h7M5 19l3-3h9a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>Request a Consultation</a>
+      </div>
+    </div>
+
+    <aside class="practice-panel" id="what" data-reveal>
+      <div class="panel-top">
+        <a class="btn light" href="#contact">Request a Consultation</a>
+        <a class="btn phone" href="tel:+10000000000">(000) 000-0000</a>
+      </div>
+      <div class="practice-rail">
+        <div class="ghost-label">Harassment</div>
+        <div class="practice-track">
+          <article class="practice-card is-active" data-title="First Review"><h2>Not Sure?</h2><p>If something at work feels wrong, start with a confidential review before assuming nothing can be done.</p></article>
+          <article class="practice-card dim" data-title="Termination"><h2>Wrongful Termination</h2><p>Lost your job after reporting a problem, requesting leave, or refusing unfair treatment? We help you understand whether your rights were violated.</p></article>
+          <article class="practice-card dim" data-title="Retaliation"><h2>Workplace Retaliation</h2><p>When speaking up leads to demotion, punishment, schedule changes, or pressure to quit, the timeline matters.</p></article>
+          <article class="practice-card dim" data-title="Wages"><h2>Pay &amp; Overtime</h2><p>Unpaid wages, missed breaks, and misclassification can create real financial harm. We help map what you may be owed.</p></article>
+        </div>
+        <button class="plus prev" type="button" aria-label="Show previous practice area"><span aria-hidden="true"></span></button>
+        <button class="plus next" type="button" aria-label="Show next practice area"><span aria-hidden="true"></span></button>
+        <div class="practice-fade"></div>
+      </div>
+    </aside>
+  </section>
+
+  <button class="chat-toggle" type="button" aria-expanded="false" aria-controls="arden-chat-panel" aria-label="Open consultation options">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 8h10M7 12h7M5 19l3-3h9a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+
+  <div class="chat-card" id="arden-chat-panel" aria-label="Consultation options">
+    <div class="chat-head">Hello. Welcome to Arden Law. Tell us what happened and we will help you find the right next step.<button class="chat-close" type="button" aria-label="Close consultation options">&times;</button></div>
+    <div class="chat-body">
+      <a class="primary" href="#contact">New Case</a>
+      <a href="#contact">Existing Case</a>
+      <a href="#contact">Other</a>
+    </div>
+  </div>
+
+  <section class="section alt" id="about">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Think this applies to you? We can help in three clear steps.</h2>
+        <p>You do not need to know the legal name of what happened. You only need to share the facts, timing, and documents so an attorney can explain the options.</p>
+      </div>
+      <div class="steps">
+        <article class="step" data-reveal><strong>1</strong><h3>Share the story</h3><p>Tell us what happened at work, who was involved, and what changed afterward.</p></article>
+        <article class="step" data-reveal><strong>2</strong><h3>Review the proof</h3><p>We look at emails, texts, pay records, write-ups, and timelines that may matter.</p></article>
+        <article class="step" data-reveal><strong>3</strong><h3>Know the path</h3><p>You leave with plain-English guidance on risks, deadlines, and possible next steps.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Worker rights cases need speed, clarity, and careful records.</h2>
+        <p>Every case begins with facts. We organize what happened, identify the legal questions, and explain what can realistically be pursued.</p>
+      </div>
+      <div class="proof-grid">
+        <article class="proof-card dark" data-reveal>
+          <h3>Focused on employment matters only.</h3>
+          <p>Our fictional Arden Law concept is built around workers who need answers about termination, retaliation, harassment, pay, leave, and discrimination.</p>
+          <div class="metrics">
+            <div class="metric"><strong>24h</strong><span>response target</span></div>
+            <div class="metric"><strong>0$</strong><span>consultation fee</span></div>
+            <div class="metric"><strong>1:1</strong><span>case review</span></div>
+          </div>
+        </article>
+        <article class="proof-card" data-reveal>
+          <h3>No upfront confusion.</h3>
+          <p>The first conversation is not a lecture. It is a review of what happened, what documents matter, and whether a legal path may exist.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="cases">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Common situations people bring to us.</h2>
+        <p>These examples are not legal advice or promised outcomes. They show the kinds of workplace questions a consultation can help clarify.</p>
+      </div>
+      <div class="case-grid">
+        <article class="case" data-reveal><h3>Terminated after reporting misconduct</h3><p>Clarifying whether timing, documents, and witnesses support a retaliation review.</p></article>
+        <article class="case" data-reveal><h3>Pay records do not match hours worked</h3><p>Reviewing schedules, wage statements, breaks, and classification questions.</p></article>
+        <article class="case" data-reveal><h3>Harassment complaints ignored</h3><p>Mapping reports, employer response, repeated conduct, and available documentation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section red" id="contact">
+    <div class="wrap form-panel">
+      <div class="form-copy" data-reveal>
+        <h2>Ready to understand your rights?</h2>
+        <p>Send a short summary and we will help you identify whether a consultation makes sense. This concept page is a design demo and not legal advice.</p>
+      </div>
+      <form class="form" data-reveal>
+        <input type="text" placeholder="Full name" aria-label="Full name">
+        <input type="tel" placeholder="Phone number" aria-label="Phone number">
+        <input type="email" placeholder="Email address" aria-label="Email address">
+        <select aria-label="Workplace issue">
+          <option>Wrongful termination</option>
+          <option>Retaliation</option>
+          <option>Harassment or discrimination</option>
+          <option>Pay or overtime issue</option>
+          <option>Not sure yet</option>
+        </select>
+        <textarea placeholder="Briefly describe what happened" aria-label="Briefly describe what happened"></textarea>
+        <button class="btn light" type="submit">Request a Consultation</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div><h3>Arden Law</h3><p>Employment-rights law firm concept inspired by a premium split-layout legal website reference.</p></div>
+      <div><h3>Practice</h3><a href="#what">Wrongful termination</a><a href="#what">Retaliation</a><a href="#what">Pay issues</a></div>
+      <div><h3>Firm</h3><a href="#about">About</a><a href="#cases">Cases</a><a href="#contact">Consultation</a></div>
+      <div><h3>Reference</h3><a href="https://d.law/">D.Law reference</a><a href="https://www.awwwards.com/sites/d-law">Awwwards listing</a></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector(".redlaw-page");
+  if (!page) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cards = Array.prototype.slice.call(page.querySelectorAll(".practice-card"));
+  var panel = page.querySelector(".practice-panel");
+  var ghost = page.querySelector(".ghost-label");
+  var prevPractice = page.querySelector(".plus.prev");
+  var nextPracticeButton = page.querySelector(".plus.next");
+  var chatToggle = page.querySelector(".chat-toggle");
+  var chatClose = page.querySelector(".chat-close");
+  var activeIndex = 0;
+  var timer;
+  function setPractice(index) {
+    if (!cards.length || !panel) return;
+    activeIndex = (index + cards.length) % cards.length;
+    cards.forEach(function (card, cardIndex) {
+      var active = cardIndex === activeIndex;
+      var prev = cardIndex === (activeIndex - 1 + cards.length) % cards.length;
+      var next = cardIndex === (activeIndex + 1) % cards.length;
+      card.classList.toggle("is-active", active);
+      card.classList.toggle("is-prev", prev);
+      card.classList.toggle("is-next", next);
+      card.classList.toggle("dim", !active);
+    });
+    if (ghost) {
+      ghost.style.opacity = "0";
+      ghost.style.transform = "translateY(-10px)";
+      window.setTimeout(function () {
+        ghost.textContent = cards[activeIndex].getAttribute("data-title") || "";
+        ghost.style.opacity = "";
+        ghost.style.transform = "";
+      }, 160);
+    }
+  }
+  function nextPractice() { setPractice(activeIndex + 1); }
+  function previousPractice() { setPractice(activeIndex - 1); }
+  function restartTimer() {
+    if (timer) window.clearInterval(timer);
+    if (!reduce) timer = window.setInterval(nextPractice, 4600);
+  }
+  setPractice(0);
+  if (nextPracticeButton) {
+    nextPracticeButton.addEventListener("click", function () {
+      nextPractice();
+      restartTimer();
+    });
+  }
+  if (prevPractice) {
+    prevPractice.addEventListener("click", function () {
+      previousPractice();
+      restartTimer();
+    });
+  }
+  if (!reduce && cards.length) timer = window.setInterval(nextPractice, 4600);
+  if (chatToggle) {
+    chatToggle.addEventListener("click", function () {
+      var open = !page.classList.contains("chat-open");
+      page.classList.toggle("chat-open", open);
+      chatToggle.setAttribute("aria-expanded", String(open));
+      chatToggle.setAttribute("aria-label", open ? "Close consultation options" : "Open consultation options");
+    });
+  }
+  if (chatClose) {
+    chatClose.addEventListener("click", function () {
+      page.classList.remove("chat-open");
+      if (chatToggle) {
+        chatToggle.setAttribute("aria-expanded", "false");
+        chatToggle.setAttribute("aria-label", "Open consultation options");
+        chatToggle.focus();
+      }
+    });
+  }
+  page.querySelectorAll(".chat-body a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      page.classList.remove("chat-open");
+      if (chatToggle) chatToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+  if (!reduce && "IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    page.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+      item.style.transitionDelay = Math.min(index * 50, 260) + "ms";
+      observer.observe(item);
+    });
+  } else {
+    page.querySelectorAll("[data-reveal]").forEach(function (item) { item.classList.add("is-visible"); });
+  }
+})();
+</script>

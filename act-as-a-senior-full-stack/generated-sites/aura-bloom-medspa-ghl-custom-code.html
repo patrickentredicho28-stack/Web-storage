@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aura & Bloom Med Spa</title>
+  <meta name="description" content="Premium med spa funnel built for consultations, treatment discovery, and confident booking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+
+.aura-medspa {
+  
+  *, *::before, *::after { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  button, input, select, textarea { font: inherit; }
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
+
+  --ink: #26231f;
+  --muted: #70695f;
+  --cream: #f6efe4;
+  --paper: #fffaf2;
+  --sage: #8c9a80;
+  --moss: #3d4a35;
+  --clay: #c9856f;
+  --line: rgba(38, 35, 31, .15);
+  color: var(--ink);
+  background: var(--cream);
+  font-family: Manrope, sans-serif;
+  overflow: hidden;
+}
+.aura-medspa .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.aura-medspa .nav { height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 22px; border-bottom: 1px solid var(--line); }
+.aura-medspa .brand { font-family: "Instrument Serif", serif; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: .01em; }
+.aura-medspa .links { display: flex; gap: 28px; font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.aura-medspa .btn { border: 1px solid var(--ink); border-radius: 999px; padding: 14px 22px; background: var(--ink); color: var(--paper); font-weight: 800; display: inline-flex; align-items: center; gap: 10px; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; cursor: pointer; white-space: nowrap; }
+.aura-medspa .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 45px rgba(38,35,31,.24); }
+.aura-medspa .btn.ghost { background: transparent; color: var(--ink); }
+.aura-medspa .hero { min-height: 780px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 54px; align-items: center; padding: 54px 0 80px; }
+.aura-medspa .eyebrow { text-transform: uppercase; letter-spacing: .18em; color: var(--moss); font-weight: 800; font-size: .75rem; }
+.aura-medspa h1 { font-family: "Instrument Serif", serif; font-weight: 400; font-size: clamp(4.1rem, 8.4vw, 9.6rem); line-height: .82; letter-spacing: -.04em; margin: 22px 0; max-width: 820px; }
+.aura-medspa .lead { font-size: clamp(1.05rem, 1.7vw, 1.35rem); color: var(--muted); line-height: 1.7; max-width: 660px; }
+.aura-medspa .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.aura-medspa .hero-art { position: relative; min-height: 610px; }
+.aura-medspa .oval { position: absolute; inset: 0 4% 4% 10%; border-radius: 48% 48% 8px 8px; overflow: hidden; box-shadow: 0 35px 90px rgba(61,74,53,.23); }
+.aura-medspa .oval img { width: 100%; height: 100%; object-fit: cover; }
+.aura-medspa .floating { position: absolute; left: 0; bottom: 44px; width: min(340px, 75%); background: rgba(255,250,242,.92); border: 1px solid var(--line); padding: 24px; box-shadow: 0 25px 80px rgba(38,35,31,.16); backdrop-filter: blur(16px); }
+.aura-medspa .floating strong { display: block; font-size: 2.3rem; color: var(--clay); }
+.aura-medspa .treatments { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.aura-medspa .split { display: grid; grid-template-columns: .8fr 1.2fr; gap: 54px; padding: 96px 0; align-items: start; }
+.aura-medspa h2 { font-family: "Instrument Serif", serif; font-size: clamp(3rem, 5vw, 6.4rem); line-height: .9; font-weight: 400; margin: 12px 0 20px; }
+.aura-medspa .service-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); }
+.aura-medspa .service { min-height: 250px; padding: 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(140deg, rgba(255,250,242,.85), rgba(246,239,228,.7)); transition: transform .28s ease, background .28s ease, box-shadow .28s ease; }
+.aura-medspa .service:nth-child(even) { border-right: 0; }
+.aura-medspa .service:nth-last-child(-n+2) { border-bottom: 0; }
+.aura-medspa .service:hover { transform: translateY(-8px); background: var(--paper); box-shadow: 0 22px 70px rgba(38,35,31,.13); z-index: 1; }
+.aura-medspa .num { color: var(--clay); font-weight: 900; margin-bottom: 32px; }
+.aura-medspa .service h3 { margin: 0 0 12px; font-size: 1.15rem; text-transform: uppercase; letter-spacing: .08em; }
+.aura-medspa .service p { color: var(--muted); line-height: 1.65; margin: 0; }
+.aura-medspa .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--moss); color: var(--paper); }
+.aura-medspa .feature img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; }
+.aura-medspa .feature-copy { padding: clamp(44px, 7vw, 94px); display: flex; flex-direction: column; justify-content: center; }
+.aura-medspa .feature-copy p { color: rgba(255,250,242,.76); line-height: 1.75; font-size: 1.1rem; }
+.aura-medspa .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 38px; }
+.aura-medspa .step { border-top: 1px solid rgba(255,250,242,.32); padding-top: 22px; }
+.aura-medspa .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper); }
+.aura-medspa .proof-strip div { padding: 30px; border-right: 1px solid var(--line); }
+.aura-medspa .proof-strip div:last-child { border-right: 0; }
+.aura-medspa .proof-strip strong { display: block; font-size: 2.4rem; color: var(--clay); }
+.aura-medspa .framework { padding: 96px 0; }
+.aura-medspa .two-col { display: grid; grid-template-columns: .9fr 1.1fr; gap: 42px; align-items: center; }
+.aura-medspa .soft-panel { background: var(--paper); border: 1px solid var(--line); padding: clamp(28px, 4vw, 48px); box-shadow: 0 24px 70px rgba(38,35,31,.08); }
+.aura-medspa .compare { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); }
+.aura-medspa .compare article { padding: 32px; background: var(--paper); }
+.aura-medspa .compare article:first-child { background: #efe5da; border-right: 1px solid var(--line); }
+.aura-medspa .compare h3, .aura-medspa .offer-card h3, .aura-medspa .faq h3 { margin: 0 0 12px; font-size: 1.18rem; text-transform: uppercase; letter-spacing: .08em; }
+.aura-medspa .compare p, .aura-medspa .offer-card p, .aura-medspa .faq p { color: var(--muted); line-height: 1.65; margin: 0; }
+.aura-medspa .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+.aura-medspa .offer-card { background: var(--paper); border: 1px solid var(--line); padding: 28px; color: var(--ink); transition: transform .25s ease, box-shadow .25s ease; }
+.aura-medspa .offer-card:hover { transform: translateY(-7px); box-shadow: 0 22px 60px rgba(38,35,31,.12); }
+.aura-medspa .authority { background: var(--moss); color: var(--paper); }
+.aura-medspa .authority .soft-panel { color: var(--ink); }
+.aura-medspa .authority .soft-panel .eyebrow { color: var(--moss); }
+.aura-medspa .authority .soft-panel h2 { color: var(--ink); }
+.aura-medspa .authority .soft-panel .lead { color: var(--muted); }
+.aura-medspa .authority .soft-panel > p { color: var(--muted); }
+.aura-medspa .authority .offer-card p { color: var(--muted); }
+.aura-medspa .authority img { width: 100%; min-height: 520px; height: 100%; object-fit: cover; }
+.aura-medspa .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 30px; }
+.aura-medspa .faq { background: var(--paper); border: 1px solid var(--line); padding: 28px; }
+.aura-medspa .booking { padding: 100px 0; display: grid; grid-template-columns: 1fr .85fr; gap: 42px; align-items: stretch; }
+.aura-medspa form { background: var(--paper); border: 1px solid var(--line); padding: 32px; display: grid; gap: 14px; box-shadow: 0 25px 80px rgba(38,35,31,.09); }
+.aura-medspa input, .aura-medspa select, .aura-medspa textarea { width: 100%; border: 1px solid var(--line); background: #fffdf8; padding: 17px 18px; border-radius: 0; color: var(--ink); min-width: 0; }
+.aura-medspa textarea { min-height: 120px; resize: vertical; }
+.aura-medspa .footer { padding: 34px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; color: var(--muted); }
+.aura-medspa .service-grid,
+.aura-medspa .steps,
+.aura-medspa .proof-strip,
+.aura-medspa .offer-grid,
+.aura-medspa .faq-grid,
+.aura-medspa .compare {
+  align-items: stretch;
+}
+.aura-medspa .service,
+.aura-medspa .step,
+.aura-medspa .proof-strip div,
+.aura-medspa .compare article,
+.aura-medspa .offer-card,
+.aura-medspa .faq {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.aura-medspa .service { padding: clamp(30px, 3.2vw, 44px); min-height: 285px; }
+.aura-medspa .service h3,
+.aura-medspa .offer-card h3,
+.aura-medspa .faq h3,
+.aura-medspa .compare h3 {
+  line-height: 1.28;
+}
+.aura-medspa .service p,
+.aura-medspa .offer-card p,
+.aura-medspa .faq p,
+.aura-medspa .compare p {
+  line-height: 1.72;
+}
+.aura-medspa .offer-card,
+.aura-medspa .faq,
+.aura-medspa .compare article {
+  padding: clamp(30px, 3vw, 42px);
+  min-height: 210px;
+}
+.aura-medspa .proof-strip div { min-height: 150px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.aura-medspa .proof-strip span { line-height: 1.45; color: var(--muted); }
+@media (max-width: 900px) {
+  .aura-medspa .links { display: none; }
+  .aura-medspa .hero, .aura-medspa .split, .aura-medspa .feature, .aura-medspa .booking, .aura-medspa .two-col { grid-template-columns: 1fr; }
+  .aura-medspa .hero { min-height: 0; padding-top: 34px; }
+  .aura-medspa .hero-art { min-height: 460px; }
+  .aura-medspa h1 { font-size: clamp(4rem, 20vw, 6.4rem); }
+  .aura-medspa .service-grid, .aura-medspa .steps { grid-template-columns: 1fr; }
+  .aura-medspa .proof-strip, .aura-medspa .offer-grid, .aura-medspa .faq-grid, .aura-medspa .compare { grid-template-columns: 1fr; }
+  .aura-medspa .proof-strip div, .aura-medspa .compare article:first-child { border-right: 0; border-bottom: 1px solid var(--line); }
+  .aura-medspa .service, .aura-medspa .service:nth-child(even), .aura-medspa .service:nth-last-child(-n+2) { border-right: 0; border-bottom: 1px solid var(--line); }
+  .aura-medspa .service, .aura-medspa .offer-card, .aura-medspa .faq, .aura-medspa .compare article { min-height: auto; padding: 30px; }
+  .aura-medspa .soft-panel { padding: 30px; }
+  .aura-medspa .footer { flex-direction: column; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="aura-medspa">
+
+    <header class="wrap nav">
+      <a class="brand" href="#">aura & bloom</a>
+      <nav class="links" aria-label="Primary"><a href="#treatments">Treatments</a><a href="#approach">Approach</a><a href="#visit">Visit</a></nav>
+      <button class="btn" data-scroll="#visit">Book consult</button>
+    </header>
+    <main>
+      <section class="wrap hero">
+        <div class="reveal">
+          <p class="eyebrow">Medical aesthetics, softened</p>
+          <h1>Care that makes your skin feel quietly expensive.</h1>
+          <p class="lead">A consult-first med spa for people who want natural-looking skin, measured recommendations, and licensed providers who explain every step before treatment.</p>
+          <div class="hero-actions"><button class="btn" data-scroll="#visit">Reserve a skin consult</button><button class="btn ghost" data-scroll="#treatments">Explore treatments</button></div>
+        </div>
+        <div class="hero-art reveal">
+          <div class="oval"><img src="assets/medspa/medspa-luxury-room.jpg" alt="Calm med spa treatment room with warm neutral design"></div>
+          <div class="floating"><strong>45 min</strong><span>Goal mapping before any injectable, laser, or facial plan.</span></div>
+        </div>
+      </section>
+      <section class="treatments" id="treatments">
+        <div class="wrap split">
+          <div class="reveal"><p class="eyebrow">Treatment menu</p><h2>Choose the outcome, not a random procedure.</h2><p class="lead">Each visit begins with your skin history, event timeline, comfort level, and maintenance preference.</p></div>
+          <div class="service-grid reveal">
+            <article class="service"><div class="num">01</div><h3>Skin refresh</h3><p>Hydrafacial-style cleansing, exfoliation, and hydration for brighter texture before photos, events, or everyday confidence.</p></article>
+            <article class="service"><div class="num">02</div><h3>Wrinkle smoothing</h3><p>Conservative wrinkle relaxer planning for softer movement without erasing your expression.</p></article>
+            <article class="service"><div class="num">03</div><h3>Tone repair</h3><p>Laser and peel guidance for sun spots, uneven tone, and texture concerns with realistic downtime notes.</p></article>
+            <article class="service"><div class="num">04</div><h3>Volume balance</h3><p>Filler conversations that start with facial proportion, not product volume, so the result stays believable.</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="feature" id="approach">
+        <img src="assets/medspa/medspa-facial.jpg" alt="Aesthetic facial treatment with clean clinical technique">
+        <div class="feature-copy reveal"><p class="eyebrow">Why it feels different</p><h2>Less pressure. More precision.</h2><p>You leave with a written treatment map, provider notes, prep instructions, and honest timing. If a treatment is not right for your face, budget, or schedule, we say that clearly.</p><div class="steps"><div class="step"><strong>Listen</strong><p>Goals, history, events.</p></div><div class="step"><strong>Map</strong><p>Options and timing.</p></div><div class="step"><strong>Treat</strong><p>Only when aligned.</p></div></div></div>
+      </section>
+      <section class="proof-strip reveal" aria-label="Trust proof">
+        <div><strong>4.9</strong><span>Patients mention calm, clear guidance</span></div><div><strong>45m</strong><span>Time reserved for your first skin map</span></div><div><strong>0</strong><span>Same-day treatment pressure required</span></div><div><strong>1</strong><span>Plan matched to your face and timeline</span></div>
+      </section>
+      <section class="wrap framework">
+        <div class="two-col reveal"><div><p class="eyebrow">A better first visit</p><h2>Stop buying treatments before you understand the plan.</h2><p class="lead">Most visitors arrive comparing procedures, prices, and before-and-after photos. The smarter path is a mapped sequence that protects your skin, timing, and natural expression.</p></div><div class="compare"><article><h3>Menu-first booking</h3><p>Pick a service, hope it fits your skin, then discover downtime, cost, and maintenance after the appointment.</p></article><article><h3>Plan-first care</h3><p>Start with a provider-led consult, match treatment to your goal, and leave with a realistic route before anything begins.</p></article></div></div>
+      </section>
+      <section class="authority framework">
+        <div class="wrap two-col"><img class="reveal" src="assets/medspa/medspa-treatment.jpg" alt="Provider-led aesthetic consultation"><div class="soft-panel reveal"><p class="eyebrow">Provider-led from the start</p><h2>Licensed care with a natural-finish bias.</h2><p class="lead">Your plan considers skin sensitivity, medication conflicts, prior treatments, facial movement, and event timing. If a treatment should wait, we say so.</p><div class="offer-grid"><article class="offer-card"><h3>Fit check</h3><p>We check fit before recommending lasers, peels, injectables, or advanced facials.</p></article><article class="offer-card"><h3>Treatment order</h3><p>You see which treatments come first, what to avoid, and when to schedule.</p></article><article class="offer-card"><h3>Balanced result</h3><p>Every option is filtered through your expression, features, and maintenance comfort.</p></article></div></div></div>
+      </section>
+      <section class="wrap framework">
+        <div class="reveal"><p class="eyebrow">Start with clarity</p><h2>Start with a skin strategy consult, then choose with confidence.</h2><p class="lead">Your first visit includes goal mapping, treatment fit, downtime notes, maintenance expectations, and a simple next-step recommendation.</p></div><div class="offer-grid"><article class="offer-card reveal"><h3>Skin map</h3><p>Skin and goal review, provider recommendation, and a written treatment route.</p></article><article class="offer-card reveal"><h3>Decide after the plan</h3><p>No obligation to treat on the same day. Choose after you understand the path.</p></article><article class="offer-card reveal"><h3>Reserved consult time</h3><p>Consult spots are held weekly so every first visit gets enough provider time.</p></article></div>
+      </section>
+      <section class="wrap framework">
+        <div class="reveal"><p class="eyebrow">Before you book</p><h2>Clear answers before you choose a treatment.</h2></div><div class="faq-grid"><article class="faq reveal"><h3>Do I need to know the treatment?</h3><p>No. Tell us the outcome you want. We will recommend the right path after screening.</p></article><article class="faq reveal"><h3>Can I avoid looking overdone?</h3><p>Yes. The plan is built around natural movement, facial balance, and conservative progression.</p></article><article class="faq reveal"><h3>What if I have an event soon?</h3><p>We map timing first so you avoid treatments with the wrong downtime window.</p></article><article class="faq reveal"><h3>Will I be pushed to treat?</h3><p>No. You can leave with a plan and book later when the timing feels right.</p></article></div>
+      </section>
+      <section class="wrap booking" id="visit">
+        <div class="reveal"><p class="eyebrow">Begin here</p><h2>Your first visit should feel informed before it feels committed.</h2><p class="lead">Request a consultation and we will help you understand what is possible, what is worth waiting on, and what plan fits your natural features.</p></div>
+        <form class="reveal"><input aria-label="First name" placeholder="First name"><input aria-label="Email" placeholder="Email address"><select aria-label="Treatment interest"><option>Treatment interest</option><option>Skin refresh</option><option>Wrinkle smoothing</option><option>Tone repair</option><option>Volume balance</option></select><textarea aria-label="Goals" placeholder="What would you like to improve?"></textarea><button class="btn" type="button">Request consultation</button></form>
+      </section>
+    </main>
+    <footer class="wrap footer"><span>aura & bloom med spa</span><span>Consult-first aesthetics. Natural-looking plans. Licensed care.</span></footer>
+  </div>
+  <script>
+
+  (() => {
+    const root = document.currentScript.previousElementSibling;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+      root.querySelectorAll(".reveal").forEach((el, index) => {
+        el.style.transitionDelay = Math.min(index * 45, 260) + "ms";
+        io.observe(el);
+      });
+    } else {
+      root.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+    }
+    root.querySelectorAll("[data-scroll]").forEach((button) => {
+      button.addEventListener("click", () => root.querySelector(button.dataset.scroll)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }));
+    });
+  })();
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solace Aesthetics Med Spa</title>
+  <meta name="description" content="A Revive-inspired med spa funnel with treatment finder, locations, reviews, promotions, and consultation CTAs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .solace-medspa {
+      --cream: #fbf6ec;
+      --paper: #fffdf8;
+      --ink: #153832;
+      --pine: #0d4b42;
+      --mint: #d8f1e9;
+      --sea: #71beb0;
+      --gold: #d7a84d;
+      --clay: #eecdbf;
+      --rose: #f8e3dc;
+      --muted: #60746e;
+      --line: rgba(21, 56, 50, .16);
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Manrope, sans-serif;
+      overflow: hidden;
+    }
+    .solace-medspa *, .solace-medspa *::before, .solace-medspa *::after { box-sizing: border-box; }
+    .solace-medspa a { color: inherit; text-decoration: none; }
+    .solace-medspa img { display: block; max-width: 100%; height: auto; }
+    .solace-medspa button, .solace-medspa input, .solace-medspa select, .solace-medspa textarea { font: inherit; }
+    .solace-medspa .wrap { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+    .solace-medspa .announce { background: var(--pine); color: var(--paper); font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .solace-medspa .announce .wrap { min-height: 38px; display: flex; justify-content: center; align-items: center; text-align: center; }
+    .solace-medspa .nav { position: sticky; top: 0; z-index: 20; background: rgba(251,246,236,.92); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
+    .solace-medspa .nav-inner { min-height: 82px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+    .solace-medspa .left-links, .solace-medspa .right-links { display: flex; align-items: center; gap: 22px; font-size: .82rem; font-weight: 800; color: var(--pine); }
+    .solace-medspa .right-links { justify-content: flex-end; }
+    .solace-medspa .brand { font-family: "Playfair Display", serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 700; letter-spacing: -.05em; white-space: nowrap; }
+    .solace-medspa .btn { border: 1px solid var(--pine); background: var(--pine); color: var(--paper); padding: 14px 22px; border-radius: 999px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; white-space: nowrap; transition: transform .24s ease, box-shadow .24s ease, background .24s ease; }
+    .solace-medspa .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(13, 75, 66, .24); }
+    .solace-medspa .btn.alt { background: var(--gold); border-color: var(--gold); color: #1d2d26; }
+    .solace-medspa .btn.light { background: var(--paper); color: var(--pine); }
+    .solace-medspa .hero { background: var(--mint); position: relative; overflow: hidden; }
+    .solace-medspa .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 8% 20%, rgba(255,255,255,.7), transparent 27%), radial-gradient(circle at 86% 18%, rgba(215,168,77,.26), transparent 24%); pointer-events: none; }
+    .solace-medspa .hero-grid { min-height: 705px; display: grid; grid-template-columns: .95fr 1.05fr; gap: 36px; align-items: center; position: relative; z-index: 1; }
+    .solace-medspa .eyebrow { color: var(--pine); font-size: .76rem; text-transform: uppercase; letter-spacing: .18em; font-weight: 900; margin: 0 0 18px; }
+    .solace-medspa h1 { font-family: "Playfair Display", serif; font-size: clamp(4.4rem, 8vw, 8.8rem); line-height: .86; letter-spacing: -.07em; margin: 0 0 24px; max-width: 780px; }
+    .solace-medspa .lead { color: var(--muted); line-height: 1.75; font-size: 1.1rem; max-width: 650px; margin: 0; }
+    .solace-medspa .actions { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 32px; }
+    .solace-medspa .review-proof { margin-top: 34px; display: flex; align-items: center; gap: 16px; color: var(--pine); font-weight: 800; }
+    .solace-medspa .stars { color: var(--gold); letter-spacing: .08em; }
+    .solace-medspa .hero-media { position: relative; align-self: stretch; min-height: 620px; display: grid; align-items: end; }
+    .solace-medspa .hero-media img { width: 100%; height: 92%; object-fit: cover; object-position: center; border-radius: 0 0 42% 42%; align-self: end; box-shadow: 0 30px 90px rgba(21,56,50,.2); }
+    .solace-medspa .offer-card { position: absolute; left: -26px; bottom: 58px; width: min(310px, 72%); background: var(--paper); border: 1px solid var(--line); padding: 24px; box-shadow: 0 24px 60px rgba(21,56,50,.18); }
+    .solace-medspa .offer-card strong { display: block; font-family: "Playfair Display", serif; font-size: 2.7rem; line-height: .9; letter-spacing: -.05em; color: var(--pine); margin-bottom: 10px; }
+    .solace-medspa .offer-card p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .solace-medspa .finder { background: var(--paper); border-bottom: 1px solid var(--line); }
+    .solace-medspa .finder-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: 36px; align-items: center; padding: 54px 0; }
+    .solace-medspa h2 { font-family: "Playfair Display", serif; font-size: clamp(3rem, 5.8vw, 6.4rem); line-height: .92; letter-spacing: -.06em; margin: 0; }
+    .solace-medspa .concerns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .solace-medspa .concern { border: 1px solid var(--line); background: var(--cream); color: var(--pine); border-radius: 999px; padding: 18px 22px; font-weight: 900; text-align: left; cursor: pointer; transition: transform .24s ease, background .24s ease, box-shadow .24s ease; }
+    .solace-medspa .concern:hover { transform: translateY(-3px); background: var(--mint); box-shadow: 0 16px 40px rgba(21,56,50,.12); }
+    .solace-medspa .section { padding: 92px 0; }
+    .solace-medspa .section-head { display: grid; grid-template-columns: .82fr 1fr; gap: 44px; align-items: end; margin-bottom: 34px; }
+    .solace-medspa .section-head .lead { max-width: 560px; }
+    .solace-medspa .feature { display: grid; grid-template-columns: 1.1fr .9fr; background: var(--pine); color: var(--paper); }
+    .solace-medspa .feature img { width: 100%; height: 100%; min-height: 520px; object-fit: cover; }
+    .solace-medspa .feature-copy { padding: clamp(38px, 6vw, 86px); display: flex; flex-direction: column; justify-content: center; }
+    .solace-medspa .feature-copy .eyebrow { color: var(--mint); }
+    .solace-medspa .feature-copy .lead { color: rgba(255,255,255,.76); }
+    .solace-medspa .service-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .solace-medspa .mini { border: 1px solid rgba(255,255,255,.18); padding: 18px; min-height: 132px; background: rgba(255,255,255,.07); transition: transform .24s ease, background .24s ease; }
+    .solace-medspa .mini:hover { transform: translateY(-6px); background: rgba(255,255,255,.12); }
+    .solace-medspa .locations { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .solace-medspa .location { background: var(--paper); border: 1px solid var(--line); overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+    .solace-medspa .location:hover { transform: translateY(-8px); box-shadow: 0 24px 70px rgba(21,56,50,.13); }
+    .solace-medspa .location img { width: 100%; height: 205px; object-fit: cover; }
+    .solace-medspa .location div { padding: 22px; }
+    .solace-medspa .location h3, .solace-medspa .review h3 { margin: 0 0 8px; font-size: 1.18rem; }
+    .solace-medspa .location p, .solace-medspa .review p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .solace-medspa .reviews { background: var(--rose); }
+    .solace-medspa .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .solace-medspa .review { background: var(--paper); border: 1px solid rgba(21,56,50,.12); padding: 28px; min-height: 260px; }
+    .solace-medspa .top-treatments { display: flex; flex-wrap: wrap; gap: 12px; }
+    .solace-medspa .chip { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 13px 18px; color: var(--pine); font-weight: 900; transition: transform .22s ease, background .22s ease; }
+    .solace-medspa .chip:hover { transform: translateY(-3px); background: var(--mint); }
+    .solace-medspa .promo { background: var(--pine); color: var(--paper); }
+    .solace-medspa .promo-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 42px; align-items: center; }
+    .solace-medspa .promo img { width: 100%; height: 520px; object-fit: cover; box-shadow: 0 28px 80px rgba(0,0,0,.24); }
+    .solace-medspa .promo .lead { color: rgba(255,255,255,.75); }
+    .solace-medspa .consult { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: stretch; }
+    .solace-medspa .consult-panel { position: relative; min-height: 620px; overflow: hidden; background: var(--mint); }
+    .solace-medspa .consult-panel img { width: 100%; height: 100%; object-fit: cover; }
+    .solace-medspa .consult-copy { position: absolute; inset: auto 26px 26px 26px; background: rgba(251,246,236,.92); border: 1px solid rgba(21,56,50,.18); padding: 28px; box-shadow: 0 24px 70px rgba(21,56,50,.16); }
+    .solace-medspa form { background: var(--paper); padding: clamp(26px, 4vw, 44px); display: grid; grid-template-columns: 1fr 1fr; gap: 14px; border: 1px solid var(--line); }
+    .solace-medspa input, .solace-medspa select, .solace-medspa textarea { width: 100%; min-width: 0; border: 1px solid var(--line); background: #fffdf8; padding: 16px 17px; color: var(--ink); border-radius: 0; }
+    .solace-medspa textarea, .solace-medspa .full { grid-column: 1 / -1; }
+    .solace-medspa textarea { min-height: 120px; resize: vertical; }
+    .solace-medspa .orb { width: 110px; height: 110px; border-radius: 50%; margin-top: 28px; background: radial-gradient(circle at 34% 28%, #ffffff, #bfeee4 32%, #54a99a 66%, #0d4b42); box-shadow: inset -18px -20px 38px rgba(13,75,66,.28), 0 22px 50px rgba(13,75,66,.24); animation: floatOrb 5.8s ease-in-out infinite; }
+    @keyframes floatOrb { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(7deg); } }
+    .solace-medspa .footer { background: #0b322d; color: rgba(255,255,255,.76); padding: 48px 0; }
+    .solace-medspa .footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 28px; }
+    .solace-medspa .footer strong { color: var(--paper); display: block; margin-bottom: 12px; }
+    .solace-medspa .concern,
+    .solace-medspa .mini,
+    .solace-medspa .location,
+    .solace-medspa .review,
+    .solace-medspa .chip,
+    .solace-medspa .offer-card {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+    .solace-medspa .concern { min-height: 72px; line-height: 1.35; display: flex; align-items: center; }
+    .solace-medspa .mini { padding: 24px; min-height: 165px; }
+    .solace-medspa .mini strong,
+    .solace-medspa .location h3,
+    .solace-medspa .review h3 {
+      line-height: 1.28;
+    }
+    .solace-medspa .mini p,
+    .solace-medspa .location p,
+    .solace-medspa .review p,
+    .solace-medspa .offer-card p {
+      line-height: 1.7;
+    }
+    .solace-medspa .location div { padding: 26px; }
+    .solace-medspa .location { min-height: 410px; }
+    .solace-medspa .review { min-height: 285px; display: flex; flex-direction: column; justify-content: flex-start; gap: 10px; }
+    .solace-medspa form { align-content: start; }
+    .solace-medspa input,
+    .solace-medspa select,
+    .solace-medspa textarea {
+      line-height: 1.45;
+    }
+    .solace-medspa .reveal { opacity: 0; transform: translateY(22px); transition: opacity .72s cubic-bezier(.2,.7,.2,1), transform .72s cubic-bezier(.2,.7,.2,1); }
+    .solace-medspa .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 940px) {
+      .solace-medspa .left-links, .solace-medspa .right-links { display: none; }
+      .solace-medspa .nav-inner { grid-template-columns: 1fr auto; }
+      .solace-medspa .hero-grid, .solace-medspa .finder-grid, .solace-medspa .section-head, .solace-medspa .feature, .solace-medspa .promo-grid, .solace-medspa .consult { grid-template-columns: 1fr; }
+      .solace-medspa .hero-grid { min-height: 0; padding: 54px 0; }
+      .solace-medspa h1 { font-size: clamp(4rem, 18vw, 6.4rem); }
+      .solace-medspa .hero-media { min-height: 480px; }
+      .solace-medspa .hero-media img { height: 100%; }
+      .solace-medspa .concerns, .solace-medspa .service-row, .solace-medspa .locations, .solace-medspa .review-grid, .solace-medspa .footer-grid { grid-template-columns: 1fr; }
+      .solace-medspa form { grid-template-columns: 1fr; }
+      .solace-medspa .mini { min-height: 172px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+      .solace-medspa .location, .solace-medspa .review { min-height: auto; }
+      .solace-medspa .location div, .solace-medspa .review, .solace-medspa .mini, .solace-medspa form, .solace-medspa .consult-copy { padding: 28px; }
+      .solace-medspa .offer-card { left: 16px; bottom: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .solace-medspa *, .solace-medspa *::before, .solace-medspa *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .solace-medspa .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="solace-medspa">
+    <div class="announce"><div class="wrap">May skin offers are open: consult-first glow plans, wrinkle smoothing, and tone repair.</div></div>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <nav class="left-links" aria-label="Primary">
+          <a href="#treatments">Treatments</a>
+          <a href="#concerns">Concerns</a>
+          <a href="#locations">Locations</a>
+        </nav>
+        <a class="brand" href="#">Solace</a>
+        <div class="right-links">
+          <a href="#reviews">Reviews</a>
+          <a href="#promo">Promotions</a>
+          <button class="btn" data-scroll="#consult">Book Now</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="reveal">
+            <p class="eyebrow">Love your skin</p>
+            <h1>Radiate with confidence.</h1>
+            <p class="lead">From wrinkle smoothing to chemical peels, laser glow, and skin memberships, Solace brings proven aesthetic techniques within reach through provider-led treatment plans.</p>
+            <div class="actions">
+              <button class="btn alt" data-scroll="#consult">Book a Free Consultation</button>
+              <button class="btn light" data-scroll="#concerns">Find My Treatment</button>
+            </div>
+            <div class="review-proof"><span class="stars">★★★★★</span><span>13,000+ review-led visits planned with care.</span></div>
+          </div>
+          <div class="hero-media reveal">
+            <img src="assets/medspa/medspa-woman.jpg" alt="Woman with glowing skin for med spa campaign">
+            <article class="offer-card">
+              <strong>May glow offers</strong>
+              <p>Featured treatment savings for first-time skin, injectable, and laser consultation plans.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="finder" id="concerns">
+        <div class="wrap finder-grid reveal">
+          <div>
+            <p class="eyebrow">Find what treatment is right for you</p>
+            <h2>What is your primary concern?</h2>
+          </div>
+          <div class="concerns">
+            <button class="concern" type="button">Facial wrinkles and fine lines</button>
+            <button class="concern" type="button">Loss of facial volume and sagging</button>
+            <button class="concern" type="button">Uneven skin tone, texture, or acne scars</button>
+            <button class="concern" type="button">Body fat, wellness, or weight support</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature" id="treatments">
+        <img src="assets/medspa/medspa-facial.jpg" alt="Aesthetic facial treatment in a calm med spa room">
+        <div class="feature-copy reveal">
+          <p class="eyebrow">Featured treatment</p>
+          <h2>Glow essentials without the guesswork.</h2>
+          <p class="lead">A provider maps your skin history, timeline, and comfort with downtime before recommending facials, peels, microneedling, wrinkle reducers, or laser treatment.</p>
+          <div class="service-row">
+            <article class="mini"><strong>Botox-style smoothing</strong><p>Soft movement, clean planning.</p></article>
+            <article class="mini"><strong>Microneedling</strong><p>Texture support and glow.</p></article>
+            <article class="mini"><strong>Laser tone repair</strong><p>Spots, redness, and clarity.</p></article>
+            <article class="mini"><strong>Hydrating facials</strong><p>Fresh skin with low downtime.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="locations">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Find a Solace location near you</p><h2>Choose the room that fits your day.</h2></div>
+          <p class="lead">The reference flow makes location discovery easy before asking for a booking. This mirror keeps that same conversion step with fictional clinic locations.</p>
+        </div>
+        <div class="locations">
+          <article class="location reveal"><img src="assets/medspa/medspa-room.jpg" alt="Warm med spa location interior"><div><h3>West Harbor</h3><p>Bright consult rooms, facial lounge, and laser suite.</p></div></article>
+          <article class="location reveal"><img src="assets/medspa/medspa-clinic.jpg" alt="Modern aesthetic clinic location"><div><h3>Northline</h3><p>Injectables, skin analysis, and maintenance visits.</p></div></article>
+          <article class="location reveal"><img src="assets/medspa/medspa-luxury-room.jpg" alt="Luxury spa treatment room"><div><h3>Canyon Point</h3><p>Relaxed spa setting for glow and recovery treatments.</p></div></article>
+          <article class="location reveal"><img src="assets/medspa/medspa-laser.jpg" alt="Clinical aesthetic treatment area"><div><h3>Rose District</h3><p>Laser care, peels, and skin texture programs.</p></div></article>
+        </div>
+      </section>
+
+      <section class="reviews section" id="reviews">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div><p class="eyebrow">Client confidence</p><h2>Real reassurance before booking.</h2></div>
+            <p class="lead">Visitors need proof close to the treatment decision. The review cards mirror the credibility rhythm of the reference without inventing specific medical results.</p>
+          </div>
+          <div class="review-grid">
+            <article class="review reveal"><div class="stars">★★★★★</div><h3>Clear and conservative</h3><p>The provider explained options, timing, and what not to do before my event. I felt informed instead of pushed.</p></article>
+            <article class="review reveal"><div class="stars">★★★★★</div><h3>Beautiful space</h3><p>The room felt calm, the team was thoughtful, and the plan matched the natural look I wanted.</p></article>
+            <article class="review reveal"><div class="stars">★★★★★</div><h3>Easy first visit</h3><p>The consultation made it simple to understand where to start, what to skip, and how to maintain results.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section">
+        <div class="section-head reveal">
+          <div><p class="eyebrow">Top treatments</p><h2>Popular paths, easy to scan.</h2></div>
+          <div class="top-treatments">
+            <a class="chip" href="#consult">Chemical peels</a>
+            <a class="chip" href="#consult">Morpheus-style RF</a>
+            <a class="chip" href="#consult">Wrinkle reducers</a>
+            <a class="chip" href="#consult">Microneedling</a>
+            <a class="chip" href="#consult">Dermal filler consult</a>
+            <a class="chip" href="#consult">Laser resurfacing</a>
+            <a class="chip" href="#consult">Hydrating facials</a>
+            <a class="chip" href="#consult">Membership plans</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="promo section" id="promo">
+        <div class="wrap promo-grid">
+          <div class="reveal">
+            <p class="eyebrow">Membership and promotions</p>
+            <h2>Experience a total skin revival.</h2>
+            <p class="lead">Monthly offers, seasonal events, and membership plans give returning clients an easier way to keep skin care consistent.</p>
+            <div class="actions"><button class="btn alt" data-scroll="#consult">See Current Offers</button><button class="btn light" data-scroll="#consult">Ask About Membership</button></div>
+            <div class="orb" aria-hidden="true"></div>
+          </div>
+          <img class="reveal" src="assets/medspa/medspa-serum.jpg" alt="Premium skincare products for med spa promotion">
+        </div>
+      </section>
+
+      <section class="wrap section consult" id="consult">
+        <div class="consult-panel reveal">
+          <img src="assets/medspa/medspa-treatment.jpg" alt="Provider consultation before a med spa treatment">
+          <div class="consult-copy">
+            <p class="eyebrow">How can we help you?</p>
+            <h2>Book the consult before choosing the treatment.</h2>
+            <p class="lead">Tell us your concern, timeline, and comfort level. We will help route you to the right provider and plan.</p>
+          </div>
+        </div>
+        <form class="reveal">
+          <input aria-label="First name" placeholder="First name">
+          <input aria-label="Last name" placeholder="Last name">
+          <input aria-label="Email" placeholder="Email address">
+          <select aria-label="Treatment category"><option>Select treatment section</option><option>Fine lines and wrinkles</option><option>Skin tone and texture</option><option>Volume and contouring</option><option>Health and wellness</option></select>
+          <textarea class="full" aria-label="Message" placeholder="What would you like help deciding?"></textarea>
+          <button class="btn alt full" type="button">Book a Free Consultation</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <div><strong>Solace</strong><p>Provider-led aesthetic care for glow, confidence, and natural-looking treatment plans.</p></div>
+        <div><strong>Treatments</strong><p>Wrinkle reducers<br>Facials<br>Lasers<br>Memberships</p></div>
+        <div><strong>Contact</strong><p>Find a location<br>Book now<br>Consultation support</p></div>
+        <div><strong>Hours</strong><p>Mon-Fri 9-7<br>Saturday 9-5<br>Sunday by request</p></div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const root = document.querySelector(".solace-medspa");
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduced && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14 });
+        root.querySelectorAll(".reveal").forEach((el, index) => {
+          el.style.transitionDelay = Math.min(index * 35, 210) + "ms";
+          io.observe(el);
+        });
+      } else {
+        root.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+      root.querySelectorAll("[data-scroll]").forEach((button) => {
+        button.addEventListener("click", () => root.querySelector(button.dataset.scroll)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }));
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fever Room Fitness</title>
+  <meta name="description" content="A high-energy training club with coached classes, recovery spaces, first-week planning, and a free trial for people bored by routine workouts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    .fever-fitness {
+      --ink: #11100d;
+      --smoke: #191711;
+      --paper: #f4f0df;
+      --acid: #d9ff31;
+      --hot: #ff3f1f;
+      --blue: #71b8ff;
+      --muted: rgba(244,240,223,.72);
+      --line: rgba(244,240,223,.18);
+      color: var(--paper);
+      background: var(--ink);
+      font-family: Manrope, sans-serif;
+      overflow: hidden;
+    }
+    .fever-fitness *, .fever-fitness *::before, .fever-fitness *::after { box-sizing: border-box; }
+    .fever-fitness a { color: inherit; text-decoration: none; }
+    .fever-fitness img { display: block; max-width: 100%; height: auto; }
+    .fever-fitness button, .fever-fitness input, .fever-fitness select, .fever-fitness textarea { font: inherit; }
+    .fever-fitness .wrap { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
+    .fever-fitness .topbar { background: var(--acid); color: var(--ink); font-size: .78rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .fever-fitness .topbar .wrap { min-height: 38px; display: flex; justify-content: center; align-items: center; text-align: center; }
+    .fever-fitness .nav { position: sticky; top: 0; z-index: 40; background: rgba(17,16,13,.9); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
+    .fever-fitness .nav-inner { min-height: 82px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 28px; }
+    .fever-fitness .brand { font-family: "Archivo Black", sans-serif; font-size: clamp(1.5rem, 3vw, 2.9rem); letter-spacing: -.07em; line-height: .86; }
+    .fever-fitness .links { display: flex; justify-content: center; gap: 26px; color: var(--muted); font-size: .82rem; font-weight: 900; text-transform: uppercase; letter-spacing: .09em; }
+    .fever-fitness .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .fever-fitness .btn { border: 1px solid var(--paper); color: var(--paper); background: transparent; border-radius: 0; padding: 14px 20px; font-weight: 900; text-transform: uppercase; letter-spacing: .07em; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; transition: transform .22s ease, box-shadow .22s ease, background .22s ease, color .22s ease; white-space: nowrap; }
+    .fever-fitness .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(217,255,49,.18); }
+    .fever-fitness .btn.primary { background: var(--acid); border-color: var(--acid); color: var(--ink); }
+    .fever-fitness .btn.hot { background: var(--hot); border-color: var(--hot); color: var(--paper); }
+    .fever-fitness .hero { position: relative; min-height: 760px; display: grid; align-items: stretch; overflow: hidden; border-bottom: 1px solid var(--line); }
+    .fever-fitness .hero-bg { position: absolute; inset: 0; }
+    .fever-fitness .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.15) contrast(1.06) brightness(.62); }
+    .fever-fitness .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17,16,13,.98), rgba(17,16,13,.66) 42%, rgba(17,16,13,.12)); }
+    .fever-fitness .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr .72fr; gap: 34px; align-items: end; padding: 86px 0 58px; }
+    .fever-fitness .kicker { color: var(--acid); font-size: .76rem; text-transform: uppercase; letter-spacing: .2em; font-weight: 900; margin: 0 0 18px; }
+    .fever-fitness h1 { font-family: "Archivo Black", sans-serif; font-size: clamp(5rem, 12vw, 12.5rem); line-height: .76; letter-spacing: -.09em; margin: 0; max-width: 980px; text-transform: uppercase; }
+    .fever-fitness .lead { color: var(--muted); line-height: 1.74; font-size: 1.08rem; max-width: 660px; margin: 22px 0 0; }
+    .fever-fitness .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .fever-fitness .trial-card { align-self: end; background: rgba(17,16,13,.82); border: 1px solid var(--line); padding: 30px; box-shadow: 0 30px 90px rgba(0,0,0,.28); }
+    .fever-fitness .trial-card strong { display: block; font-family: "Archivo Black", sans-serif; font-size: clamp(3rem, 6vw, 6rem); line-height: .82; letter-spacing: -.08em; color: var(--acid); margin-bottom: 18px; }
+    .fever-fitness .trial-card p { margin: 0; color: var(--muted); line-height: 1.68; }
+    .fever-fitness .ticker { height: 82px; background: var(--paper); color: var(--ink); overflow: hidden; display: flex; align-items: center; white-space: nowrap; }
+    .fever-fitness .ticker-track { display: flex; width: max-content; animation: feverTicker 24s linear infinite; }
+    .fever-fitness .ticker-group { display: flex; gap: 34px; padding-right: 34px; font-family: "Archivo Black", sans-serif; font-size: clamp(1.25rem, 3vw, 2.4rem); text-transform: uppercase; letter-spacing: -.04em; }
+    @keyframes feverTicker { to { transform: translateX(-50%); } }
+    .fever-fitness .section { padding: 96px 0; }
+    .fever-fitness .light { background: var(--paper); color: var(--ink); }
+    .fever-fitness .section-head { display: grid; grid-template-columns: .78fr 1fr; gap: 42px; align-items: end; margin-bottom: 34px; }
+    .fever-fitness .head-rail { min-height: 210px; border: 1px solid currentColor; border-color: inherit; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; gap: 26px; }
+    .fever-fitness .head-rail strong { display: block; font-family: "Archivo Black", sans-serif; font-size: clamp(2.3rem, 4vw, 4.8rem); line-height: .78; letter-spacing: -.07em; text-transform: uppercase; color: var(--acid); }
+    .fever-fitness .head-rail p:last-child { margin: 0; color: var(--muted); line-height: 1.62; max-width: 360px; }
+    .fever-fitness .light .head-rail { border-color: rgba(17,16,13,.18); }
+    .fever-fitness .light .head-rail p:last-child { color: rgba(17,16,13,.68); }
+    .fever-fitness h2 { font-family: "Archivo Black", sans-serif; font-size: clamp(3.2rem, 7vw, 7.6rem); line-height: .78; letter-spacing: -.08em; text-transform: uppercase; margin: 0; }
+    .fever-fitness .light .lead { color: rgba(17,16,13,.7); }
+    .fever-fitness .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(17,16,13,.18); border-left: 1px solid rgba(17,16,13,.18); margin-top: 44px; }
+    .fever-fitness .stat { padding: 28px; border-right: 1px solid rgba(17,16,13,.18); border-bottom: 1px solid rgba(17,16,13,.18); min-height: 165px; display: flex; flex-direction: column; justify-content: center; }
+    .fever-fitness .stat strong { font-family: "Archivo Black", sans-serif; font-size: 3.6rem; letter-spacing: -.07em; line-height: .85; color: var(--hot); }
+    .fever-fitness .stat span { font-weight: 900; text-transform: uppercase; letter-spacing: .06em; line-height: 1.38; margin-top: 12px; }
+    .fever-fitness .class-stage { display: grid; grid-template-columns: .88fr 1.12fr; gap: 28px; align-items: stretch; }
+    .fever-fitness .program-panel { background: var(--smoke); border: 1px solid var(--line); padding: 30px; min-height: 560px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+    .fever-fitness .program-panel::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(244,240,223,.04), rgba(244,240,223,.04) 1px, transparent 1px, transparent 42px); opacity: .6; pointer-events: none; }
+    .fever-fitness .program-panel h3 { position: relative; font-family: "Archivo Black", sans-serif; font-size: clamp(3.2rem, 6vw, 6.8rem); line-height: .78; letter-spacing: -.08em; text-transform: uppercase; margin: 0; color: var(--acid); }
+    .fever-fitness .program-panel p { position: relative; color: var(--muted); line-height: 1.72; max-width: 540px; margin: 20px 0; }
+    .fever-fitness .program-meta { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 26px; }
+    .fever-fitness .program-meta span { border: 1px solid var(--line); padding: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; min-height: 78px; display: flex; align-items: center; }
+    .fever-fitness .class-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .fever-fitness .class-card { position: relative; min-height: 270px; overflow: hidden; border: 1px solid var(--line); cursor: pointer; background: var(--smoke); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .fever-fitness .class-card:hover, .fever-fitness .class-card.active { transform: translateY(-6px); border-color: var(--acid); box-shadow: 0 24px 70px rgba(0,0,0,.26); }
+    .fever-fitness .class-card img { width: 100%; height: 100%; min-height: 270px; object-fit: cover; filter: grayscale(.08) brightness(.72); transition: transform .35s ease, filter .35s ease; }
+    .fever-fitness .class-card:hover img, .fever-fitness .class-card.active img { transform: scale(1.06); filter: grayscale(0) brightness(.58); }
+    .fever-fitness .class-card div { position: absolute; inset: auto 18px 18px 18px; }
+    .fever-fitness .class-card span { color: var(--acid); font-weight: 900; font-size: .76rem; letter-spacing: .13em; text-transform: uppercase; }
+    .fever-fitness .class-card h3 { font-family: "Archivo Black", sans-serif; font-size: 2.2rem; line-height: .86; letter-spacing: -.06em; text-transform: uppercase; margin: 8px 0 0; }
+    .fever-fitness .upgrade-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .fever-fitness .upgrade { min-height: 410px; background: var(--smoke); border: 1px solid var(--line); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; transition: transform .24s ease, background .24s ease; }
+    .fever-fitness .upgrade:hover { transform: translateY(-8px); background: #211f17; }
+    .fever-fitness .upgrade .icon { width: 68px; height: 68px; border-radius: 50%; border: 1px solid var(--acid); display: grid; place-items: center; color: var(--acid); }
+    .fever-fitness .upgrade h3 { font-family: "Archivo Black", sans-serif; font-size: 2.5rem; line-height: .84; letter-spacing: -.07em; text-transform: uppercase; margin: 42px 0 14px; }
+    .fever-fitness .upgrade p { color: var(--muted); line-height: 1.72; margin: 0; }
+    .fever-fitness .planner { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+    .fever-fitness .planner-board { background: var(--ink); color: var(--paper); padding: 32px; border: 1px solid rgba(17,16,13,.18); min-height: 500px; display: flex; flex-direction: column; justify-content: space-between; }
+    .fever-fitness .planner-board h3 { font-family: "Archivo Black", sans-serif; font-size: clamp(3rem, 6vw, 6rem); line-height: .8; letter-spacing: -.07em; text-transform: uppercase; margin: 0 0 22px; color: var(--acid); }
+    .fever-fitness .planner-controls { display: grid; gap: 16px; }
+    .fever-fitness .field { border: 1px solid rgba(17,16,13,.18); background: rgba(17,16,13,.04); padding: 22px; }
+    .fever-fitness .field label { display: flex; justify-content: space-between; gap: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+    .fever-fitness input[type="range"] { width: 100%; accent-color: var(--hot); }
+    .fever-fitness .schedule { display: grid; gap: 12px; }
+    .fever-fitness .slot { display: grid; grid-template-columns: 92px 1fr auto; gap: 14px; align-items: center; background: var(--paper); color: var(--ink); border: 1px solid rgba(17,16,13,.18); padding: 18px; }
+    .fever-fitness .slot strong { font-family: "Archivo Black", sans-serif; letter-spacing: -.04em; }
+    .fever-fitness .slot span { color: rgba(17,16,13,.68); line-height: 1.4; }
+    .fever-fitness .location-wall { display: grid; grid-template-columns: .7fr 1.3fr; gap: 24px; }
+    .fever-fitness .location-buttons { display: grid; gap: 10px; }
+    .fever-fitness .location-intro { background: rgba(17,16,13,.06); border: 1px solid rgba(17,16,13,.18); padding: 24px; margin-bottom: 6px; }
+    .fever-fitness .location-intro h3 { font-family: "Archivo Black", sans-serif; font-size: clamp(2rem, 4vw, 3.4rem); line-height: .84; letter-spacing: -.07em; text-transform: uppercase; margin: 0 0 12px; }
+    .fever-fitness .location-intro p { color: rgba(17,16,13,.68); line-height: 1.68; margin: 0; }
+    .fever-fitness .location-btn { border: 1px solid rgba(17,16,13,.18); background: var(--paper); color: var(--ink); padding: 20px; font-weight: 900; text-align: left; text-transform: uppercase; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+    .fever-fitness .location-btn:hover, .fever-fitness .location-btn.active { background: var(--acid); transform: translateX(8px); }
+    .fever-fitness .club-card { position: relative; overflow: hidden; min-height: 520px; border: 1px solid rgba(17,16,13,.18); color: var(--paper); }
+    .fever-fitness .club-card img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.58); }
+    .fever-fitness .club-copy { position: absolute; inset: auto 28px 28px 28px; max-width: 600px; }
+    .fever-fitness .club-copy h3 { font-family: "Archivo Black", sans-serif; font-size: clamp(3rem, 7vw, 7rem); line-height: .78; letter-spacing: -.08em; text-transform: uppercase; margin: 0 0 16px; color: var(--acid); }
+    .fever-fitness .club-copy p { line-height: 1.72; color: rgba(244,240,223,.82); margin: 0; }
+    .fever-fitness .final { background: var(--hot); color: var(--paper); }
+    .fever-fitness .final-grid { display: grid; grid-template-columns: 1fr .82fr; gap: 34px; align-items: center; }
+    .fever-fitness .final h2 { color: var(--paper); }
+    .fever-fitness form { background: var(--paper); color: var(--ink); padding: 30px; display: grid; gap: 14px; border: 1px solid rgba(17,16,13,.18); }
+    .fever-fitness input, .fever-fitness select, .fever-fitness textarea { width: 100%; min-width: 0; border: 1px solid rgba(17,16,13,.2); background: #fffdf2; color: var(--ink); padding: 17px 18px; line-height: 1.45; }
+    .fever-fitness textarea { min-height: 116px; resize: vertical; }
+    .fever-fitness .footer { padding: 42px 0; border-top: 1px solid var(--line); color: var(--muted); }
+    .fever-fitness .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 22px; align-items: center; }
+    .fever-fitness .reveal { opacity: 0; transform: translateY(24px); transition: opacity .72s cubic-bezier(.2,.7,.2,1), transform .72s cubic-bezier(.2,.7,.2,1); }
+    .fever-fitness .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 980px) {
+      .fever-fitness .links { display: none; }
+      .fever-fitness .nav-inner { grid-template-columns: 1fr auto; }
+      .fever-fitness .nav-actions .btn:not(.primary) { display: none; }
+      .fever-fitness .hero-grid, .fever-fitness .section-head, .fever-fitness .class-stage, .fever-fitness .planner, .fever-fitness .location-wall, .fever-fitness .final-grid { grid-template-columns: 1fr; }
+      .fever-fitness .hero { min-height: auto; }
+      .fever-fitness .hero-grid { padding: 62px 0; }
+      .fever-fitness h1 { font-size: clamp(5rem, 22vw, 7.4rem); }
+      .fever-fitness .stats, .fever-fitness .upgrade-grid, .fever-fitness .class-grid { grid-template-columns: 1fr; }
+      .fever-fitness .program-meta { grid-template-columns: 1fr; }
+      .fever-fitness .program-panel, .fever-fitness .upgrade, .fever-fitness .planner-board, .fever-fitness .club-card { min-height: auto; }
+      .fever-fitness .club-card img { min-height: 430px; }
+      .fever-fitness .slot { grid-template-columns: 1fr; }
+      .fever-fitness .footer-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fever-fitness *, .fever-fitness *::before, .fever-fitness *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+      .fever-fitness .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="fever-fitness">
+    <div class="topbar"><div class="wrap">Pay nothing until your first class locks in. Trial spaces reset every Monday.</div></div>
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#">FEVER<br>ROOM</a>
+        <nav class="links" aria-label="Primary">
+          <a href="#classes">Classes</a>
+          <a href="#upgrades">Recovery</a>
+          <a href="#planner">Planner</a>
+          <a href="#studios">Studios</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="btn" data-scroll="#planner">Build plan</button>
+          <button class="btn primary" data-scroll="#trial">Free trial</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-bg"><img src="assets/fitness/fitness-hero.jpg" alt="High energy group training class with dramatic lighting"></div>
+        <div class="wrap hero-grid">
+          <div class="reveal">
+            <p class="kicker">Challenger fitness club</p>
+            <h1>Anything but routine.</h1>
+            <p class="lead">A training club for people who get bored by rows of machines. Fight, lift, sweat, recover, and build a week that actually pulls you back in.</p>
+            <div class="hero-actions"><button class="btn primary" data-scroll="#trial">Claim a free trial</button><button class="btn" data-scroll="#classes">Choose your class</button></div>
+          </div>
+          <aside class="trial-card reveal">
+            <strong>7 days</strong>
+            <p>Try the floor, one coached session, and one recovery slot before picking a membership.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="ticker" aria-label="Training modes">
+        <div class="ticker-track">
+          <div class="ticker-group"><span>Fight</span><span>Strength</span><span>Ride</span><span>Mobility</span><span>Conditioning</span><span>Recover</span></div>
+          <div class="ticker-group" aria-hidden="true"><span>Fight</span><span>Strength</span><span>Ride</span><span>Mobility</span><span>Conditioning</span><span>Recover</span></div>
+          <div class="ticker-group" aria-hidden="true"><span>Fight</span><span>Strength</span><span>Ride</span><span>Mobility</span><span>Conditioning</span><span>Recover</span></div>
+        </div>
+      </section>
+
+      <section class="light section">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <aside class="head-rail"><div><p class="kicker">Not another polite gym</p><strong>Day one has direction.</strong></div><p>Proof, plan, and next step sit close together so visitors know where to begin.</p></aside>
+            <div><h2>Built for momentum.</h2><p class="lead">The first visit is designed to remove the usual friction: what to try, where to start, who will coach you, and how to fit training into your actual week.</p></div>
+          </div>
+          <div class="stats reveal">
+            <div class="stat"><strong>60+</strong><span>Weekly coached sessions</span></div>
+            <div class="stat"><strong>6</strong><span>Training lanes to choose from</span></div>
+            <div class="stat"><strong>2</strong><span>Recovery rooms after class</span></div>
+            <div class="stat"><strong>1</strong><span>Trial plan before joining</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="classes">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <aside class="head-rail"><div><p class="kicker">Tap a lane</p><strong>Pick your training mood.</strong></div><p>The class deck updates in place, making exploration feel active instead of buried in a timetable.</p></aside>
+            <div><h2>Classes with a pulse.</h2><p class="lead">Each card updates the training deck, so visitors can explore intensity, fit, and next step without getting buried in a timetable.</p></div>
+          </div>
+          <div class="class-stage">
+            <aside class="program-panel reveal" aria-live="polite">
+              <div>
+                <h3 id="programTitle">Fight Lab</h3>
+                <p id="programText">Boxing conditioning, bag work, footwork, and short rounds that make cardio feel like a skill instead of a punishment.</p>
+              </div>
+              <div class="program-meta">
+                <span id="programIntensity">High intensity</span>
+                <span id="programTime">45 minutes</span>
+                <span id="programBest">Best after work</span>
+              </div>
+            </aside>
+            <div class="class-grid">
+              <article class="class-card active reveal" data-title="Fight Lab" data-text="Boxing conditioning, bag work, footwork, and short rounds that make cardio feel like a skill instead of a punishment." data-intensity="High intensity" data-time="45 minutes" data-best="Best after work"><img src="assets/fitness/fitness-boxing.jpg" alt="Boxing fitness class"><div><span>01 / Fight</span><h3>Fight Lab</h3></div></article>
+              <article class="class-card reveal" data-title="Lift Room" data-text="Coached compound lifts, accessory work, and progressions so strength feels measurable without feeling lonely." data-intensity="Heavy strength" data-time="50 minutes" data-best="Best 2x weekly"><img src="assets/fitness/fitness-strength.jpg" alt="Strength training floor"><div><span>02 / Strength</span><h3>Lift Room</h3></div></article>
+              <article class="class-card reveal" data-title="Sweat Index" data-text="Intervals, sleds, bikes, and bodyweight work for people who want a clean hit of effort without guessing the workout." data-intensity="Conditioning" data-time="35 minutes" data-best="Best at lunch"><img src="assets/fitness/fitness-hero.jpg" alt="Group conditioning workout"><div><span>03 / Sweat</span><h3>Sweat Index</h3></div></article>
+              <article class="class-card reveal" data-title="Reset Flow" data-text="Mobility, breath-led control, and deep stretch work that helps your body absorb the harder sessions." data-intensity="Low impact" data-time="40 minutes" data-best="Best on recovery days"><img src="assets/fitness/fitness-yoga.jpg" alt="Mobility and recovery fitness class"><div><span>04 / Reset</span><h3>Reset Flow</h3></div></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="upgrades">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <aside class="head-rail"><div><p class="kicker">The extras matter</p><strong>Recovery sells the repeat visit.</strong></div><p>Members do not just need a hard session. They need a reason to come back tomorrow.</p></aside>
+            <div><h2>Train hard, then come down properly.</h2><p class="lead">Hard sessions only work when your body can absorb them. Recovery tools, coach checks, and open-floor access help the first week feel sustainable.</p></div>
+          </div>
+          <div class="upgrade-grid">
+            <article class="upgrade reveal"><div class="icon">RX</div><div><h3>Recovery den</h3><p>Compression, guided cooldowns, and soft tissue tools so the next session does not start from zero.</p></div></article>
+            <article class="upgrade reveal"><div class="icon">PT</div><div><h3>Coach check</h3><p>One form screen and one goal review help route you into the right class lane on day one.</p></div></article>
+            <article class="upgrade reveal"><div class="icon">24</div><div><h3>Open floor</h3><p>Use the racks, bags, sleds, and mobility space outside class time when your schedule gets weird.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="light section" id="planner">
+        <div class="wrap planner">
+          <div class="planner-board reveal">
+            <div><p class="kicker">Interactive trial planner</p><h3 id="planHeadline">3 sessions</h3><p class="lead" id="planCopy">Start with two coached sessions and one recovery slot. Enough variety to feel the club without overcommitting your week.</p></div>
+            <button class="btn primary" data-scroll="#trial">Send me this plan</button>
+          </div>
+          <div class="planner-controls reveal">
+            <div class="field"><label for="days">Training days <span id="daysValue">3</span></label><input id="days" type="range" min="1" max="6" value="3"></div>
+            <div class="field"><label for="intensity">Intensity <span id="intensityValue">6</span></label><input id="intensity" type="range" min="1" max="10" value="6"></div>
+            <div class="schedule" aria-label="Suggested weekly schedule">
+              <div class="slot"><strong>MON</strong><span id="slotOne">Lift Room, controlled strength</span><button class="btn hot" data-scroll="#trial">Book</button></div>
+              <div class="slot"><strong>WED</strong><span id="slotTwo">Fight Lab, high-energy skill work</span><button class="btn hot" data-scroll="#trial">Book</button></div>
+              <div class="slot"><strong>SAT</strong><span id="slotThree">Reset Flow, mobility and recovery</span><button class="btn hot" data-scroll="#trial">Book</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="light section" id="studios">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <aside class="head-rail"><div><p class="kicker">Find your room</p><strong>Every club has a personality.</strong></div><p>The studio chooser gives each location a reason to exist before asking for a trial.</p></aside>
+            <div><h2>Pick the energy you need.</h2><p class="lead">Choose the room that matches your week: heavy strength, high-output conditioning, or a calmer reset that keeps you consistent.</p></div>
+          </div>
+          <div class="location-wall">
+            <div class="location-buttons reveal">
+              <div class="location-intro"><h3>Three rooms, three moods.</h3><p>Pick the club personality that matches how you want your first week to feel.</p></div>
+              <button class="location-btn active" data-club="Downtown Vault" data-club-text="Dark room strength, boxing bags, late classes, and recovery tools built for after-work training." data-club-img="assets/fitness/fitness-strength.jpg">Downtown Vault</button>
+              <button class="location-btn" data-club="Westside Engine" data-club-text="Conditioning floor, sled lanes, open gym hours, and coaches who keep high effort organized." data-club-img="assets/fitness/fitness-hero.jpg">Westside Engine</button>
+              <button class="location-btn" data-club="North Reset" data-club-text="Mobility, yoga, breath-led recovery, and quiet strength work for members rebuilding consistency." data-club-img="assets/fitness/fitness-yoga.jpg">North Reset</button>
+            </div>
+            <article class="club-card reveal">
+              <img id="clubImage" src="assets/fitness/fitness-strength.jpg" alt="Selected Fever Room studio">
+              <div class="club-copy"><h3 id="clubName">Downtown Vault</h3><p id="clubText">Dark room strength, boxing bags, late classes, and recovery tools built for after-work training.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="final section" id="trial">
+        <div class="wrap final-grid">
+          <div class="reveal"><p class="kicker">Start without guessing</p><h2>Try the room before you join it.</h2><p class="lead">Tell us how you train now and what usually derails you. We will send a first-week route with the right class, coach, and recovery slot.</p></div>
+          <form class="reveal">
+            <input aria-label="Name" placeholder="Name">
+            <input aria-label="Email" placeholder="Email address">
+            <select aria-label="Training goal"><option>Main goal</option><option>Build strength</option><option>Lose fat</option><option>Train for performance</option><option>Restart safely</option></select>
+            <textarea aria-label="Training history" placeholder="What kind of training actually keeps you engaged?"></textarea>
+            <button class="btn primary" type="button">Claim my free trial</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <span>Fever Room Training Club. Fight, lift, sweat, recover, repeat.</span>
+        <span>Classes / Recovery / Planner / Trial</span>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const root = document.querySelector(".fever-fitness");
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduced && "IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.14 });
+        root.querySelectorAll(".reveal").forEach((el, index) => {
+          el.style.transitionDelay = Math.min(index * 36, 220) + "ms";
+          observer.observe(el);
+        });
+      } else {
+        root.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+      }
+      root.querySelectorAll("[data-scroll]").forEach((button) => {
+        button.addEventListener("click", () => root.querySelector(button.dataset.scroll)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" }));
+      });
+      const title = root.querySelector("#programTitle");
+      const text = root.querySelector("#programText");
+      const intensity = root.querySelector("#programIntensity");
+      const time = root.querySelector("#programTime");
+      const best = root.querySelector("#programBest");
+      root.querySelectorAll(".class-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          root.querySelectorAll(".class-card").forEach((item) => item.classList.remove("active"));
+          card.classList.add("active");
+          title.textContent = card.dataset.title;
+          text.textContent = card.dataset.text;
+          intensity.textContent = card.dataset.intensity;
+          time.textContent = card.dataset.time;
+          best.textContent = card.dataset.best;
+        });
+      });
+      const days = root.querySelector("#days");
+      const effort = root.querySelector("#intensity");
+      const daysValue = root.querySelector("#daysValue");
+      const intensityValue = root.querySelector("#intensityValue");
+      const planHeadline = root.querySelector("#planHeadline");
+      const planCopy = root.querySelector("#planCopy");
+      const updatePlan = () => {
+        const d = Number(days.value);
+        const e = Number(effort.value);
+        daysValue.textContent = d;
+        intensityValue.textContent = e;
+        planHeadline.textContent = `${d} session${d === 1 ? "" : "s"}`;
+        planCopy.textContent = e > 7
+          ? "Go heavy on coached conditioning and strength, then protect the week with one recovery session."
+          : e < 4
+            ? "Start with low-impact mobility, skill work, and one calm strength session so consistency comes first."
+            : "Balance two coached sessions with recovery, enough variety to feel the club without overcommitting your week.";
+      };
+      days.addEventListener("input", updatePlan);
+      effort.addEventListener("input", updatePlan);
+      root.querySelectorAll(".location-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+          root.querySelectorAll(".location-btn").forEach((item) => item.classList.remove("active"));
+          button.classList.add("active");
+          root.querySelector("#clubName").textContent = button.dataset.club;
+          root.querySelector("#clubText").textContent = button.dataset.clubText;
+          root.querySelector("#clubImage").src = button.dataset.clubImg;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

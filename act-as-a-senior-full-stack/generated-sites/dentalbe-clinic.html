@@ -1,0 +1,671 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap");
+
+.dentalbe-page {
+  --navy: #071b2a;
+  --navy-2: #0b2938;
+  --teal: #0e766f;
+  --aqua: #58d6cf;
+  --ice: #eaf9f7;
+  --paper: #f7fbfa;
+  --white: #ffffff;
+  --ink: #102129;
+  --muted: #677d84;
+  --line: rgba(16, 33, 41, 0.12);
+  --line-light: rgba(255, 255, 255, 0.16);
+  --shadow: 0 26px 76px rgba(7, 27, 42, 0.16);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: "Manrope", Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+  isolation: isolate;
+  text-rendering: geometricPrecision;
+}
+
+.dentalbe-page,
+.dentalbe-page *,
+.dentalbe-page *::before,
+.dentalbe-page *::after {
+  box-sizing: border-box;
+}
+
+.dentalbe-page a { color: inherit; text-decoration: none; }
+.dentalbe-page img { display: block; width: 100%; max-width: 100%; height: auto; }
+.dentalbe-page :focus-visible { outline: 3px solid rgba(88, 214, 207, .8); outline-offset: 4px; }
+.dentalbe-page .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+
+.dentalbe-page .topbar {
+  background: var(--navy) !important;
+  color: rgba(255,255,255,.78);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dentalbe-page .topbar-inner {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.dentalbe-page .hero-shell {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 74% 18%, rgba(88,214,207,.32), transparent 28%),
+    linear-gradient(180deg, #f7fbfa 0%, #eaf9f7 100%) !important;
+}
+
+.dentalbe-page .nav {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.dentalbe-page .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -.05em;
+}
+
+.dentalbe-page .brand-mark {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--aqua);
+  box-shadow: 0 16px 34px rgba(7, 27, 42, .2);
+}
+
+.dentalbe-page .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: #456069;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.dentalbe-page .btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 14px;
+  padding: 0 22px;
+  background: var(--teal);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 18px 44px rgba(14, 118, 111, .2);
+  transition: transform 240ms var(--ease), background 240ms var(--ease), box-shadow 240ms var(--ease);
+  cursor: pointer;
+}
+
+.dentalbe-page .btn:hover { transform: translateY(-2px); background: #0a655f; box-shadow: 0 24px 56px rgba(14,118,111,.26); }
+.dentalbe-page .btn.secondary { background: var(--white); color: var(--navy); box-shadow: inset 0 0 0 1px var(--line); }
+
+.dentalbe-page .hero {
+  min-height: 710px;
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(380px, .92fr);
+  align-items: center;
+  gap: 58px;
+  padding: 54px 0 86px;
+}
+
+.dentalbe-page h1,
+.dentalbe-page h2,
+.dentalbe-page h3,
+.dentalbe-page p { margin: 0; }
+
+.dentalbe-page .eyebrow {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  padding: 0 13px;
+  border-radius: 12px;
+  background: rgba(14, 118, 111, .09);
+  color: var(--teal);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.dentalbe-page h1 {
+  margin-top: 22px;
+  max-width: 650px;
+  color: var(--navy);
+  font-size: clamp(50px, 7vw, 92px);
+  line-height: .98;
+  font-weight: 900;
+  letter-spacing: -.075em;
+}
+
+.dentalbe-page .hero-copy p {
+  max-width: 610px;
+  margin-top: 26px;
+  color: #526b73;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.78;
+}
+
+.dentalbe-page .hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+.dentalbe-page .hero-grid {
+  position: relative;
+  min-height: 600px;
+  display: grid;
+  grid-template-columns: .75fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.dentalbe-page .hero-photo {
+  overflow: hidden;
+  border-radius: 34px;
+  background: #d8f3ee;
+  box-shadow: var(--shadow);
+}
+
+.dentalbe-page .hero-photo.large { grid-row: span 2; }
+.dentalbe-page .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.dentalbe-page .hero-card {
+  display: grid;
+  align-content: space-between;
+  padding: 24px;
+  border-radius: 30px;
+  background: var(--navy) !important;
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.dentalbe-page .hero-card strong {
+  display: block;
+  color: var(--aqua);
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.05em;
+}
+
+.dentalbe-page .hero-card span {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255,255,255,.74);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.dentalbe-page .quick-book {
+  position: absolute;
+  left: -30px;
+  bottom: 26px;
+  width: min(330px, 86%);
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(255,255,255,.72);
+  box-shadow: 0 24px 70px rgba(7,27,42,.18);
+  backdrop-filter: blur(18px);
+}
+
+.dentalbe-page .quick-book strong { color: var(--navy); font-size: 18px; font-weight: 900; }
+.dentalbe-page .quick-book p { margin-top: 10px; color: var(--muted); font-size: 13px; }
+
+.dentalbe-page .logo-strip {
+  padding: 28px 0;
+  background: var(--white) !important;
+  border-block: 1px solid var(--line);
+}
+
+.dentalbe-page .logos {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  align-items: center;
+  text-align: center;
+  color: #799093;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.dentalbe-page .section { padding: 96px 0; }
+.dentalbe-page .section.white { background: var(--white) !important; }
+.dentalbe-page .section.dark { background: var(--navy) !important; color: var(--white); }
+
+.dentalbe-page .section-head {
+  display: grid;
+  grid-template-columns: minmax(260px, .8fr) minmax(0, .82fr);
+  gap: 64px;
+  align-items: end;
+}
+
+.dentalbe-page h2 {
+  max-width: 690px;
+  color: inherit;
+  font-size: clamp(38px, 5.4vw, 70px);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.067em;
+}
+
+.dentalbe-page .section-head p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.82;
+}
+
+.dentalbe-page .dark .section-head p { color: rgba(255,255,255,.72); }
+
+.dentalbe-page .bento {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr .85fr;
+  gap: 20px;
+}
+
+.dentalbe-page .bento-card {
+  min-height: 260px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  padding: 28px;
+  background: #eef9f6;
+  border: 1px solid var(--line);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+
+.dentalbe-page .bento-card:hover { transform: translateY(-7px); box-shadow: 0 24px 70px rgba(7,27,42,.1); }
+.dentalbe-page .bento-card.wide { grid-row: span 2; min-height: 540px; background: var(--navy); color: var(--white); }
+
+.dentalbe-page .bento-card img {
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 55%;
+  object-fit: cover;
+}
+
+.dentalbe-page .bento-card.wide img { height: 62%; opacity: .86; }
+.dentalbe-page .bento-card h3 { position: relative; z-index: 1; font-size: 25px; line-height: 1.12; font-weight: 900; letter-spacing: -.04em; }
+.dentalbe-page .bento-card p { position: relative; z-index: 1; margin-top: 12px; color: #5e757a; font-size: 13px; line-height: 1.7; }
+.dentalbe-page .bento-card.wide p { color: rgba(255,255,255,.72); }
+
+.dentalbe-page .split {
+  display: grid;
+  grid-template-columns: minmax(320px, .9fr) minmax(0, 1fr);
+  gap: 70px;
+  align-items: center;
+}
+
+.dentalbe-page .round-photo {
+  min-height: 580px;
+  overflow: hidden;
+  border-radius: 48px;
+  box-shadow: var(--shadow);
+}
+
+.dentalbe-page .round-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.dentalbe-page .feature-list { margin-top: 30px; display: grid; gap: 15px; }
+.dentalbe-page .feature-list span { display: flex; gap: 12px; color: #405b63; font-size: 15px; font-weight: 800; }
+.dentalbe-page .feature-list b { flex: 0 0 auto; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 10px; background: var(--ice); color: var(--teal); }
+
+.dentalbe-page .step-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.dentalbe-page .step {
+  padding: 26px;
+  min-height: 240px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--line-light);
+}
+
+.dentalbe-page .step strong { color: var(--aqua); font-size: 14px; font-weight: 900; }
+.dentalbe-page .step h3 { margin-top: 44px; color: var(--white); font-size: 21px; line-height: 1.14; }
+.dentalbe-page .step p { margin-top: 12px; color: rgba(255,255,255,.72); font-size: 12px; }
+
+.dentalbe-page .pricing {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.dentalbe-page .price-card {
+  padding: 30px;
+  border-radius: 30px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 56px rgba(7,27,42,.07);
+}
+
+.dentalbe-page .price-card.featured { background: var(--navy); color: var(--white); transform: translateY(-12px); }
+.dentalbe-page .price-card h3 { font-size: 24px; color: inherit; }
+.dentalbe-page .price { display: block; margin-top: 18px; font-size: 40px; line-height: 1; font-weight: 900; letter-spacing: -.05em; }
+.dentalbe-page .price { line-height: 1.18 !important; padding-block: .08em; }
+.dentalbe-page .price-card p { margin-top: 14px; color: var(--muted); font-size: 13px; }
+.dentalbe-page .price-card.featured p { color: rgba(255,255,255,.72); }
+
+.dentalbe-page .gallery {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr 1fr;
+  gap: 18px;
+}
+
+.dentalbe-page .gallery img {
+  height: 300px;
+  object-fit: cover;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+}
+
+.dentalbe-page .testimonial {
+  padding: 48px;
+  border-radius: 38px;
+  background: var(--navy) !important;
+  color: var(--white);
+  display: grid;
+  grid-template-columns: minmax(260px, .55fr) minmax(0, 1fr);
+  gap: 54px;
+  align-items: center;
+}
+
+.dentalbe-page .testimonial img { border-radius: 30px; aspect-ratio: .86; height: 100%; object-fit: cover; }
+.dentalbe-page .stars { color: #ffd85a; letter-spacing: .08em; }
+.dentalbe-page .testimonial p { margin-top: 24px; color: rgba(255,255,255,.76); font-size: 18px; line-height: 1.8; }
+.dentalbe-page .testimonial cite { display: block; margin-top: 24px; color: var(--aqua); font-style: normal; font-weight: 900; }
+
+.dentalbe-page .appointment {
+  display: grid;
+  grid-template-columns: minmax(260px, .72fr) minmax(0, 1fr);
+  gap: 42px;
+  align-items: start;
+}
+
+.dentalbe-page .appointment-info {
+  padding: 34px;
+  border-radius: 34px;
+  background: linear-gradient(135deg, var(--teal), var(--navy));
+  color: var(--white);
+}
+
+.dentalbe-page .appointment-info p { margin-top: 16px; color: rgba(255,255,255,.76); }
+
+.dentalbe-page .form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.dentalbe-page .form input,
+.dentalbe-page .form select,
+.dentalbe-page .form textarea {
+  width: 100%;
+  min-height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  padding: 0 16px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.dentalbe-page .form textarea { grid-column: 1 / -1; min-height: 132px; padding-top: 16px; resize: vertical; }
+
+.dentalbe-page .footer {
+  padding: 58px 0;
+  background: var(--navy) !important;
+  color: rgba(255,255,255,.7);
+}
+
+.dentalbe-page .footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 34px;
+}
+
+.dentalbe-page .footer h3 { color: var(--white); font-size: 14px; margin-bottom: 14px; }
+.dentalbe-page .footer a, .dentalbe-page .footer p { display: block; margin-top: 10px; color: rgba(255,255,255,.64); font-size: 13px; }
+
+.dentalbe-page [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 720ms var(--ease), transform 720ms var(--ease); }
+.dentalbe-page [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 980px) {
+  .dentalbe-page .nav-links, .dentalbe-page .topbar { display: none; }
+  .dentalbe-page .hero, .dentalbe-page .section-head, .dentalbe-page .split, .dentalbe-page .testimonial, .dentalbe-page .appointment { grid-template-columns: 1fr; }
+  .dentalbe-page .hero-grid { min-height: 620px; }
+  .dentalbe-page .bento, .dentalbe-page .pricing, .dentalbe-page .gallery, .dentalbe-page .footer-grid { grid-template-columns: 1fr 1fr; }
+  .dentalbe-page .step-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .dentalbe-page .wrap { width: min(100% - 28px, 1180px); }
+  .dentalbe-page .nav { min-height: 74px; }
+  .dentalbe-page .nav > .btn { min-height: 42px; padding-inline: 14px; font-size: 11px; }
+  .dentalbe-page h1 { font-size: clamp(42px, 13vw, 60px); }
+  .dentalbe-page h2 { font-size: clamp(34px, 10vw, 46px); }
+  .dentalbe-page .hero { padding: 34px 0 64px; }
+  .dentalbe-page .hero-grid { grid-template-columns: 1fr; min-height: auto; }
+  .dentalbe-page .hero-photo.large { min-height: 380px; }
+  .dentalbe-page .quick-book { position: relative; left: auto; bottom: auto; width: 100%; margin-top: 16px; }
+  .dentalbe-page .section { padding: 68px 0; }
+  .dentalbe-page .bento, .dentalbe-page .pricing, .dentalbe-page .gallery, .dentalbe-page .step-grid, .dentalbe-page .footer-grid, .dentalbe-page .form { grid-template-columns: 1fr; }
+  .dentalbe-page .bento-card.wide { min-height: 440px; }
+  .dentalbe-page .round-photo { min-height: 440px; }
+  .dentalbe-page .price-card.featured { transform: none; }
+  .dentalbe-page .testimonial { padding: 24px; border-radius: 28px; }
+}
+
+.dentalbe-page, .dentalbe-page * { min-width: 0 !important; }
+.dentalbe-page :is(h1, h2, h3, p, a, button, span, strong, small, li, label, input, textarea, select) {
+  max-height: none !important;
+  height: auto;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.dentalbe-page :is(h1, h2, h3) { line-height: 1.14 !important; padding-block: .05em .12em; text-wrap: balance; }
+.dentalbe-page p { line-height: 1.68 !important; }
+.dentalbe-page .btn { line-height: 1.2 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dentalbe-page *, .dentalbe-page *::before, .dentalbe-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .dentalbe-page [data-reveal] { opacity: 1; transform: none; }
+}
+/* STORAGE_DASHBOARD_QA_POLISH */
+.dentalbe-page { overflow-x: clip; }
+.dentalbe-page img { max-width: 100%; object-fit: cover; }
+.dentalbe-page figure { overflow: hidden; }
+.dentalbe-page :is(h1,h2,h3,h4,p,a,button,label,input,select,textarea,span) {
+  max-height: none !important;
+  text-overflow: clip !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.dentalbe-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 240ms cubic-bezier(.16,1,.3,1), box-shadow 240ms cubic-bezier(.16,1,.3,1), filter 240ms cubic-bezier(.16,1,.3,1), border-color 240ms cubic-bezier(.16,1,.3,1);
+}
+.dentalbe-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover {
+  transform: translateY(-3px);
+  filter: saturate(1.04);
+  box-shadow: 0 22px 58px rgba(0,0,0,.18), 0 0 0 6px rgba(255,255,255,.14);
+}
+.dentalbe-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card) {
+  transition: transform 280ms cubic-bezier(.16,1,.3,1), box-shadow 280ms cubic-bezier(.16,1,.3,1), border-color 280ms cubic-bezier(.16,1,.3,1), filter 280ms cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+.dentalbe-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover {
+  transform: translateY(-6px);
+  filter: saturate(1.03);
+}
+.dentalbe-page :is(.hero, .hero-shell, .hero-panel, .hero-visual, .hero-card) {
+  position: relative;
+}
+.dentalbe-page :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 0 38%, rgba(255,255,255,.12) 48%, transparent 60%);
+  transform: translateX(-130%);
+  animation: storageHeroSheen 8.5s cubic-bezier(.16,1,.3,1) infinite;
+}
+@keyframes storageHeroSheen {
+  0%, 42%, 100% { transform: translateX(-130%); }
+  62% { transform: translateX(130%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dentalbe-page :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after { animation: none !important; }
+  .dentalbe-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover,
+  .dentalbe-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover { transform: none !important; }
+}
+
+</style>
+
+<div class="dentalbe-page">
+  <div class="topbar"><div class="wrap topbar-inner"><span>Emergency dental guidance available today</span><span>Call (000) 000-0000</span></div></div>
+  <section class="hero-shell" id="top">
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="#top"><span class="brand-mark">Be</span> DentalBe</a>
+      <div class="nav-links"><a href="#care">Care</a><a href="#experience">Experience</a><a href="#plans">Plans</a><a href="#reviews">Reviews</a><a href="#booking">Book</a></div>
+      <a class="btn" href="#booking">Book Online</a>
+    </nav>
+    <div class="wrap hero">
+      <div class="hero-copy" data-reveal>
+        <span class="eyebrow">Modern dental care, designed around trust</span>
+        <h1>Confident smiles start with a clearer dental plan.</h1>
+        <p>DentalBe helps patients get preventive, cosmetic, and restorative care without rushed explanations, confusing estimates, or pressure to choose treatment on the spot.</p>
+        <div class="hero-actions"><a class="btn" href="#booking">Plan My Visit</a><a class="btn secondary" href="#care">Explore Care</a></div>
+      </div>
+      <div class="hero-grid" data-reveal>
+        <figure class="hero-photo large"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=84" alt="Modern dental treatment room"></figure>
+        <figure class="hero-photo"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=84" alt="Dental instruments and care setup"></figure>
+        <div class="hero-card"><div><strong>97%</strong><span>of patients understand their plan before booking treatment</span></div><a class="btn" href="#booking">Get Started</a></div>
+        <div class="quick-book"><strong>Same-week new patient consults</strong><p>Share your concern and we will recommend the right first appointment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="logo-strip"><div class="wrap logos"><span>Digital scans</span><span>Clear estimates</span><span>Comfort visits</span><span>Family scheduling</span><span>Smile design</span></div></section>
+
+  <section class="section white" id="care">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>Everything your smile needs, organized by priority.</h2><p>From your first exam to a full smile refresh, every treatment is explained in plain language so you can act with confidence.</p></div>
+      <div class="bento">
+        <article class="bento-card wide" data-reveal><h3>Complete smile planning</h3><p>A full view of gum health, bite, aesthetics, and long-term function before you commit to care.</p><img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=900&q=84" alt="Dentist treating a patient"></article>
+        <article class="bento-card" data-reveal><h3>Preventive dentistry</h3><p>Cleanings, exams, X-rays, and gum support that keep small problems from becoming urgent.</p><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=84" alt="Bright dental clinic"></article>
+        <article class="bento-card" data-reveal><h3>Cosmetic upgrades</h3><p>Whitening, bonding, veneers, and smile design with realistic previews and honest fit checks.</p><img src="https://images.unsplash.com/photo-1616391182219-e080b4d1043a?auto=format&fit=crop&w=600&q=84" alt="Smiling cosmetic dental patient"></article>
+        <article class="bento-card" data-reveal><h3>Restorative repair</h3><p>Fillings, crowns, bridges, and implant planning for teeth that need strength and stability.</p><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=84" alt="Dental tools"></article>
+        <article class="bento-card" data-reveal><h3>Urgent tooth pain</h3><p>Fast triage for pain, swelling, broken teeth, and treatment questions that cannot wait.</p><img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=600&q=84" alt="Dental exam room"></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white" id="experience">
+    <div class="wrap split">
+      <figure class="round-photo" data-reveal><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=84" alt="Clean modern dental clinic suite"></figure>
+      <div data-reveal><span class="eyebrow">Patient-first experience</span><h2>The appointment feels calmer because the process is visible.</h2><p>We replace dental uncertainty with a written roadmap: what matters now, what can wait, and what each option means for comfort, longevity, and cost.</p><div class="feature-list"><span><b>✓</b> Intraoral photos and scans shown chairside.</span><span><b>✓</b> Priority-based treatment plans with transparent estimates.</span><span><b>✓</b> Comfort pacing for anxious patients and longer procedures.</span><span><b>✓</b> Family blocks and reminders that make follow-through easier.</span></div></div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>Four steps from uncertainty to a clear smile plan.</h2><p>A structured first visit gives you answers before treatment becomes a guessing game.</p></div>
+      <div class="step-grid">
+        <article class="step" data-reveal><strong>01</strong><h3>Concern review</h3><p>We listen for pain, goals, timing, budget, and past dental experiences.</p></article>
+        <article class="step" data-reveal><strong>02</strong><h3>Digital check</h3><p>Photos, scans, and X-rays help us explain the real condition clearly.</p></article>
+        <article class="step" data-reveal><strong>03</strong><h3>Plan options</h3><p>You see urgent, recommended, and optional care separated into plain priorities.</p></article>
+        <article class="step" data-reveal><strong>04</strong><h3>Comfort care</h3><p>Treatment is scheduled with the right time, support, and aftercare expectations.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white" id="plans">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>Choose the visit that matches where you are.</h2><p>No mystery packages. Start with the right appointment and let the clinical findings shape the next step.</p></div>
+      <div class="pricing">
+        <article class="price-card" data-reveal><h3>New Patient Exam</h3><span class="price">$89</span><p>Consult, photos, digital X-rays, and a written care priority map.</p></article>
+        <article class="price-card featured" data-reveal><h3>Smile Design Consult</h3><span class="price">$149</span><p>Cosmetic goals, shade planning, scan review, and treatment possibilities.</p></article>
+        <article class="price-card" data-reveal><h3>Urgent Care Visit</h3><span class="price">$99</span><p>Focused exam for pain, swelling, broken teeth, or sudden dental concern.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>A clinic built to feel bright, precise, and unhurried.</h2><p>The environment matters. Clean technology, calm rooms, and clear communication help patients feel more in control.</p></div>
+      <div class="gallery" data-reveal><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=84" alt="Modern dental room"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=84" alt="Dental tools close up"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=84" alt="Dental clinic chair"></div>
+    </div>
+  </section>
+
+  <section class="section white" id="reviews">
+    <div class="wrap testimonial" data-reveal>
+      <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=700&q=84" alt="Happy dental patient">
+      <div><span class="stars">★★★★★</span><h2>“The treatment plan finally made sense.”</h2><p>I had put off care because I expected a lecture. Instead, they showed me what mattered, what could wait, and how to handle it one appointment at a time.</p><cite>Representative patient feedback</cite></div>
+    </div>
+  </section>
+
+  <section class="section white" id="booking">
+    <div class="wrap appointment">
+      <aside class="appointment-info" data-reveal><span class="eyebrow">Book a visit</span><h2>Tell us what you want help with.</h2><p>We will match you with the right first appointment and send available times.</p></aside>
+      <form class="form" data-reveal><input type="text" placeholder="Full name" aria-label="Full name"><input type="tel" placeholder="Phone number" aria-label="Phone number"><input type="email" placeholder="Email address" aria-label="Email address"><select aria-label="Visit type"><option>New patient exam</option><option>Tooth pain or emergency</option><option>Cosmetic consultation</option><option>Restorative treatment</option></select><textarea placeholder="What would you like help with?" aria-label="What would you like help with?"></textarea><button class="btn" type="submit">Request Appointment</button></form>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="wrap footer-grid"><div><h3>DentalBe</h3><p>Modern dental care with clearer plans, calmer visits, and confident next steps.</p></div><div><h3>Care</h3><a href="#care">Treatments</a><a href="#experience">Experience</a><a href="#plans">Visit types</a></div><div><h3>Clinic</h3><a href="#reviews">Reviews</a><a href="#booking">Book online</a><a href="#top">Back to top</a></div><div><h3>Contact</h3><a href="tel:+10000000000">(000) 000-0000</a><a href="mailto:hello@dentalbe.example">hello@dentalbe.example</a></div></div></footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector(".dentalbe-page");
+  if (!page) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    page.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+      item.style.transitionDelay = Math.min(index * 45, 240) + "ms";
+      observer.observe(item);
+    });
+  } else {
+    page.querySelectorAll("[data-reveal]").forEach(function (item) { item.classList.add("is-visible"); });
+  }
+})();
+</script>

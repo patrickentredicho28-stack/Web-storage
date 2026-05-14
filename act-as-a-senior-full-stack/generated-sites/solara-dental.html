@@ -1,0 +1,681 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap");
+
+.solara-page {
+  --ink: #18201f;
+  --forest: #24433b;
+  --sage: #d8e2d8;
+  --sage-2: #eef3eb;
+  --cream: #fbf5e9;
+  --paper: #fffaf0;
+  --clay: #c86f4e;
+  --clay-2: #e7a184;
+  --sun: #f2c56b;
+  --muted: #6f7771;
+  --line: rgba(36, 67, 59, 0.14);
+  --line-light: rgba(255, 250, 240, 0.22);
+  --shadow: 0 26px 74px rgba(36, 67, 59, 0.16);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: "Manrope", Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+  isolation: isolate;
+  text-rendering: geometricPrecision;
+}
+
+.solara-page,
+.solara-page *,
+.solara-page *::before,
+.solara-page *::after { box-sizing: border-box; }
+
+.solara-page a { color: inherit; text-decoration: none; }
+.solara-page img { display: block; width: 100%; max-width: 100%; height: auto; }
+.solara-page :focus-visible { outline: 3px solid rgba(200, 111, 78, .72); outline-offset: 4px; }
+.solara-page .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+
+.solara-page .hero-shell {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255,250,240,.98), rgba(255,250,240,.78)),
+    radial-gradient(circle at 82% 28%, rgba(231,161,132,.34), transparent 28%),
+    var(--paper) !important;
+}
+
+.solara-page .hero-shell::before {
+  content: "";
+  position: absolute;
+  left: -10vw;
+  bottom: -18vw;
+  width: 44vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--sage);
+  opacity: .62;
+}
+
+.solara-page .nav {
+  min-height: 88px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+}
+
+.solara-page .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--forest);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -.04em;
+}
+
+.solara-page .brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50% 50% 50% 8px;
+  background: var(--clay);
+  color: var(--paper);
+}
+
+.solara-page .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: #586560;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.solara-page .btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 22px;
+  background: var(--forest);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 18px 42px rgba(36,67,59,.2);
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), background 240ms var(--ease);
+  cursor: pointer;
+}
+
+.solara-page .btn:hover { transform: translateY(-2px); background: #18332d; box-shadow: 0 24px 54px rgba(36,67,59,.25); }
+.solara-page .btn.secondary { background: transparent; color: var(--forest); box-shadow: inset 0 0 0 1px var(--line); }
+.solara-page .btn.clay { background: var(--clay); color: var(--paper); }
+
+.solara-page .hero {
+  position: relative;
+  min-height: 760px;
+  display: grid;
+  grid-template-columns: minmax(0, .88fr) minmax(380px, .9fr);
+  gap: 70px;
+  align-items: center;
+  padding: 54px 0 94px;
+}
+
+.solara-page h1,
+.solara-page h2,
+.solara-page h3,
+.solara-page p { margin: 0; }
+
+.solara-page .eyebrow {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: rgba(200,111,78,.11);
+  color: #9e573d;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.solara-page h1 {
+  margin-top: 22px;
+  max-width: 680px;
+  color: var(--forest);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(58px, 7.8vw, 104px);
+  line-height: .92;
+  font-weight: 800;
+  letter-spacing: -.05em;
+}
+
+.solara-page .hero-copy p {
+  max-width: 610px;
+  margin-top: 28px;
+  color: #596861;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.78;
+}
+
+.solara-page .hero-actions { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+.solara-page .hero-note {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solara-page .note {
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 50px rgba(36,67,59,.08);
+}
+
+.solara-page .note strong { display: block; color: var(--forest); font-size: 24px; line-height: 1; font-weight: 900; }
+.solara-page .note span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; font-weight: 800; }
+
+.solara-page .hero-visual {
+  position: relative;
+  min-height: 650px;
+}
+
+.solara-page .arch {
+  position: absolute;
+  inset: 0 6% 34px 10%;
+  overflow: hidden;
+  border-radius: 999px 999px 36px 36px;
+  background: var(--sage);
+  box-shadow: var(--shadow);
+}
+
+.solara-page .arch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.solara-page .appointment-ticket {
+  position: absolute;
+  left: -4px;
+  bottom: 0;
+  width: min(360px, 88%);
+  padding: 24px;
+  border-radius: 30px;
+  background: var(--forest);
+  color: var(--paper);
+  box-shadow: 0 26px 70px rgba(36,67,59,.26);
+}
+
+.solara-page .appointment-ticket strong { display: block; font-size: 20px; line-height: 1.25; }
+.solara-page .appointment-ticket p { margin-top: 12px; color: rgba(255,250,240,.72); font-size: 13px; }
+
+.solara-page .smile-card {
+  position: absolute;
+  right: 0;
+  top: 58px;
+  width: min(250px, 72%);
+  padding: 20px;
+  border-radius: 28px;
+  background: rgba(255,255,255,.88);
+  border: 1px solid rgba(255,255,255,.8);
+  box-shadow: 0 24px 58px rgba(36,67,59,.16);
+  backdrop-filter: blur(18px);
+}
+
+.solara-page .smile-card span { color: var(--clay); letter-spacing: .08em; }
+.solara-page .smile-card p { margin-top: 10px; color: #53635d; font-size: 12px; line-height: 1.6; }
+
+.solara-page .strip {
+  padding: 26px 0;
+  background: var(--forest) !important;
+  color: rgba(255,250,240,.78);
+}
+
+.solara-page .strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.solara-page .section { padding: 96px 0; }
+.solara-page .section.paper { background: var(--paper) !important; }
+.solara-page .section.sage { background: var(--sage-2) !important; }
+.solara-page .section.dark { background: var(--forest) !important; color: var(--paper); }
+
+.solara-page .section-head {
+  display: grid;
+  grid-template-columns: minmax(260px, .82fr) minmax(0, .8fr);
+  gap: 64px;
+  align-items: end;
+}
+
+.solara-page h2 {
+  max-width: 680px;
+  color: inherit;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(42px, 5.8vw, 76px);
+  line-height: .95;
+  font-weight: 800;
+  letter-spacing: -.045em;
+}
+
+.solara-page .section-head p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.82;
+}
+
+.solara-page .dark .section-head p { color: rgba(255,250,240,.72); }
+
+.solara-page .treatment-board {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.solara-page .treatment {
+  min-height: 275px;
+  display: grid;
+  grid-template-columns: .72fr 1fr;
+  overflow: hidden;
+  border-radius: 34px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 62px rgba(36,67,59,.08);
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+
+.solara-page .treatment:hover { transform: translateY(-7px); box-shadow: 0 28px 76px rgba(36,67,59,.13); }
+.solara-page .treatment img { height: 100%; object-fit: cover; }
+.solara-page .treatment-copy { padding: 28px; align-self: center; }
+.solara-page .treatment-copy h3 { color: var(--forest); font-size: 25px; line-height: 1.1; font-weight: 900; letter-spacing: -.04em; }
+.solara-page .treatment-copy p { margin-top: 13px; color: var(--muted); font-size: 13px; line-height: 1.72; }
+
+.solara-page .story {
+  display: grid;
+  grid-template-columns: minmax(320px, .88fr) minmax(0, 1fr);
+  gap: 74px;
+  align-items: center;
+}
+
+.solara-page .story-photo {
+  position: relative;
+  min-height: 610px;
+}
+
+.solara-page .story-photo figure {
+  position: absolute;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.solara-page .story-main {
+  inset: 0 13% 70px 0;
+  border-radius: 36px;
+}
+
+.solara-page .story-mini {
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  border: 10px solid var(--paper);
+  border-radius: 999px 999px 28px 28px;
+}
+
+.solara-page .story-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.solara-page .feature-list { margin-top: 30px; display: grid; gap: 15px; }
+.solara-page .feature-list span { display: flex; gap: 12px; color: #50625b; font-size: 15px; font-weight: 800; }
+.solara-page .feature-list b { flex: 0 0 auto; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--clay); color: var(--paper); }
+
+.solara-page .ritual-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.solara-page .ritual {
+  min-height: 245px;
+  padding: 26px;
+  border-radius: 34px;
+  background: rgba(255,250,240,.08);
+  border: 1px solid var(--line-light);
+}
+
+.solara-page .ritual strong { color: var(--clay-2); font-size: 14px; font-weight: 900; }
+.solara-page .ritual h3 { margin-top: 44px; color: var(--paper); font-size: 22px; line-height: 1.16; }
+.solara-page .ritual p { margin-top: 12px; color: rgba(255,250,240,.72); font-size: 12px; }
+
+.solara-page .doctor-lineup {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.solara-page .doctor {
+  overflow: hidden;
+  border-radius: 999px 999px 34px 34px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 60px rgba(36,67,59,.08);
+}
+
+.solara-page .doctor img { height: 345px; object-fit: cover; object-position: center top; }
+.solara-page .doctor div { padding: 24px; }
+.solara-page .doctor h3 { color: var(--forest); font-size: 22px; }
+.solara-page .doctor p { margin-top: 8px; color: var(--muted); font-size: 13px; }
+
+.solara-page .testimonial {
+  display: grid;
+  grid-template-columns: minmax(260px, .54fr) minmax(0, 1fr);
+  gap: 58px;
+  align-items: center;
+  padding: 50px;
+  border-radius: 44px;
+  background: var(--forest) !important;
+  color: var(--paper);
+}
+
+.solara-page .testimonial img { border-radius: 999px 999px 32px 32px; aspect-ratio: .86; height: 100%; object-fit: cover; }
+.solara-page .stars { color: var(--sun); letter-spacing: .08em; }
+.solara-page .testimonial p { margin-top: 24px; color: rgba(255,250,240,.76); font-size: 18px; line-height: 1.82; }
+.solara-page .testimonial cite { display: block; margin-top: 22px; color: var(--clay-2); font-style: normal; font-weight: 900; }
+
+.solara-page .faq-grid {
+  margin-top: 54px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.solara-page .faq {
+  padding: 26px;
+  border-radius: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.solara-page .faq h3 { color: var(--forest); font-size: 19px; }
+.solara-page .faq p { margin-top: 10px; color: var(--muted); font-size: 13px; }
+
+.solara-page .booking {
+  display: grid;
+  grid-template-columns: minmax(260px, .72fr) minmax(0, 1fr);
+  gap: 42px;
+  align-items: start;
+}
+
+.solara-page .booking-info {
+  padding: 36px;
+  border-radius: 40px;
+  background: var(--forest);
+  color: var(--paper);
+}
+
+.solara-page .booking-info p { margin-top: 16px; color: rgba(255,250,240,.72); }
+
+.solara-page .form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.solara-page .form input,
+.solara-page .form select,
+.solara-page .form textarea {
+  width: 100%;
+  min-height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  padding: 0 18px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.solara-page .form textarea {
+  grid-column: 1 / -1;
+  min-height: 136px;
+  padding-top: 18px;
+  border-radius: 26px;
+  resize: vertical;
+}
+
+.solara-page .footer {
+  padding: 58px 0;
+  background: var(--forest) !important;
+  color: rgba(255,250,240,.7);
+}
+
+.solara-page .footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 34px;
+}
+
+.solara-page .footer h3 { color: var(--paper); font-size: 14px; margin-bottom: 14px; }
+.solara-page .footer a, .solara-page .footer p { display: block; margin-top: 10px; color: rgba(255,250,240,.64); font-size: 13px; }
+
+.solara-page [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 720ms var(--ease), transform 720ms var(--ease); }
+.solara-page [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 980px) {
+  .solara-page .nav-links { display: none; }
+  .solara-page .hero, .solara-page .section-head, .solara-page .story, .solara-page .testimonial, .solara-page .booking { grid-template-columns: 1fr; }
+  .solara-page .hero-visual { min-height: 580px; }
+  .solara-page .treatment-board, .solara-page .doctor-lineup, .solara-page .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .solara-page .ritual-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .solara-page .wrap { width: min(100% - 28px, 1180px); }
+  .solara-page .nav { min-height: 74px; }
+  .solara-page .nav > .btn { min-height: 42px; padding-inline: 14px; font-size: 11px; }
+  .solara-page h1 { font-size: clamp(48px, 14vw, 66px); }
+  .solara-page h2 { font-size: clamp(36px, 11vw, 48px); }
+  .solara-page .hero { padding: 38px 0 66px; }
+  .solara-page .hero-note, .solara-page .treatment-board, .solara-page .doctor-lineup, .solara-page .ritual-grid, .solara-page .faq-grid, .solara-page .footer-grid, .solara-page .form, .solara-page .strip-grid { grid-template-columns: 1fr; }
+  .solara-page .arch { inset: 44px 0 70px; }
+  .solara-page .smile-card { top: 0; right: 12px; }
+  .solara-page .appointment-ticket { left: 12px; }
+  .solara-page .section { padding: 68px 0; }
+  .solara-page .treatment { grid-template-columns: 1fr; }
+  .solara-page .treatment img { height: 210px; }
+  .solara-page .story-photo { min-height: 460px; }
+  .solara-page .story-mini { width: 190px; }
+  .solara-page .testimonial { padding: 24px; border-radius: 30px; }
+}
+
+.solara-page, .solara-page * { min-width: 0 !important; }
+.solara-page :is(h1, h2, h3, p, a, button, span, strong, small, li, label, input, textarea, select) {
+  max-height: none !important;
+  height: auto;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.solara-page :is(h1, h2, h3) { line-height: 1.12 !important; padding-block: .05em .13em; text-wrap: balance; }
+.solara-page p { line-height: 1.68 !important; }
+.solara-page .btn { line-height: 1.2 !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .solara-page *, .solara-page *::before, .solara-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .solara-page [data-reveal] { opacity: 1; transform: none; }
+}
+/* STORAGE_DASHBOARD_QA_POLISH */
+.solara-page { overflow-x: clip; }
+.solara-page img { max-width: 100%; object-fit: cover; }
+.solara-page figure { overflow: hidden; }
+.solara-page :is(h1,h2,h3,h4,p,a,button,label,input,select,textarea,span) {
+  max-height: none !important;
+  text-overflow: clip !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.solara-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 240ms cubic-bezier(.16,1,.3,1), box-shadow 240ms cubic-bezier(.16,1,.3,1), filter 240ms cubic-bezier(.16,1,.3,1), border-color 240ms cubic-bezier(.16,1,.3,1);
+}
+.solara-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover {
+  transform: translateY(-3px);
+  filter: saturate(1.04);
+  box-shadow: 0 22px 58px rgba(0,0,0,.18), 0 0 0 6px rgba(255,255,255,.14);
+}
+.solara-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card) {
+  transition: transform 280ms cubic-bezier(.16,1,.3,1), box-shadow 280ms cubic-bezier(.16,1,.3,1), border-color 280ms cubic-bezier(.16,1,.3,1), filter 280ms cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+.solara-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover {
+  transform: translateY(-6px);
+  filter: saturate(1.03);
+}
+.solara-page :is(.hero, .hero-shell, .hero-panel, .hero-visual, .hero-card) {
+  position: relative;
+}
+.solara-page :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 0 38%, rgba(255,255,255,.12) 48%, transparent 60%);
+  transform: translateX(-130%);
+  animation: storageHeroSheen 8.5s cubic-bezier(.16,1,.3,1) infinite;
+}
+@keyframes storageHeroSheen {
+  0%, 42%, 100% { transform: translateX(-130%); }
+  62% { transform: translateX(130%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .solara-page :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after { animation: none !important; }
+  .solara-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover,
+  .solara-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover { transform: none !important; }
+}
+
+</style>
+
+<div class="solara-page">
+  <section class="hero-shell" id="top">
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="#top"><span class="brand-mark">S</span> Solara Dental</a>
+      <div class="nav-links"><a href="#care">Care</a><a href="#ritual">Visit Flow</a><a href="#team">Team</a><a href="#reviews">Reviews</a><a href="#booking">Book</a></div>
+      <a class="btn clay" href="#booking">Reserve Visit</a>
+    </nav>
+    <div class="wrap hero">
+      <div class="hero-copy" data-reveal>
+        <span class="eyebrow">Boutique dental care for real life</span>
+        <h1>Smile care that feels warm, honest, and beautifully planned.</h1>
+        <p>Solara Dental blends modern dentistry with a calmer patient experience, so you understand your mouth, your options, and the next step before treatment begins.</p>
+        <div class="hero-actions"><a class="btn" href="#booking">Book a Comfort Visit</a><a class="btn secondary" href="#care">See Services</a></div>
+        <div class="hero-note"><div class="note"><strong>4.9</strong><span>patient rating</span></div><div class="note"><strong>45m</strong><span>unrushed first visits</span></div><div class="note"><strong>1:1</strong><span>clear treatment planning</span></div></div>
+      </div>
+      <div class="hero-visual" data-reveal>
+        <figure class="arch"><img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=900&q=84" alt="Warm modern dental studio"></figure>
+        <aside class="smile-card"><span>★★★★★</span><p>“They made the plan feel simple instead of scary.”</p></aside>
+        <aside class="appointment-ticket"><strong>New patient comfort consult</strong><p>Includes photos, exam, priorities, and a written next-step plan.</p></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip"><div class="wrap strip-grid"><span>Transparent estimates</span><span>Comfort-first visits</span><span>Digital smile scans</span><span>Family-friendly care</span></div></section>
+
+  <section class="section paper" id="care">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>The right care, in the right order.</h2><p>Every treatment starts with the same promise: we explain what is happening, what matters most, and which option fits your real life.</p></div>
+      <div class="treatment-board">
+        <article class="treatment" data-reveal><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=84" alt="Preventive dental tools"><div class="treatment-copy"><h3>Preventive Care</h3><p>Cleanings, exams, gum support, and digital checks that keep small problems manageable.</p></div></article>
+        <article class="treatment" data-reveal><img src="https://images.unsplash.com/photo-1616391182219-e080b4d1043a?auto=format&fit=crop&w=600&q=84" alt="Cosmetic dental smile"><div class="treatment-copy"><h3>Smile Aesthetics</h3><p>Whitening, bonding, veneers, and smile planning with realistic expectations from day one.</p></div></article>
+        <article class="treatment" data-reveal><img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=600&q=84" alt="Restorative dental treatment"><div class="treatment-copy"><h3>Restorative Repair</h3><p>Fillings, crowns, bridges, and implant planning focused on comfort and long-term strength.</p></div></article>
+        <article class="treatment" data-reveal><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=84" alt="Dental emergency room"><div class="treatment-copy"><h3>Urgent Tooth Help</h3><p>Focused exams for pain, broken teeth, swelling, or worries that should not wait.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sage">
+    <div class="wrap story">
+      <div class="story-photo" data-reveal><figure class="story-main"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=84" alt="Calm dental treatment room"></figure><figure class="story-mini"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=500&q=84" alt="Dental chair in bright clinic"></figure></div>
+      <div data-reveal><span class="eyebrow">The Solara difference</span><h2>A dental visit should not feel like a sales meeting.</h2><p>We separate urgent care from optional improvements, explain tradeoffs clearly, and help you choose a timeline that protects your health without overwhelming your calendar.</p><div class="feature-list"><span><b>✓</b> Visual diagnosis with photos and scans.</span><span><b>✓</b> Written care roadmap after the first visit.</span><span><b>✓</b> Comfort pacing for anxious patients.</span><span><b>✓</b> Treatment choices explained before scheduling.</span></div></div>
+    </div>
+  </section>
+
+  <section class="section dark" id="ritual">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>A calmer rhythm for every appointment.</h2><p>Our visit flow is designed to slow down the confusing parts and keep the clinical work precise.</p></div>
+      <div class="ritual-grid"><article class="ritual" data-reveal><strong>01</strong><h3>Listen</h3><p>We start with your concerns, history, and what would make treatment feel manageable.</p></article><article class="ritual" data-reveal><strong>02</strong><h3>Look</h3><p>Photos, scans, and exams help us show you what is actually happening.</p></article><article class="ritual" data-reveal><strong>03</strong><h3>Plan</h3><p>You receive a prioritized roadmap with costs, timing, and choices.</p></article><article class="ritual" data-reveal><strong>04</strong><h3>Care</h3><p>Treatment is paced, explained, and followed by simple aftercare instructions.</p></article></div>
+    </div>
+  </section>
+
+  <section class="section paper" id="team">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>Meet the people who make dentistry feel human.</h2><p>Clinical skill matters. So does tone, pacing, and the ability to explain choices without judgment.</p></div>
+      <div class="doctor-lineup"><article class="doctor" data-reveal><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=84" alt="Solara dentist"><div><h3>Dr. Lena Wells</h3><p>Restorative and cosmetic care.</p></div></article><article class="doctor" data-reveal><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=84" alt="Solara dental clinician"><div><h3>Dr. Omar Lee</h3><p>Implants, crowns, and urgent care.</p></div></article><article class="doctor" data-reveal><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=700&q=84" alt="Solara hygienist"><div><h3>Ari Chen, RDH</h3><p>Prevention and gum health.</p></div></article></div>
+    </div>
+  </section>
+
+  <section class="section sage" id="reviews">
+    <div class="wrap testimonial" data-reveal><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=700&q=84" alt="Happy Solara Dental patient"><div><span class="stars">★★★★★</span><h2>“They told me what mattered now and what could wait.”</h2><p>I had avoided the dentist because I expected bad news and pressure. Solara gave me a clear order of priorities and made the first treatment feel doable.</p><cite>Representative patient feedback</cite></div></div>
+  </section>
+
+  <section class="section paper">
+    <div class="wrap">
+      <div class="section-head" data-reveal><h2>Before you book, here is what patients usually ask.</h2><p>If your question is more specific, send a note and our care team can point you to the right first appointment.</p></div>
+      <div class="faq-grid"><article class="faq" data-reveal><h3>Do you work with nervous patients?</h3><p>Yes. We explain each step, pause when needed, and plan longer visits when comfort matters.</p></article><article class="faq" data-reveal><h3>Will I know the cost first?</h3><p>Yes. Treatment recommendations include priorities, timing, and estimated costs before you decide.</p></article><article class="faq" data-reveal><h3>Can I come in for cosmetic advice only?</h3><p>Yes. A smile consult can explore whitening, bonding, veneers, and realistic treatment options.</p></article><article class="faq" data-reveal><h3>What if I have tooth pain?</h3><p>Request an urgent visit and we will help identify the right next step as quickly as possible.</p></article></div>
+    </div>
+  </section>
+
+  <section class="section sage" id="booking">
+    <div class="wrap booking">
+      <aside class="booking-info" data-reveal><span class="eyebrow">Start here</span><h2>Reserve a visit and get a clearer next step.</h2><p>Tell us what is going on. We will help match you to the right appointment type and timing.</p></aside>
+      <form class="form" data-reveal><input type="text" placeholder="Full name" aria-label="Full name"><input type="tel" placeholder="Phone number" aria-label="Phone number"><input type="email" placeholder="Email address" aria-label="Email address"><select aria-label="Visit type"><option>New patient comfort consult</option><option>Tooth pain or emergency</option><option>Cosmetic smile consult</option><option>Restorative treatment planning</option></select><textarea placeholder="What would you like help with?" aria-label="What would you like help with?"></textarea><button class="btn clay" type="submit">Request Appointment</button></form>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="wrap footer-grid"><div><h3>Solara Dental</h3><p>Warm, honest dental care with beautiful planning and calmer appointments.</p></div><div><h3>Care</h3><a href="#care">Services</a><a href="#ritual">Visit flow</a><a href="#team">Team</a></div><div><h3>Clinic</h3><a href="#reviews">Reviews</a><a href="#booking">Book visit</a><a href="#top">Back to top</a></div><div><h3>Contact</h3><a href="tel:+10000000000">(000) 000-0000</a><a href="mailto:hello@solaradental.example">hello@solaradental.example</a></div></div></footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector(".solara-page");
+  if (!page) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    page.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+      item.style.transitionDelay = Math.min(index * 45, 240) + "ms";
+      observer.observe(item);
+    });
+  } else {
+    page.querySelectorAll("[data-reveal]").forEach(function (item) { item.classList.add("is-visible"); });
+  }
+})();
+</script>

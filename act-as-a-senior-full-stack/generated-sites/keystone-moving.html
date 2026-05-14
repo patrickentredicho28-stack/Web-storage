@@ -1,0 +1,805 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&family=Fraunces:opsz,wght@9..144,600;9..144,750&display=swap");
+
+.keystone-move {
+  --ink: #101720;
+  --deep: #172538;
+  --blue: #1c5d99;
+  --blue-2: #0d3e70;
+  --lime: #c8f04d;
+  --paper: #f6f2e8;
+  --card: #fffaf0;
+  --muted: #65717f;
+  --line: rgba(16, 23, 32, .14);
+  --white: #fffdf7;
+  --shadow: 0 28px 70px rgba(16, 23, 32, .18);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: "Manrope", Arial, sans-serif;
+  line-height: 1.55;
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+.keystone-move,
+.keystone-move *,
+.keystone-move *::before,
+.keystone-move *::after { box-sizing: border-box; }
+
+.keystone-move a { color: inherit; text-decoration: none; }
+.keystone-move img { display: block; max-width: 100%; height: auto; }
+.keystone-move :focus-visible { outline: 3px solid rgba(200, 240, 77, .72); outline-offset: 4px; }
+.keystone-move .wrap { width: min(1240px, calc(100% - 48px)); margin-inline: auto; }
+.keystone-move :is(h1, h2, h3, p) { margin: 0; }
+
+.keystone-move .nav {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 28px;
+}
+
+.keystone-move .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  font-size: 28px;
+}
+
+.keystone-move .brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--deep);
+  color: var(--lime);
+  font-weight: 900;
+}
+
+.keystone-move .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: #344151;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.keystone-move .nav-cta {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--deep);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 16px 34px rgba(23, 37, 56, .18);
+}
+
+.keystone-move .hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(420px, .78fr);
+  gap: 26px;
+  min-height: 760px;
+  padding-bottom: 54px;
+}
+
+.keystone-move .hero-copy {
+  display: grid;
+  align-content: center;
+  padding: 56px 0 94px;
+}
+
+.keystone-move .eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,250,240,.72);
+  color: #344151;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.keystone-move .eyebrow::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 6px rgba(200,240,77,.22);
+}
+
+.keystone-move h1 {
+  max-width: 720px;
+  margin-top: 28px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(58px, 7vw, 104px);
+  line-height: .94;
+  letter-spacing: -.055em;
+  padding-block: .04em .1em;
+}
+
+.keystone-move .hero-copy p {
+  max-width: 640px;
+  margin-top: 30px;
+  color: #263342;
+  font-size: clamp(18px, 1.6vw, 22px);
+}
+
+.keystone-move .hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.keystone-move .btn {
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 24px;
+  background: var(--blue);
+  color: var(--white);
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 220ms var(--ease), background 220ms var(--ease), box-shadow 220ms var(--ease);
+  box-shadow: 0 18px 42px rgba(28, 93, 153, .24);
+}
+
+.keystone-move .btn:hover { transform: translateY(-2px); background: var(--blue-2); }
+.keystone-move .btn.secondary { background: transparent; color: var(--deep); box-shadow: inset 0 0 0 1px var(--line); }
+.keystone-move .btn.lime { background: var(--lime); color: var(--ink); box-shadow: 0 18px 42px rgba(142, 171, 40, .25); }
+
+.keystone-move .hero-visual {
+  position: relative;
+  min-height: 690px;
+  overflow: hidden;
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(16,23,32,.02), rgba(16,23,32,.82)),
+    url("https://images.unsplash.com/photo-1715645948484-da40dd56bc93?auto=format&fit=crop&w=1600&q=84") center/cover;
+  box-shadow: var(--shadow);
+}
+
+.keystone-move .hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 0 38%, rgba(255,255,255,.18) 48%, transparent 58%);
+  background-size: 220% 100%;
+  opacity: .65;
+  animation: moveLight 7s var(--ease) infinite;
+}
+
+.keystone-move .quote-card {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  width: min(390px, calc(100% - 56px));
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 26px;
+  background: rgba(255,253,247,.94);
+  color: var(--ink);
+  box-shadow: 0 24px 70px rgba(0,0,0,.34);
+}
+
+.keystone-move .quote-card h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -.03em;
+}
+
+.keystone-move .quote-form {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.keystone-move .quote-form input,
+.keystone-move .quote-form select,
+.keystone-move .quote-form textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0 13px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.keystone-move .quote-form textarea {
+  grid-column: 1 / -1;
+  min-height: 82px;
+  padding-top: 12px;
+  resize: vertical;
+}
+
+.keystone-move .quote-form button { grid-column: 1 / -1; }
+
+.keystone-move .hero-stats {
+  position: absolute;
+  left: 28px;
+  bottom: 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: min(220px, calc(100% - 56px));
+}
+
+.keystone-move .stat {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(16,23,32,.62);
+  color: var(--white);
+  backdrop-filter: blur(10px);
+}
+
+.keystone-move .stat strong {
+  display: block;
+  color: var(--lime);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.keystone-move .stat span {
+  display: block;
+  margin-top: 7px;
+  color: rgba(255,255,255,.72);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.keystone-move .section { padding: 96px 0; background: var(--paper) !important; }
+.keystone-move .section.dark { background: var(--deep) !important; color: var(--white); }
+.keystone-move .section.light { background: var(--card) !important; }
+
+.keystone-move .section-head {
+  display: grid;
+  grid-template-columns: minmax(300px, .82fr) minmax(0, .9fr);
+  align-items: end;
+  gap: 70px;
+}
+
+.keystone-move h2 {
+  max-width: 720px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(42px, 5vw, 76px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  padding-block: .04em .1em;
+}
+
+.keystone-move .section-head p {
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.keystone-move .dark .section-head p { color: rgba(255,255,255,.68); }
+
+.keystone-move .service-grid {
+  margin-top: 54px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr .9fr;
+  gap: 18px;
+}
+
+.keystone-move .service {
+  min-height: 260px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255,253,247,.8);
+  overflow: hidden;
+  position: relative;
+  transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+
+.keystone-move .service:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.keystone-move .service.featured {
+  grid-row: span 2;
+  min-height: 540px;
+  display: grid;
+  align-content: end;
+  color: var(--white);
+  background:
+    linear-gradient(180deg, rgba(16,23,32,.05), rgba(16,23,32,.86)),
+    url("https://images.unsplash.com/photo-1590807774630-9c3b69d8263e?auto=format&fit=crop&w=900&q=84") center/cover;
+}
+
+.keystone-move .service h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 32px;
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  padding-block: .04em .08em;
+}
+
+.keystone-move .service p {
+  margin-top: 14px;
+  color: var(--muted);
+}
+
+.keystone-move .service.featured p { color: rgba(255,255,255,.78); }
+
+.keystone-move .proof-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin-top: 54px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255,255,255,.12);
+}
+
+.keystone-move .proof {
+  padding: 30px;
+  background: rgba(255,255,255,.08);
+}
+
+.keystone-move .proof strong {
+  display: block;
+  color: var(--lime);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.keystone-move .proof span {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,.72);
+  font-weight: 800;
+}
+
+.keystone-move .process {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.keystone-move .step {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--white);
+}
+
+.keystone-move .step strong {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.keystone-move .step h3 { margin-top: 30px; font-size: 22px; }
+.keystone-move .step p { margin-top: 12px; color: var(--muted); }
+
+.keystone-move .pricing {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.keystone-move .price-card {
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 28px;
+  background: rgba(255,255,255,.08);
+}
+
+.keystone-move .price-card.highlight {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.keystone-move .price-card h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 34px;
+  line-height: 1;
+  padding-block: .04em .08em;
+}
+
+.keystone-move .price-card p { margin-top: 14px; color: rgba(255,255,255,.68); }
+.keystone-move .price-card.highlight p { color: rgba(16,23,32,.72); }
+.keystone-move .price-card ul {
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+.keystone-move .price-card li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 800;
+}
+
+.keystone-move .price-card li::before {
+  content: "";
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.keystone-move .final {
+  position: relative;
+  overflow: hidden;
+  border-radius: 38px;
+  padding: 54px;
+  color: var(--white);
+  background:
+    linear-gradient(90deg, rgba(16,23,32,.94), rgba(16,23,32,.52)),
+    url("https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=84") center/cover;
+  box-shadow: var(--shadow);
+}
+
+.keystone-move .final-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, .85fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.keystone-move .final p {
+  margin-top: 20px;
+  max-width: 540px;
+  color: rgba(255,255,255,.76);
+}
+
+.keystone-move .final-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.keystone-move .final-form input,
+.keystone-move .final-form select {
+  min-height: 58px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 16px;
+  background: rgba(255,253,247,.96);
+  padding: 0 16px;
+  color: var(--ink);
+  font: inherit;
+}
+
+.keystone-move .final-form button { grid-column: 1 / -1; }
+
+.keystone-move .footer {
+  padding: 54px 0;
+  background: var(--ink) !important;
+  color: rgba(255,255,255,.64);
+}
+
+.keystone-move .footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 30px;
+}
+
+.keystone-move .footer h3 { color: var(--white); font-size: 14px; margin: 0 0 12px; }
+.keystone-move .footer p,
+.keystone-move .footer a { display: block; margin-top: 9px; color: rgba(255,255,255,.62); font-size: 13px; }
+
+.keystone-move [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 720ms var(--ease), transform 720ms var(--ease);
+}
+
+.keystone-move [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+@keyframes moveLight {
+  0%, 100% { background-position: 130% 0; }
+  50% { background-position: -30% 0; }
+}
+
+@media (max-width: 980px) {
+  .keystone-move .nav { grid-template-columns: 1fr auto; }
+  .keystone-move .nav-links { display: none; }
+  .keystone-move .hero,
+  .keystone-move .section-head,
+  .keystone-move .final-grid { grid-template-columns: 1fr; }
+  .keystone-move .hero { min-height: auto; }
+  .keystone-move .hero-copy { padding: 38px 0 18px; }
+  .keystone-move .hero-visual { min-height: 760px; }
+  .keystone-move .service-grid,
+  .keystone-move .process,
+  .keystone-move .pricing,
+  .keystone-move .proof-strip,
+  .keystone-move .footer-grid { grid-template-columns: 1fr; }
+  .keystone-move .service.featured { min-height: 360px; grid-row: auto; }
+}
+
+@media (max-width: 640px) {
+  .keystone-move .wrap { width: min(100% - 28px, 1240px); }
+  .keystone-move .nav-cta { min-height: 44px; padding-inline: 14px; font-size: 0; }
+  .keystone-move .nav-cta::after { content: "Quote"; font-size: 13px; }
+  .keystone-move h1 { font-size: clamp(46px, 14vw, 62px); }
+  .keystone-move .hero-visual { min-height: 1040px; border-radius: 26px; }
+  .keystone-move .quote-card,
+  .keystone-move .hero-stats {
+    left: 18px;
+    right: 18px;
+    width: auto;
+  }
+  .keystone-move .hero-stats { grid-template-columns: 1fr; bottom: 560px; }
+  .keystone-move .quote-card { bottom: 18px; }
+  .keystone-move .quote-form,
+  .keystone-move .final-form { grid-template-columns: 1fr; }
+  .keystone-move .section { padding: 70px 0; }
+  .keystone-move .final { padding: 28px; border-radius: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .keystone-move *,
+  .keystone-move *::before,
+  .keystone-move *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .keystone-move [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* STORAGE_DASHBOARD_QA_POLISH */
+.keystone-move { overflow-x: clip; }
+.keystone-move img { max-width: 100%; object-fit: cover; }
+.keystone-move figure { overflow: hidden; }
+.keystone-move :is(h1,h2,h3,h4,p,a,button,label,input,select,textarea,span) {
+  max-height: none !important;
+  text-overflow: clip !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.keystone-move :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 240ms cubic-bezier(.16,1,.3,1), box-shadow 240ms cubic-bezier(.16,1,.3,1), filter 240ms cubic-bezier(.16,1,.3,1), border-color 240ms cubic-bezier(.16,1,.3,1);
+}
+.keystone-move :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover {
+  transform: translateY(-3px);
+  filter: saturate(1.04);
+  box-shadow: 0 22px 58px rgba(0,0,0,.18), 0 0 0 6px rgba(255,255,255,.14);
+}
+.keystone-move :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card) {
+  transition: transform 280ms cubic-bezier(.16,1,.3,1), box-shadow 280ms cubic-bezier(.16,1,.3,1), border-color 280ms cubic-bezier(.16,1,.3,1), filter 280ms cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+.keystone-move :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover {
+  transform: translateY(-6px);
+  filter: saturate(1.03);
+}
+.keystone-move :is(.hero, .hero-shell, .hero-panel, .hero-visual, .hero-card) {
+  position: relative;
+}
+.keystone-move :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 0 38%, rgba(255,255,255,.12) 48%, transparent 60%);
+  transform: translateX(-130%);
+  animation: storageHeroSheen 8.5s cubic-bezier(.16,1,.3,1) infinite;
+}
+@keyframes storageHeroSheen {
+  0%, 42%, 100% { transform: translateX(-130%); }
+  62% { transform: translateX(130%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .keystone-move :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after { animation: none !important; }
+  .keystone-move :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover,
+  .keystone-move :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover { transform: none !important; }
+}
+
+</style>
+
+<div class="keystone-move">
+  <nav class="wrap nav" aria-label="Primary navigation">
+    <a class="brand" href="#top"><span class="brand-mark">K</span> Keystone Move Co.</a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#quote">Quote</a>
+    </div>
+    <a class="nav-cta" href="#quote">Check My Move Date</a>
+  </nav>
+
+  <section class="wrap hero" id="top">
+    <div class="hero-copy" data-reveal>
+      <span class="eyebrow">Licensed local and long-distance movers</span>
+      <h1>Move day should feel planned, not improvised.</h1>
+      <p>Keystone Move Co. handles apartments, homes, offices, fragile pieces, and tight building rules with a clear plan before the truck ever arrives.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#quote">Get a Moving Quote</a>
+        <a class="btn secondary" href="#process">See How We Plan It</a>
+      </div>
+    </div>
+
+    <aside class="hero-visual" aria-label="Professional movers loading a home">
+      <div class="hero-stats">
+        <div class="stat"><strong>4.9</strong><span>average review score</span></div>
+        <div class="stat"><strong>18k+</strong><span>rooms moved</span></div>
+        <div class="stat"><strong>0</strong><span>surprise arrival windows</span></div>
+      </div>
+      <div class="quote-card">
+        <h3>Price the move before the boxes stack up.</h3>
+        <form class="quote-form">
+          <input type="text" placeholder="Moving from" aria-label="Moving from">
+          <input type="text" placeholder="Moving to" aria-label="Moving to">
+          <select aria-label="Move type">
+            <option>Apartment move</option>
+            <option>Home move</option>
+            <option>Office relocation</option>
+            <option>Packing help</option>
+          </select>
+          <input type="date" aria-label="Preferred move date">
+          <textarea placeholder="Anything fragile, heavy, or hard to access?" aria-label="Move details"></textarea>
+          <button class="btn lime" type="submit">Send My Estimate Request</button>
+        </form>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section light" id="services">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Built for the moves people worry about most.</h2>
+        <p>Every service is designed around the three things that make moving stressful: timing, damage risk, and unclear scope.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service featured" data-reveal>
+          <h3>White-glove home moves</h3>
+          <p>Room-by-room protection, labeled placement, floor coverage, building coordination, and careful handling for the pieces you cannot replace.</p>
+        </article>
+        <article class="service" data-reveal><h3>Apartment and condo moves</h3><p>Elevator windows, parking restrictions, hallway protection, and tight stairwells planned before arrival.</p></article>
+        <article class="service" data-reveal><h3>Office relocation</h3><p>Desk maps, IT handoff, after-hours scheduling, and a reset plan so the team can reopen quickly.</p></article>
+        <article class="service" data-reveal><h3>Packing and fragile care</h3><p>Art, mirrors, dishes, wardrobes, and specialty items packed with a documented room inventory.</p></article>
+        <article class="service" data-reveal><h3>Long-distance coordination</h3><p>A single move lead, clear load windows, route updates, and delivery expectations before departure.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Proof matters when everything you own is on the truck.</h2>
+        <p>We make the operational details visible so the quote feels grounded and the move feels controlled.</p>
+      </div>
+      <div class="proof-strip" data-reveal>
+        <div class="proof"><strong>24h</strong><span>quote response target</span></div>
+        <div class="proof"><strong>2x</strong><span>inventory confirmation</span></div>
+        <div class="proof"><strong>100%</strong><span>floor and doorway care</span></div>
+        <div class="proof"><strong>1</strong><span>dedicated move lead</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>A calmer move starts before move day.</h2>
+        <p>The work is not just lifting. It is sequencing the day so crews, buildings, parking, inventory, and client expectations all line up.</p>
+      </div>
+      <div class="process">
+        <article class="step" data-reveal><strong>1</strong><h3>Scope the rooms</h3><p>We review rooms, large items, building rules, stairs, elevators, parking, and distance.</p></article>
+        <article class="step" data-reveal><strong>2</strong><h3>Build the move plan</h3><p>You get arrival windows, crew size, protection notes, and packing priorities in writing.</p></article>
+        <article class="step" data-reveal><strong>3</strong><h3>Protect and load</h3><p>Doorways, floors, furniture, and fragile items are protected before the first box moves.</p></article>
+        <article class="step" data-reveal><strong>4</strong><h3>Place and reset</h3><p>Boxes and furniture land in the rooms where they belong, not just inside the door.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="pricing">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Clear tiers before you commit.</h2>
+        <p>Every quote is customized, but these tiers show how the scope usually changes by move type.</p>
+      </div>
+      <div class="pricing">
+        <article class="price-card" data-reveal><h3>Local Essential</h3><p>For apartments, smaller homes, and simple same-city moves.</p><ul><li>Two or three-person crew</li><li>Truck, pads, and basic protection</li><li>Room placement on arrival</li></ul></article>
+        <article class="price-card highlight" data-reveal><h3>Planned Home</h3><p>For families who need the whole move coordinated before the date.</p><ul><li>Pre-move inventory review</li><li>Packing support available</li><li>Building and access planning</li></ul></article>
+        <article class="price-card" data-reveal><h3>Specialty Move</h3><p>For offices, antiques, artwork, pianos, and long-distance delivery.</p><ul><li>Dedicated move lead</li><li>Specialty wrap and handling</li><li>Delivery timeline coordination</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quote">
+    <div class="wrap final" data-reveal>
+      <div class="final-grid">
+        <div>
+          <span class="eyebrow">Quote without the guessing</span>
+          <h2>Tell us what has to move. We will map the day.</h2>
+          <p>Send the basics and a coordinator will help you understand crew size, timing, access needs, and the next best step.</p>
+        </div>
+        <form class="final-form">
+          <input type="text" placeholder="Full name" aria-label="Full name">
+          <input type="tel" placeholder="Phone number" aria-label="Phone number">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <select aria-label="Move size">
+            <option>Studio or one-bedroom</option>
+            <option>Two or three-bedroom home</option>
+            <option>Large home or estate</option>
+            <option>Office or commercial move</option>
+          </select>
+          <button class="btn lime" type="submit">Request My Move Plan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div><h3>Keystone Move Co.</h3><p>Premium moving-company concept inspired by modern moving landing-page references and built GHL-ready.</p></div>
+      <div><h3>Services</h3><a href="#services">Home moves</a><a href="#services">Office moves</a><a href="#services">Packing help</a></div>
+      <div><h3>Plan</h3><a href="#process">Process</a><a href="#pricing">Pricing tiers</a><a href="#quote">Quote</a></div>
+      <div><h3>Reference</h3><a href="https://www.rocket.new/templates/relocate-premium-moving-landing-page-template">Relocate reference</a><a href="https://www.rocket.new/templates/transit-premium-moving-services-landing-page-template">Transit reference</a></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector(".keystone-move");
+  if (!page) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    page.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+      item.style.transitionDelay = Math.min(index * 55, 260) + "ms";
+      observer.observe(item);
+    });
+  } else {
+    page.querySelectorAll("[data-reveal]").forEach(function (item) { item.classList.add("visible"); });
+  }
+})();
+</script>

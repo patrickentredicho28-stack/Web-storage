@@ -1,0 +1,1253 @@
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800;900&display=swap");
+
+.dental-page {
+  --teal-950: #052824;
+  --teal-900: #083b35;
+  --teal-800: #0c574f;
+  --mint: #dff6ef;
+  --mint-2: #bfeadd;
+  --aqua: #5fd2d0;
+  --blue: #4e95ff;
+  --cream: #fbfaf4;
+  --paper: #f4faf7;
+  --white: #ffffff;
+  --ink: #0f2427;
+  --muted: #647a7c;
+  --line: rgba(8, 59, 53, 0.12);
+  --line-light: rgba(255, 255, 255, 0.18);
+  --shadow: 0 28px 80px rgba(8, 59, 53, 0.14);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+  background: var(--paper) !important;
+  color: var(--ink);
+  font-family: "Manrope", Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: clip;
+  isolation: isolate;
+  text-rendering: geometricPrecision;
+}
+
+.dental-page,
+.dental-page *,
+.dental-page *::before,
+.dental-page *::after {
+  box-sizing: border-box;
+}
+
+.dental-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dental-page img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.dental-page :focus-visible {
+  outline: 3px solid rgba(95, 210, 208, 0.75);
+  outline-offset: 4px;
+}
+
+.dental-page .wrap {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.dental-page .hero-shell {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 78% 24%, rgba(95, 210, 208, 0.32), transparent 28%),
+    linear-gradient(135deg, #e9fbf5 0%, #f7fffb 52%, #dff4ee 100%) !important;
+  border-bottom-left-radius: 46px;
+  border-bottom-right-radius: 46px;
+}
+
+.dental-page .hero-shell::before {
+  content: "";
+  position: absolute;
+  right: -11vw;
+  top: 72px;
+  width: min(560px, 54vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal-800), var(--aqua));
+  opacity: 0.12;
+}
+
+.dental-page .nav {
+  position: relative;
+  z-index: 5;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.dental-page .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--teal-950);
+}
+
+.dental-page .brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--teal-900);
+  color: var(--white);
+  box-shadow: 0 14px 34px rgba(8, 59, 53, 0.2);
+}
+
+.dental-page .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  color: #3d5759;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.dental-page .nav-links a {
+  transition: color 180ms var(--ease);
+}
+
+.dental-page .nav-links a:hover {
+  color: var(--teal-800);
+}
+
+.dental-page .btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 22px;
+  background: var(--teal-900);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 900;
+  box-shadow: 0 18px 42px rgba(8, 59, 53, 0.2);
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), background 240ms var(--ease);
+  cursor: pointer;
+}
+
+.dental-page .btn:hover {
+  transform: translateY(-2px);
+  background: var(--teal-800);
+  box-shadow: 0 24px 54px rgba(8, 59, 53, 0.24);
+}
+
+.dental-page .btn.secondary {
+  background: var(--white);
+  color: var(--teal-950);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.dental-page .btn.light {
+  background: var(--white);
+  color: var(--teal-950);
+}
+
+.dental-page .hero {
+  position: relative;
+  z-index: 2;
+  min-height: 720px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.86fr);
+  gap: 58px;
+  align-items: center;
+  padding: 58px 0 86px;
+}
+
+.dental-page .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: rgba(8, 59, 53, 0.08);
+  color: var(--teal-800);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.dental-page h1,
+.dental-page h2,
+.dental-page h3,
+.dental-page p {
+  margin: 0;
+}
+
+.dental-page h1 {
+  margin-top: 22px;
+  max-width: 690px;
+  color: var(--teal-950);
+  font-size: clamp(52px, 7.2vw, 96px);
+  line-height: 0.96;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+}
+
+.dental-page .highlight {
+  color: var(--teal-800);
+}
+
+.dental-page .hero-copy p {
+  max-width: 610px;
+  margin-top: 26px;
+  color: #4e686a;
+  font-size: clamp(17px, 2vw, 20px);
+  line-height: 1.75;
+}
+
+.dental-page .hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.dental-page .hero-proof {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dental-page .proof-chip {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(8, 59, 53, 0.08);
+  box-shadow: 0 18px 44px rgba(8, 59, 53, 0.08);
+}
+
+.dental-page .proof-chip strong {
+  display: block;
+  color: var(--teal-950);
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.dental-page .proof-chip span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dental-page .hero-visual {
+  position: relative;
+  min-height: 600px;
+}
+
+.dental-page .doctor-card {
+  position: absolute;
+  inset: 0 4% 0 7%;
+  overflow: hidden;
+  border-radius: 38px;
+  background:
+    linear-gradient(180deg, rgba(8,59,53,0) 42%, rgba(8,59,53,0.84) 100%),
+    #d9f4ed;
+  box-shadow: var(--shadow);
+}
+
+.dental-page .doctor-card img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.dental-page .booking-card {
+  position: absolute;
+  left: -22px;
+  bottom: 34px;
+  width: min(320px, 86%);
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.76);
+  box-shadow: 0 24px 60px rgba(8, 59, 53, 0.2);
+  backdrop-filter: blur(18px);
+}
+
+.dental-page .booking-card strong {
+  display: block;
+  color: var(--teal-950);
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.dental-page .booking-row {
+  margin-top: 16px;
+  display: grid;
+  gap: 9px;
+}
+
+.dental-page .booking-row span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #f2faf7;
+  color: #536b6e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dental-page .float-review {
+  position: absolute;
+  top: 54px;
+  right: -8px;
+  width: min(260px, 76%);
+  padding: 18px;
+  border-radius: 22px;
+  background: var(--teal-950);
+  color: var(--white);
+  box-shadow: 0 24px 60px rgba(8, 59, 53, 0.28);
+}
+
+.dental-page .stars {
+  color: #ffd86b;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+}
+
+.dental-page .float-review p {
+  margin-top: 10px;
+  color: rgba(255,255,255,0.78);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.dental-page .trust-strip {
+  padding: 26px 0;
+  background: var(--white) !important;
+  border-bottom: 1px solid var(--line);
+}
+
+.dental-page .trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  color: #789092;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.dental-page .section {
+  padding: 96px 0;
+}
+
+.dental-page .section.dark {
+  background: var(--teal-950) !important;
+  color: var(--white);
+}
+
+.dental-page .section.light {
+  background: var(--white) !important;
+}
+
+.dental-page .section-head {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.82fr) minmax(0, 0.8fr);
+  gap: 60px;
+  align-items: end;
+}
+
+.dental-page h2 {
+  max-width: 650px;
+  color: inherit;
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.065em;
+}
+
+.dental-page .section-head p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.dental-page .dark .section-head p {
+  color: rgba(255,255,255,0.72);
+}
+
+.dental-page .service-grid {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.dental-page .service-card {
+  position: relative;
+  min-height: 295px;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 28px;
+  background: #f2fbf7;
+  border: 1px solid var(--line);
+  transition: transform 280ms var(--ease), box-shadow 280ms var(--ease), border-color 280ms var(--ease);
+}
+
+.dental-page .service-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(95,210,208,0.55);
+  box-shadow: 0 26px 70px rgba(8, 59, 53, 0.12);
+}
+
+.dental-page .service-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--teal-900);
+  color: var(--white);
+  margin-bottom: 28px;
+}
+
+.dental-page .service-card h3 {
+  color: var(--teal-950);
+  font-size: 24px;
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.dental-page .service-card p {
+  margin-top: 14px;
+  color: #607679;
+  font-size: 13px;
+  line-height: 1.72;
+}
+
+.dental-page .service-card img {
+  position: absolute;
+  right: -28px;
+  bottom: -34px;
+  width: 178px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 28px 0 0 0;
+  opacity: 0.9;
+}
+
+.dental-page .split {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1fr);
+  gap: 66px;
+  align-items: center;
+}
+
+.dental-page .image-stack {
+  position: relative;
+  min-height: 560px;
+}
+
+.dental-page .main-img {
+  position: absolute;
+  inset: 0 8% 0 0;
+  overflow: hidden;
+  border-radius: 36px;
+  box-shadow: var(--shadow);
+}
+
+.dental-page .main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dental-page .mini-img {
+  position: absolute;
+  right: 0;
+  bottom: 38px;
+  width: 240px;
+  overflow: hidden;
+  border: 10px solid var(--white);
+  border-radius: 28px;
+  box-shadow: 0 24px 58px rgba(8, 59, 53, 0.16);
+}
+
+.dental-page .check-list {
+  margin-top: 30px;
+  display: grid;
+  gap: 14px;
+}
+
+.dental-page .check-list span {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #435f61;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.dental-page .check-list b {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--teal-900);
+}
+
+.dental-page .process-grid {
+  margin-top: 54px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.dental-page .process-card {
+  min-height: 230px;
+  padding: 24px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.dental-page .process-card strong {
+  display: block;
+  color: var(--aqua);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.dental-page .process-card h3 {
+  margin-top: 38px;
+  color: var(--white);
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.dental-page .process-card p {
+  margin-top: 12px;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+}
+
+.dental-page .team-grid {
+  margin-top: 54px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.dental-page .doctor-profile {
+  overflow: hidden;
+  border-radius: 30px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 60px rgba(8, 59, 53, 0.08);
+}
+
+.dental-page .doctor-profile img {
+  height: 320px;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.dental-page .profile-copy {
+  padding: 24px;
+}
+
+.dental-page .profile-copy h3 {
+  color: var(--teal-950);
+  font-size: 22px;
+}
+
+.dental-page .profile-copy p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.dental-page .testimonial-panel {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+  gap: 58px;
+  align-items: center;
+  padding: 46px;
+  border-radius: 38px;
+  background: var(--teal-950);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.dental-page .testimonial-panel img {
+  border-radius: 28px;
+  aspect-ratio: 0.86;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dental-page .quote {
+  max-width: 720px;
+}
+
+.dental-page .quote h2 {
+  color: var(--white);
+}
+
+.dental-page .quote p {
+  margin-top: 24px;
+  color: rgba(255,255,255,0.76);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.dental-page .quote cite {
+  display: block;
+  margin-top: 24px;
+  color: var(--aqua);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.dental-page .faq-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.dental-page .faq {
+  padding: 24px;
+  border-radius: 22px;
+  background: #f4faf7;
+  border: 1px solid var(--line);
+}
+
+.dental-page .faq h3 {
+  color: var(--teal-950);
+  font-size: 18px;
+}
+
+.dental-page .faq p {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.dental-page .cta {
+  position: relative;
+  overflow: hidden;
+  border-radius: 42px;
+  padding: 58px;
+  background:
+    linear-gradient(135deg, rgba(8,59,53,0.95), rgba(12,87,79,0.9)),
+    url("https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1600&q=84") center/cover;
+  color: var(--white);
+}
+
+.dental-page .cta p {
+  max-width: 620px;
+  margin-top: 20px;
+  color: rgba(255,255,255,0.76);
+  font-size: 16px;
+}
+
+.dental-page .cta .btn {
+  margin-top: 28px;
+  background: var(--white);
+  color: var(--teal-950);
+}
+
+.dental-page .form-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.dental-page .contact-card {
+  padding: 32px;
+  border-radius: 30px;
+  background: var(--teal-950);
+  color: var(--white);
+}
+
+.dental-page .contact-card p {
+  margin-top: 16px;
+  color: rgba(255,255,255,0.72);
+}
+
+.dental-page .form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.dental-page .form input,
+.dental-page .form select,
+.dental-page .form textarea {
+  width: 100%;
+  min-height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  padding: 0 16px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+}
+
+.dental-page .form textarea {
+  grid-column: 1 / -1;
+  min-height: 132px;
+  padding-top: 16px;
+  resize: vertical;
+}
+
+.dental-page .form .btn {
+  justify-self: start;
+}
+
+.dental-page .footer {
+  padding: 54px 0;
+  background: var(--teal-950) !important;
+  color: rgba(255,255,255,0.72);
+}
+
+.dental-page .footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 34px;
+}
+
+.dental-page .footer h3 {
+  color: var(--white);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.dental-page .footer a,
+.dental-page .footer p {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255,255,255,0.66);
+  font-size: 13px;
+}
+
+.dental-page [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 720ms var(--ease), transform 720ms var(--ease);
+}
+
+.dental-page [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes dentalPulse {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.02); }
+}
+
+.dental-page .float-review,
+.dental-page .booking-card {
+  animation: dentalPulse 6s ease-in-out infinite;
+}
+
+@media (max-width: 980px) {
+  .dental-page .nav-links {
+    display: none;
+  }
+
+  .dental-page .hero,
+  .dental-page .section-head,
+  .dental-page .split,
+  .dental-page .testimonial-panel,
+  .dental-page .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dental-page .hero {
+    min-height: auto;
+  }
+
+  .dental-page .hero-visual {
+    min-height: 560px;
+  }
+
+  .dental-page .service-grid,
+  .dental-page .process-grid,
+  .dental-page .team-grid,
+  .dental-page .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dental-page .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .dental-page .wrap {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .dental-page .hero-shell {
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+  }
+
+  .dental-page .nav {
+    height: 74px;
+  }
+
+  .dental-page .nav > .btn {
+    min-height: 42px;
+    padding-inline: 14px;
+    font-size: 11px;
+  }
+
+  .dental-page h1 {
+    font-size: clamp(43px, 13vw, 62px);
+  }
+
+  .dental-page h2 {
+    font-size: clamp(34px, 10vw, 46px);
+  }
+
+  .dental-page .hero {
+    padding: 38px 0 64px;
+  }
+
+  .dental-page .hero-proof,
+  .dental-page .service-grid,
+  .dental-page .process-grid,
+  .dental-page .team-grid,
+  .dental-page .faq-grid,
+  .dental-page .footer-grid,
+  .dental-page .form,
+  .dental-page .trust-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dental-page .hero-visual {
+    min-height: 620px;
+  }
+
+  .dental-page .doctor-card {
+    inset: 70px 0 0;
+  }
+
+  .dental-page .float-review {
+    top: 0;
+    right: 12px;
+  }
+
+  .dental-page .booking-card {
+    left: 12px;
+    bottom: 20px;
+  }
+
+  .dental-page .section {
+    padding: 68px 0;
+  }
+
+  .dental-page .image-stack {
+    min-height: 460px;
+  }
+
+  .dental-page .mini-img {
+    width: 190px;
+  }
+
+  .dental-page .testimonial-panel,
+  .dental-page .cta {
+    padding: 24px;
+    border-radius: 28px;
+  }
+}
+
+.dental-page,
+.dental-page * {
+  min-width: 0 !important;
+}
+
+.dental-page :is(h1, h2, h3, p, a, button, span, strong, small, li, label, input, textarea, select) {
+  max-height: none !important;
+  height: auto;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+.dental-page :is(h1, h2, h3) {
+  line-height: 1.14 !important;
+  padding-block: 0.05em 0.12em;
+  text-wrap: balance;
+}
+
+.dental-page p {
+  line-height: 1.68 !important;
+}
+
+.dental-page .btn {
+  line-height: 1.2 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dental-page *,
+  .dental-page *::before,
+  .dental-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .dental-page [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* STORAGE_DASHBOARD_QA_POLISH */
+.dental-page { overflow-x: clip; }
+.dental-page img { max-width: 100%; object-fit: cover; }
+.dental-page figure { overflow: hidden; }
+.dental-page :is(h1,h2,h3,h4,p,a,button,label,input,select,textarea,span) {
+  max-height: none !important;
+  text-overflow: clip !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+.dental-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 240ms cubic-bezier(.16,1,.3,1), box-shadow 240ms cubic-bezier(.16,1,.3,1), filter 240ms cubic-bezier(.16,1,.3,1), border-color 240ms cubic-bezier(.16,1,.3,1);
+}
+.dental-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover {
+  transform: translateY(-3px);
+  filter: saturate(1.04);
+  box-shadow: 0 22px 58px rgba(0,0,0,.18), 0 0 0 6px rgba(255,255,255,.14);
+}
+.dental-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card) {
+  transition: transform 280ms cubic-bezier(.16,1,.3,1), box-shadow 280ms cubic-bezier(.16,1,.3,1), border-color 280ms cubic-bezier(.16,1,.3,1), filter 280ms cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+.dental-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover {
+  transform: translateY(-6px);
+  filter: saturate(1.03);
+}
+.dental-page :is(.hero, .hero-shell, .hero-panel, .hero-visual, .hero-card) {
+  position: relative;
+}
+.dental-page :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 0 38%, rgba(255,255,255,.12) 48%, transparent 60%);
+  transform: translateX(-130%);
+  animation: storageHeroSheen 8.5s cubic-bezier(.16,1,.3,1) infinite;
+}
+@keyframes storageHeroSheen {
+  0%, 42%, 100% { transform: translateX(-130%); }
+  62% { transform: translateX(130%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dental-page :is(.hero-shell, .hero-panel, .hero-visual, .hero-card)::after { animation: none !important; }
+  .dental-page :is(article[class*="card"], article[class*="service"], .service-card, .price-card, .case-card, .treatment, .doctor-profile, .doctor, .panel, .visual, .story-card, .move-item, .move-big, .bento-card):hover,
+  .dental-page :is(.btn, button, a[class*="btn"], .pill, .nav-cta, .cta-button):hover { transform: none !important; }
+}
+
+/* STORAGE_DASHBOARD_IMAGE_CONTAINMENT */
+.dental-page .service-card { padding-right: min(220px, 46%); }
+.dental-page .service-card img {
+  right: 18px !important;
+  bottom: 18px !important;
+  width: min(178px, 38%) !important;
+  height: 150px !important;
+  border-radius: 22px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+@media (max-width: 720px) {
+  .dental-page .service-card { padding-right: 24px; padding-bottom: 196px; }
+  .dental-page .service-card img {
+    left: 24px !important;
+    right: 24px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+
+</style>
+
+<div class="dental-page">
+  <section class="hero-shell" id="top">
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="#top"><span class="brand-mark">D</span> Dentelle Studio</a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#team">Dentists</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="btn" href="#booking">Book Visit</a>
+    </nav>
+
+    <div class="wrap hero">
+      <div class="hero-copy" data-reveal>
+        <span class="eyebrow">Gentle dentistry, clear next steps</span>
+        <h1>A calmer dental visit for a <span class="highlight">healthier smile.</span></h1>
+        <p>Modern preventive, cosmetic, and restorative care for patients who want honest answers, comfortable treatment, and a dental team that explains every option before anything begins.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#booking">Schedule My Appointment</a>
+          <a class="btn secondary" href="#services">View Treatments</a>
+        </div>
+        <div class="hero-proof" aria-label="Clinic highlights">
+          <div class="proof-chip"><strong>4.9/5</strong><span>patient-rated experience</span></div>
+          <div class="proof-chip"><strong>24hr</strong><span>emergency guidance</span></div>
+          <div class="proof-chip"><strong>8k+</strong><span>smiles cared for</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal>
+        <div class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=84" alt="Dentist preparing a comfortable clinic treatment room">
+        </div>
+        <div class="float-review">
+          <span class="stars">★★★★★</span>
+          <p>“They explained the whole plan before treatment. I finally felt relaxed in a dental chair.”</p>
+        </div>
+        <div class="booking-card">
+          <strong>Next openings this week</strong>
+          <div class="booking-row">
+            <span>Cleaning consult <b>Tue</b></span>
+            <span>Smile design scan <b>Thu</b></span>
+            <span>Emergency check <b>Today</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-strip">
+    <div class="wrap trust-grid">
+      <span>Digital X-rays</span>
+      <span>Transparent treatment plans</span>
+      <span>Family-friendly scheduling</span>
+      <span>Comfort-first appointments</span>
+    </div>
+  </section>
+
+  <section class="section light" id="services">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Dental care that starts with clarity, not pressure.</h2>
+        <p>Choose the care you need now, understand the care you may need later, and leave with a plan that makes sense for your mouth, budget, and timeline.</p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service-card" data-reveal>
+          <div class="service-icon">✓</div>
+          <h3>Preventive Care</h3>
+          <p>Cleanings, exams, gum checks, digital X-rays, fluoride support, and simple guidance that helps small issues stay small.</p>
+          <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=500&q=80" alt="Dental instruments prepared for preventive care">
+        </article>
+        <article class="service-card" data-reveal>
+          <div class="service-icon">✦</div>
+          <h3>Cosmetic Dentistry</h3>
+          <p>Whitening, veneers, bonding, and smile design options explained without pushy upgrades or confusing package language.</p>
+          <img src="https://images.unsplash.com/photo-1616391182219-e080b4d1043a?auto=format&fit=crop&w=500&q=80" alt="Patient smiling after cosmetic dental consultation">
+        </article>
+        <article class="service-card" data-reveal>
+          <div class="service-icon">+</div>
+          <h3>Restorative Treatment</h3>
+          <p>Tooth-colored fillings, crowns, bridges, implant planning, and repair work focused on comfort, function, and longevity.</p>
+          <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=500&q=80" alt="Dentist helping a patient with restorative treatment">
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="wrap split">
+      <div class="image-stack" data-reveal>
+        <figure class="main-img"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=84" alt="Bright modern dental clinic room"></figure>
+        <figure class="mini-img"><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=500&q=80" alt="Close up of dental care tools"></figure>
+      </div>
+      <div data-reveal>
+        <span class="eyebrow">Why patients feel safer here</span>
+        <h2>We slow the visit down so your decisions feel easier.</h2>
+        <p class="section-head-p">No surprise treatment, no rushed explanations, and no mystery bills. We show you what we see, explain what matters, and help you choose the next best step.</p>
+        <div class="check-list">
+          <span><b>✓</b> Plain-English diagnosis before any procedure is scheduled.</span>
+          <span><b>✓</b> Comfort options for nervous patients and longer visits.</span>
+          <span><b>✓</b> Written priorities so you know what is urgent and what can wait.</span>
+          <span><b>✓</b> Family appointment blocks when multiple visits are needed.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="process">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Your first visit has a clear path.</h2>
+        <p>From the first scan to the treatment plan, each step is designed to remove uncertainty and help you feel in control.</p>
+      </div>
+      <div class="process-grid">
+        <article class="process-card" data-reveal><strong>01</strong><h3>Listen first</h3><p>We ask what hurts, what worries you, and what outcome would make care feel worthwhile.</p></article>
+        <article class="process-card" data-reveal><strong>02</strong><h3>Scan gently</h3><p>Digital imaging and clinical checks help us find the real issue without guessing.</p></article>
+        <article class="process-card" data-reveal><strong>03</strong><h3>Explain options</h3><p>You see the priorities, choices, timeline, and cost before treatment begins.</p></article>
+        <article class="process-card" data-reveal><strong>04</strong><h3>Treat with care</h3><p>Appointments are paced, comfortable, and focused on durable results.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="team">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Meet the clinicians behind the calm.</h2>
+        <p>Experienced dentists, hygienists, and care coordinators who believe a good appointment should feel organized from the first hello.</p>
+      </div>
+      <div class="team-grid">
+        <article class="doctor-profile" data-reveal><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=84" alt="Lead dentist portrait"><div class="profile-copy"><h3>Dr. Mara Ellis</h3><p>Cosmetic and restorative care lead.</p></div></article>
+        <article class="doctor-profile" data-reveal><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=84" alt="Dental surgeon portrait"><div class="profile-copy"><h3>Dr. Theo Grant</h3><p>Implants, crowns, and complex repair.</p></div></article>
+        <article class="doctor-profile" data-reveal><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=700&q=84" alt="Dental hygienist portrait"><div class="profile-copy"><h3>Nina Park, RDH</h3><p>Prevention, gum health, and education.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="reviews">
+    <div class="wrap testimonial-panel" data-reveal>
+      <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=700&q=84" alt="Smiling dental patient">
+      <div class="quote">
+        <span class="stars">★★★★★</span>
+        <h2>“The first dentist visit where I knew exactly what was happening.”</h2>
+        <p>I came in nervous and left with a clear plan. They showed me the scan, explained what could wait, and made the treatment feel manageable.</p>
+        <cite>Representative patient feedback</cite>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="faq">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Questions patients ask before booking.</h2>
+        <p>Fast answers for common concerns. Your care coordinator can help with the details before your appointment.</p>
+      </div>
+      <div class="faq-grid">
+        <article class="faq" data-reveal><h3>Do you help nervous patients?</h3><p>Yes. We explain each step, pause when needed, and offer comfort options depending on the visit.</p></article>
+        <article class="faq" data-reveal><h3>Will I get pricing before treatment?</h3><p>Yes. You receive a clear plan with priorities, timing, and estimated costs before you decide.</p></article>
+        <article class="faq" data-reveal><h3>Can I book for my family?</h3><p>Yes. We can coordinate family appointment blocks and staged treatment plans.</p></article>
+        <article class="faq" data-reveal><h3>What if I have a dental emergency?</h3><p>Call or request an urgent appointment and we will guide you to the fastest appropriate next step.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light">
+    <div class="wrap cta" data-reveal>
+      <h2>Ready for dental care that feels easier to start?</h2>
+      <p>Book a visit and leave with a clear understanding of your smile, your options, and the most sensible next step.</p>
+      <a class="btn" href="#booking">Book My Appointment</a>
+    </div>
+  </section>
+
+  <section class="section light" id="booking">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Tell us what kind of visit you need.</h2>
+        <p>Share a few details and the clinic team will follow up with appointment options and next steps.</p>
+      </div>
+      <div class="form-grid">
+        <aside class="contact-card" data-reveal>
+          <h3>Clinic hours</h3>
+          <p>Monday-Friday: 8:00 AM-6:00 PM<br>Saturday: 9:00 AM-2:00 PM<br>Emergency guidance available by phone.</p>
+        </aside>
+        <form class="form" data-reveal>
+          <input type="text" name="name" placeholder="Full name" aria-label="Full name">
+          <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number">
+          <input type="email" name="email" placeholder="Email address" aria-label="Email address">
+          <select name="visit" aria-label="Visit type">
+            <option>Cleaning or exam</option>
+            <option>Tooth pain or emergency</option>
+            <option>Cosmetic consultation</option>
+            <option>Implant or crown planning</option>
+          </select>
+          <textarea name="message" placeholder="What would you like help with?" aria-label="What would you like help with?"></textarea>
+          <button class="btn" type="submit">Request Appointment</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div><h3>Dentelle Studio</h3><p>Gentle preventive, cosmetic, and restorative dental care with clear plans and calmer visits.</p></div>
+      <div><h3>Care</h3><a href="#services">Services</a><a href="#process">First visit</a><a href="#team">Dentists</a></div>
+      <div><h3>Clinic</h3><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#booking">Book visit</a></div>
+      <div><h3>Contact</h3><a href="tel:+10000000000">(000) 000-0000</a><a href="mailto:hello@dentellestudio.example">hello@dentellestudio.example</a></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector(".dental-page");
+  if (!page) return;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+    page.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+      item.style.transitionDelay = Math.min(index * 45, 240) + "ms";
+      observer.observe(item);
+    });
+  } else {
+    page.querySelectorAll("[data-reveal]").forEach(function (item) {
+      item.classList.add("is-visible");
+    });
+  }
+})();
+</script>
